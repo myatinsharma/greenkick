@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import {
-  Patient,
-  PatientReviewSheetDesign,
-  UnionPatientDataKeys,
+  Customer,
+  CustomerReviewSheetDesign,
+  UnionCustomerDataKeys,
 } from "../models/app";
 import { useFieldArray, useForm } from "react-hook-form";
-import InputField from "../components/common/InputField";
-import RxInput from "../components/common/RxInput";
-import * as XLSX from "xlsx";
 import {
-  dummyPatient,
+  dummyCustomer,
   numberOfMedicineInputRows,
   patientDetailFormDesign,
   patientKeyLabels,
-  testPatientData,
+  testCustomerData,
 } from "@/constants/app";
 import { MdAdd } from "react-icons/md";
 import FormSewing from "./common/FormSewing";
 
 type HomeFormProps = {
-  handlePatientDataSubmission: (data: Patient) => void;
+  handleCustomerDataSubmission: (data: Customer) => void;
 };
 
-const HomeForm = ({ handlePatientDataSubmission }: HomeFormProps) => {
-  const [patient, setPatient] = useState<Patient>(dummyPatient);
+const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
+  const [patient, setCustomer] = useState<Customer>(dummyCustomer);
   const [rxNumberOfMedicines, setRxNumberOfMedicines] = useState<number>(
     numberOfMedicineInputRows
   );
   const [detailFormDesign, setDetailFormDesign] = useState<
-    PatientReviewSheetDesign[]
+    CustomerReviewSheetDesign[]
   >(patientDetailFormDesign);
 
   const {
@@ -36,31 +33,21 @@ const HomeForm = ({ handlePatientDataSubmission }: HomeFormProps) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<Patient>({ defaultValues: dummyPatient });
+  } = useForm<Customer>({ defaultValues: dummyCustomer });
 
-  function handleSave(data: Patient) {
+  function handleSave(data: Customer) {
     console.log("control", control);
 
     if (isValid) {
       console.log("data", data);
-      setPatient(data);
-      handlePatientDataSubmission(data);
+      setCustomer(data);
+      handleCustomerDataSubmission(data);
     }
-  }
-
-  function addAnotherMedicineInRx(): void {
-    const xx = detailFormDesign.map((item) => {
-      if (item.props[0] === "rx") {
-        item.children?.push(...item.children!);
-      }
-      return item;
-    });
-    setDetailFormDesign(xx);
   }
 
   return (
     <div className="App">
-      <header className="bg-teal-800 h-full px-32 py-6">
+      <header className="bg-teal-700 h-screen px-32 py-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
         GreenKick
         </h3>

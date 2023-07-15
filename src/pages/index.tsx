@@ -1,13 +1,13 @@
 import HomeForm from "@/components/HomeForm";
-import { Patient } from "@/models/app";
+import { Customer } from "@/models/app";
 import { useState } from "react";
 import PateintRxPrintView from "@/components/PateintRxPrintView";
-import { dummyPatient } from "@/constants/app";
+import { dummyCustomer } from "@/constants/app";
 
 export default function Home() {
-  const [patient, setPatient] = useState<Patient>(dummyPatient);
-  const handlePateinDetails = (patient: Patient) => {
-    setPatient(patient);
+  const [patient, setCustomer] = useState<Customer>(dummyCustomer);
+  const handlePateinDetails = (patient: Customer) => {
+    setCustomer(patient);
   };
 
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       {patient?.name ? (
         <PateintRxPrintView patient={patient}></PateintRxPrintView>
       ) : (
-        <HomeForm handlePatientDataSubmission={handlePateinDetails}></HomeForm>
+        <HomeForm handleCustomerDataSubmission={handlePateinDetails}></HomeForm>
       )}
     </main>
   );

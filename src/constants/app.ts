@@ -1,4 +1,4 @@
-import { Patient, PatientReviewSheetDesign } from "@/models/app";
+import { Customer, CustomerReviewSheetDesign } from "@/models/app";
 
 export const patientKeyLabels: Record<string, string> = {
   id: "ID",
@@ -25,38 +25,23 @@ export const patientKeyLabels: Record<string, string> = {
 
 export const numberOfMedicineInputRows = 2;
 
-export const dummyPatient: Patient = {
+export const dummyCustomer: Customer = {
   id: 0,
   name: "",
   gender: "",
-  complaints: "",
-  examination: "",
-  imagingOrInvestigations: "",
-  otherHistory: "",
-  visitDate: new Date().toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  }),
-  rx: [
-    {
-      duration: 0,
-      medicineName: "",
-      occurancy: { morning: "", afternoon: "", evening: "" },
-      type: "",
-    },
-  ],
-  advice: "",
-  investigationsAdvised: "",
-  notes: "",
-  followUpDate: new Date().toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  }),
+  requiredWorkCategory: "",
+  requiredWorkSubCategory: "",
+  age: 0,
+  city: "",
+  referenceSource: "",
+  visitDate: "",
+  convertedIntoLead: false,
+  mobile: "",
+  email: "",
+  address: "",
 };
 
-export const testPatientData: Patient = {
+export const testCustomerData: Customer = {
   id: 0,
   name: "Raj Kumar",
   age: 20,
@@ -96,7 +81,7 @@ export const testPatientData: Patient = {
   }),
 };
 
-export const patientReviewSheetDesignValues: PatientReviewSheetDesign[] = [
+export const patientReviewSheetDesignValues: CustomerReviewSheetDesign[] = [
   {
     props: ["name", "age", "gender", "visitDate"],
     bList: false,
@@ -131,7 +116,7 @@ export const patientReviewSheetDesignValues: PatientReviewSheetDesign[] = [
   },
 ];
 
-export const patientDetailFormDesign: PatientReviewSheetDesign[] = [
+export const patientDetailFormDesign: CustomerReviewSheetDesign[] = [
   {
     props: ["name", "age", "gender", "visitDate"],
   },

@@ -1,14 +1,14 @@
 import { UseFormRegister } from "react-hook-form";
 import {
   MedicineTime,
-  Patient,
-  PatientDataKeys,
+  Customer,
+  CustomerDataKeys,
   Rx,
-  UnionPatientDataKeys,
+  UnionCustomerDataKeys,
 } from "../../models/app";
 
 type InputFieldProps = {
-  register: UseFormRegister<Patient>;
+  register: UseFormRegister<Customer>;
   name: string;
   type?: string;
   label?: string;
@@ -32,13 +32,13 @@ const InputField = ({
       </label>
       {type === "textarea" ? (
         <textarea
-          {...register(name as PatientDataKeys)}
+          {...register(name as CustomerDataKeys)}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
           placeholder={placeholder}
         ></textarea>
       ) : (
         <input
-          {...register(name as PatientDataKeys)}
+          {...register(name as CustomerDataKeys)}
           type="text"
           placeholder={placeholder}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"

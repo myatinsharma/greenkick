@@ -1,10 +1,10 @@
-import { Patient } from "@/models/app";
+import { Customer } from "@/models/app";
 import InputField from "./InputField";
 import { Control, UseFormRegister, useFieldArray } from "react-hook-form";
 
 type ArrayFieldsProps = {
-  control: Control<Patient, any>;
-  register: UseFormRegister<Patient>;
+  control: Control<Customer, any>;
+  register: UseFormRegister<Customer>;
 };
 
 export const ArrayFields = ({ control, register }: ArrayFieldsProps) => {

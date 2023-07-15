@@ -1,9 +1,9 @@
-import { Patient } from "../../models/app";
+import { Customer } from "../../models/app";
 import { UseFormRegister } from "react-hook-form";
 import { MdAdd } from "react-icons/md";
 
 type RxProps = {
-  register: UseFormRegister<Patient>;
+  register: UseFormRegister<Customer>;
   index: number;
   totalRows: number;
   handleAddRowInputClick: () => void;

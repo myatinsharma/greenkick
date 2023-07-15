@@ -2,19 +2,19 @@ import {
   patientKeyLabels,
   patientReviewSheetDesignValues,
 } from "@/constants/app";
-import { Patient } from "../models/app";
+import { Customer } from "../models/app";
 
-type PatientRxPrintViewProps = {
-  patient: Patient;
+type CustomerRxPrintViewProps = {
+  patient: Customer;
 };
 
-const PateintRxPrintView = ({ patient }: PatientRxPrintViewProps) => {
-    const tdCssClasses = "border-y border-teal-800 px-2 py-1";
+const PateintRxPrintView = ({ patient }: CustomerRxPrintViewProps) => {
+  const tdCssClasses = "border-y border-teal-800 px-2 py-1";
   return (
     <div className="px-60 py-6 print:px-2 print:pt-40">
       {patientReviewSheetDesignValues.length > 0 &&
         patientReviewSheetDesignValues.map((item, index) => {
-          return !item.bList ? (
+          return (
             <div
               key={index}
               className={`grid grid-cols-${item.props.length} gap-6 mb-6`}
@@ -29,40 +29,6 @@ const PateintRxPrintView = ({ patient }: PatientRxPrintViewProps) => {
                   </div>
                 );
               })}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-6 mb-6">
-              <div className="col-span-1">
-                <table className="border-collapse border border-gray-900 w-full">
-                  <caption className="caption-top text-left font-semibold text-md mb-2 text-teal-800">Rx</caption>
-                  <thead className="font-semibold text-teal-800 text-sm">
-                    <tr>
-                      <td className={tdCssClasses}>{patientKeyLabels["medicineName"]}</td>
-                      <td className={tdCssClasses}>{patientKeyLabels["type"]}</td>
-                      <td className={tdCssClasses}>{patientKeyLabels["morning"]}</td>
-                      <td className={tdCssClasses}>{patientKeyLabels["afternoon"]}</td>
-                      <td className={tdCssClasses}>{patientKeyLabels["evening"]}</td>
-                      <td className={tdCssClasses}>{patientKeyLabels["duration"]}</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {patient.rx.map((item, index) => {
-                      return (
-                        <>
-                          <tr>
-                            <td className={tdCssClasses}>{item.medicineName}</td>
-                            <td className={tdCssClasses}>{item.type}</td>
-                            <td className={tdCssClasses}>{item.occurancy.morning}</td>
-                            <td className={tdCssClasses}>{item.occurancy.afternoon}</td>
-                            <td className={tdCssClasses}>{item.occurancy.evening}</td>
-                            <td className={tdCssClasses}>{item.duration}</td>
-                          </tr>
-                        </>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
             </div>
           );
         })}

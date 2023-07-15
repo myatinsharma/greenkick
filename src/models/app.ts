@@ -1,18 +1,22 @@
-export type Patient = {
+export type Customer = DemographicData & CustomerWork;
+
+export type DemographicData = {
   id: number;
   name: string;
+  mobile: string;
+  email?: string;
   age?: number;
-  gender: string;
-  complaints: string;
-  examination: string;
-  otherHistory?: string;
-  imagingOrInvestigations?: string;
-  advice?: string;
-  investigationsAdvised?: string;
-  notes?: string;
-  followUpDate?: string;
-  rx: Rx[];
+  gender?: string;
+  address?: string
+  city?: string;
+};
+
+export type CustomerWork = {
+  requiredWorkCategory: string;
+  requiredWorkSubCategory: string;
+  referenceSource?: string;
   visitDate?: string;
+  convertedIntoLead?: boolean;
 };
 
 export type Rx = {
@@ -28,12 +32,12 @@ export type MedicineTime = {
   evening?: string;
 };
 
-export type UnionPatientDataKeys = Patient & Rx & MedicineTime
+export type UnionCustomerDataKeys = Customer & Rx & MedicineTime;
 
-export type PatientDataKeys = Extract<keyof Patient, string>;
+export type CustomerDataKeys = Extract<keyof Customer, string>;
 
-export type PatientReviewSheetDesign = {
-  props: PatientDataKeys[];
-  children?: PatientReviewSheetDesign[];
+export type CustomerReviewSheetDesign = {
+  props: CustomerDataKeys[];
+  children?: CustomerReviewSheetDesign[];
   bList?: boolean;
 };
