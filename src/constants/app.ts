@@ -1,26 +1,33 @@
-import { Customer, CustomerReviewSheetDesign } from "@/models/app";
+import {
+  Customer,
+  CustomerFormControl,
+  CustomerReviewSheetDesign,
+} from "@/models/app";
+import { string } from "zod";
 
-export const patientKeyLabels: Record<string, string> = {
-  id: "ID",
-  name: "Name",
-  age: "Age",
-  gender: "Gender",
-  complaints: "Complaints",
-  examination: "Examination",
-  otherHistory: "Other History",
-  imagingOrInvestigations: "Imaging/Investigations",
-  advice: "Advice",
-  investigationsAdvised: "Investigations Advised",
-  notes: "Notes",
-  followUpDate: "Follow Up Date",
-  rx: "Rx",
-  visitDate: "Visit Date",
-  medicineName: "Medicine",
-  type: "Type",
-  morning: "Morning",
-  afternoon: "Afternoon",
-  evening: "Evening",
-  duration: "Duration (Days)",
+export const CustomerFormData: Record<keyof Customer, CustomerFormControl> = {
+  id: { label: "ID", showInUI: false },
+  name: { label: "Name", showInUI: true },
+  age: { label: "Age", showInUI: true },
+  gender: { label: "Gender", showInUI: true },
+  notes: { label: "Notes", showInUI: true, type: "textarea" },
+  visitDate: { label: "Visit Date", showInUI: true },
+  mobile: { label: "Mobile", showInUI: true },
+  address: { label: "Address", showInUI: true, type: "textarea" },
+  city: { label: "City", showInUI: true },
+  email: { label: "Email", showInUI: true },
+  requiredWorkCategory: {
+    label: "Required Work Category",
+    showInUI: true,
+    type: "dropdown",
+    dropdownOptions: { 1: "Construction", 2: "Vastu" },
+  },
+  requiredWorkSubCategory: {
+    label: "Required Work Sub Category",
+    showInUI: true,
+  },
+  referenceSource: { label: "Reference Source", showInUI: true },
+  convertedIntoLead: { label: "Converted Into Lead", showInUI: false },
 };
 
 export const numberOfMedicineInputRows = 2;
@@ -31,7 +38,6 @@ export const dummyCustomer: Customer = {
   gender: "",
   requiredWorkCategory: "",
   requiredWorkSubCategory: "",
-  age: 0,
   city: "",
   referenceSource: "",
   visitDate: "",
@@ -39,6 +45,7 @@ export const dummyCustomer: Customer = {
   mobile: "",
   email: "",
   address: "",
+  notes: "",
 };
 
 export const testCustomerData: Customer = {
@@ -46,35 +53,9 @@ export const testCustomerData: Customer = {
   name: "Raj Kumar",
   age: 20,
   gender: "M",
-  complaints:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dol adipisicing etc.",
-  examination: "examine the patient and prescribe the medicine",
-  imagingOrInvestigations: "X-ray, MRI, CT Scan, Blood Test, Urine Test, etc.",
-  otherHistory: "Old patient, etc.",
-  visitDate: new Date().toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  }),
-  rx: [
-    {
-      duration: 10,
-      medicineName: "Paracetamol",
-      occurancy: { morning: "1", afternoon: "0", evening: "1" },
-      type: "Tablet",
-    },
-    {
-      duration: 20,
-      medicineName: "Crocin",
-      occurancy: { morning: "0", afternoon: "1", evening: "1" },
-      type: "Syrup",
-    },
-  ],
-  advice: "Take rest",
-  investigationsAdvised: "Blood Test, Urine Test, etc.",
   notes:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  followUpDate: new Date().toLocaleDateString("en-GB", {
+  visitDate: new Date().toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "2-digit",
     year: "2-digit",

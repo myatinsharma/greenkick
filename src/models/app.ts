@@ -7,7 +7,7 @@ export type DemographicData = {
   email?: string;
   age?: number;
   gender?: string;
-  address?: string
+  address?: string;
   city?: string;
 };
 
@@ -15,8 +15,17 @@ export type CustomerWork = {
   requiredWorkCategory: string;
   requiredWorkSubCategory: string;
   referenceSource?: string;
+  notes?: string;
   visitDate?: string;
   convertedIntoLead?: boolean;
+};
+
+export type CustomerFormControl = {
+  label: string;
+  placeholder?: string;
+  showInUI: boolean;
+  type?: "dropdown" | "textarea" | "text" | "date";
+  dropdownOptions?: Record<string, string>;
 };
 
 export type Rx = {
