@@ -9,7 +9,6 @@ import {
   dummyCustomer,
   numberOfMedicineInputRows,
   patientDetailFormDesign,
-  patientKeyLabels,
   testCustomerData,
 } from "@/constants/app";
 import { MdAdd } from "react-icons/md";
