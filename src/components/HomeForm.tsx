@@ -8,7 +8,6 @@ import { useFieldArray, useForm } from "react-hook-form";
 import {
   dummyCustomer,
   numberOfMedicineInputRows,
-  patientDetailFormDesign,
   testCustomerData,
 } from "@/constants/app";
 import { MdAdd } from "react-icons/md";
@@ -23,9 +22,6 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [rxNumberOfMedicines, setRxNumberOfMedicines] = useState<number>(
     numberOfMedicineInputRows
   );
-  const [detailFormDesign, setDetailFormDesign] = useState<
-    CustomerReviewSheetDesign[]
-  >(patientDetailFormDesign);
 
   const {
     control,

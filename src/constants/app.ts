@@ -60,60 +60,12 @@ export const testCustomerData: Customer = {
     month: "2-digit",
     year: "2-digit",
   }),
+  mobile: "1234567890",
+  address: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+  city: "Delhi",
+  email: "xx@mail.com",
+  requiredWorkCategory: "Construction",
+  requiredWorkSubCategory: "Flooring",
+  referenceSource: "Google",
+  convertedIntoLead: false,
 };
-
-export const patientReviewSheetDesignValues: CustomerReviewSheetDesign[] = [
-  {
-    props: ["name", "age", "gender", "visitDate"],
-    bList: false,
-  },
-  {
-    props: ["complaints", "examination"],
-    bList: false,
-  },
-  {
-    props: ["otherHistory", "imagingOrInvestigations"],
-    bList: false,
-  },
-  {
-    props: ["rx"],
-    bList: true,
-  },
-  {
-    props: ["advice"],
-    bList: false,
-  },
-  {
-    props: ["investigationsAdvised"],
-    bList: false,
-  },
-  {
-    props: ["notes"],
-    bList: false,
-  },
-  {
-    props: ["followUpDate"],
-    bList: false,
-  },
-];
-
-export const patientDetailFormDesign: CustomerReviewSheetDesign[] = [
-  {
-    props: ["name", "age", "gender", "visitDate"],
-  },
-  {
-    props: ["rx"],
-    children: [
-      {
-        props: [
-          "medicineName",
-          "type",
-          "morning",
-          "afternoon",
-          "evening",
-          "duration",
-        ],
-      },
-    ],
-  },
-];
