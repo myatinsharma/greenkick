@@ -49,11 +49,15 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     <div className="App">
       <header className="bg-teal-700 h-screen px-32 py-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
-        GreenKick
+          GreenKick
         </h3>
         <div className="grid-cols-6 hidden">Tailwind Jugaad</div>
         <form onSubmit={handleSubmit(handleSave)} className="w-full">
-          <FormSewing defaultValues={patient} control={control} register={register}></FormSewing>
+          <FormSewing
+            defaultValues={patient}
+            control={control}
+            register={register}
+          ></FormSewing>
           <button
             type="submit"
             className="text-white bg-orange-500 hover:bg-orange-700 focus:ring-1 focus:outline-none focus:ring-orange-100 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
