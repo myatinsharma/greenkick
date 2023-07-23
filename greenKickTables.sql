@@ -31,3 +31,14 @@ CREATE TABLE CustomerRequirements (
     convertedIntoLead BOOLEAN NOT NULL,
     customerId INTEGER NOT NULL
 );
+
+INSERT INTO customerformcontrols (json, isDefault, appId) VALUES ('{
+  id: { label: "ID", showInUI: false }, name: { label: "Name", showInUI: true }, age: { label: "Age", showInUI: true }, gender: { label: "Gender", showInUI: true }, notes: { label: "Notes", showInUI: true, type: "textarea" }, visitDate: { label: "Visit Date", showInUI: true }, mobile: { label: "Mobile", showInUI: true }, address: { label: "Address", showInUI: true, type: "textarea" }, city: { label: "City", showInUI: true }, email: { label: "Email", showInUI: true }, requiredWorkCategory: {
+    label: "Required Work Category",
+    showInUI: true,
+    type: "dropdown",
+    dropdownOptions: { 1: "Construction", 2: "Vastu" },
+  }, requiredWorkSubCategory: {
+    label: "Required Work Sub Category",
+    showInUI: true,
+  }, referenceSource: { label: "Reference Source", showInUI: true }, convertedIntoLead: { label: "Converted Into Lead", showInUI: false }}', false, 2);
