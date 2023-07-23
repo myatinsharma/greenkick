@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Customer,
   CustomerReviewSheetDesign,
@@ -12,6 +12,7 @@ import {
 } from "@/constants/app";
 import { MdAdd } from "react-icons/md";
 import FormSewing from "./common/FormSewing";
+import axios from "axios";
 
 type HomeFormProps = {
   handleCustomerDataSubmission: (data: Customer) => void;
@@ -22,6 +23,18 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [rxNumberOfMedicines, setRxNumberOfMedicines] = useState<number>(
     numberOfMedicineInputRows
   );
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/get-app-settings')
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .finally(function () {
+    });
+  }, []);
 
   const {
     control,

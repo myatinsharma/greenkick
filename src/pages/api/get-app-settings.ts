@@ -9,5 +9,6 @@ export default async function handler(
     response: NextApiResponse,
   ) {
   const selectResult = await db.select().from(customerformcontrols);
+  console.log('Results', selectResult);
   return response.status(200).json({ selectResult });
 };

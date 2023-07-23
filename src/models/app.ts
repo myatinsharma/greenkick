@@ -28,6 +28,8 @@ export type CustomerFormControl = {
   dropdownOptions?: Record<string, string>;
 };
 
+export type CustomerFormData = Record<keyof Customer, CustomerFormControl>;
+
 export type Rx = {
   medicineName: string;
   type?: string;
