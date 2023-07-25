@@ -26,10 +26,6 @@ const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("fc", fc);
-  }, [fc]);
-
   return (
     fc &&
     <div className="grid grid-cols-2 gap-4">
