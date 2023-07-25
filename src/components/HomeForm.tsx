@@ -10,8 +10,8 @@ import {
   numberOfMedicineInputRows,
   testCustomerData,
 } from "@/constants/app";
-import { MdAdd } from "react-icons/md";
 import FormSewing from "./common/FormSewing";
+import { postCustomer } from "@/services/customer.service";
 
 type HomeFormProps = {
   handleCustomerDataSubmission: (data: Customer) => void;
@@ -37,6 +37,9 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
       console.log("data", data);
       setCustomer(data);
       handleCustomerDataSubmission(data);
+      postCustomer(data).then((res) => {
+        console.log(res);
+      });
     }
   }
 

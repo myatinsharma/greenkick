@@ -23,8 +23,8 @@ CREATE TABLE Customers (
 
 CREATE TABLE CustomerRequirements (
     id SERIAL PRIMARY KEY,
-    requiredWorkCategory VARCHAR(100) NOT NULL,
-    requiredWorkSubCategory VARCHAR(100) NOT NULL,
+    requiredWorkCategory INTEGER NOT NULL,
+    requiredWorkSubCategory INTEGER NOT NULL,
     referenceSource VARCHAR(100) NULL,
     notes VARCHAR(100) NULL,
     visitDate VARCHAR(100) NOT NULL,

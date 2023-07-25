@@ -12,12 +12,13 @@ export type DemographicData = {
 };
 
 export type CustomerWork = {
-  requiredWorkCategory: string;
-  requiredWorkSubCategory: string;
+  requiredWorkCategory: number;
+  requiredWorkSubCategory: number;
   referenceSource?: string;
   notes?: string;
   visitDate?: string;
   convertedIntoLead?: boolean;
+  customerId: number;
 };
 
 export type CustomerFormControl = {

@@ -25,12 +25,12 @@ export const customerRelations = relations(customer, ({ many }) => ({
 
 export const customerrequirements = pgTable('customerrequirements', {
   id: serial('id').primaryKey(),
-  requiredWorkCategory: varchar('requiredWorkCategory', {length: 250}).notNull(),
-  requiredWorkSubCategory: varchar('requiredWorkSubCategory', {length: 250}).notNull(),
-  referenceSource: varchar('referenceSource', {length: 250}).notNull(),
-  notes: varchar('notes', {length: 250}).notNull(),
-  visitDate: varchar('visitDate', {length: 250}).notNull(),
-  convertedIntoLead: boolean('convertedIntoLead').notNull(),
+  requiredWorkCategory: integer('requiredWorkCategory'),
+  requiredWorkSubCategory: integer('requiredWorkSubCategory'),
+  referenceSource: varchar('referenceSource', {length: 250}),
+  notes: varchar('notes', {length: 250}),
+  visitDate: varchar('visitDate', {length: 250}),
+  convertedIntoLead: boolean('convertedIntoLead'),
   customerId: integer('customerId').notNull(),
 });
 
