@@ -14,35 +14,35 @@ type FormSewingProps = {
 const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
   const [fc, setFc] = useState<FormKeyControls>();
   useEffect(() => {
-    axios.get('http://localhost:3000/api/get-app-settings')
-    .then(function (response) {
-      console.log(response.data[0].json);
-      setFc(JSON.parse(response.data[0].json) as unknown as FormKeyControls);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    .finally(function () {
-    });
+    axios
+      .get("http://localhost:3000/api/get-app-settings")
+      .then(function (response) {
+        console.log(response.data[0].json);
+        setFc(JSON.parse(response.data[0].json) as unknown as FormKeyControls);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {});
   }, []);
 
   return (
-    fc &&
-    <div className="grid grid-cols-2 gap-4">
-      {Object.entries(defaultValues).map(([key, value], ind) => {
-        if (fc[key as keyof Customer].showInUI === false)
-          return null;
-        return (
-          <div className="col-span-1" key={ind}>
-            <InputField
-              register={register}
-              name={key}
-              control={fc[key as keyof Customer]}
-            ></InputField>
-          </div>
-        );
-      })}
-    </div>
+    fc && (
+      <div className="grid grid-cols-2 gap-4">
+        {Object.entries(defaultValues).map(([key, value], ind) => {
+          if (fc[key as keyof Customer].showInUI === false) return null;
+          return (
+            <div className="col-span-1" key={ind}>
+              <InputField
+                register={register}
+                name={key}
+                control={fc[key as keyof Customer]}
+              ></InputField>
+            </div>
+          );
+        })}
+      </div>
+    )
   );
 };
 

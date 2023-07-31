@@ -18,7 +18,7 @@ type HomeFormProps = {
 };
 
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
-  const [patient, setCustomer] = useState<Customer>(dummyCustomer);
+  const [customer, setCustomer] = useState<Customer>(dummyCustomer);
   const [rxNumberOfMedicines, setRxNumberOfMedicines] = useState<number>(
     numberOfMedicineInputRows
   );
@@ -52,13 +52,13 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
         <div className="grid-cols-6 hidden">Tailwind Jugaad</div>
         <form onSubmit={handleSubmit(handleSave)} className="w-full">
           <FormSewing
-            defaultValues={patient}
+            defaultValues={customer}
             control={control}
             register={register}
           ></FormSewing>
           <button
             type="submit"
-            className="text-white bg-orange-500 hover:bg-orange-700 focus:ring-1 focus:outline-none focus:ring-orange-100 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            className="mt-4 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
             Submit
           </button>

@@ -18,7 +18,6 @@ export type CustomerWork = {
   notes?: string;
   visitDate?: string;
   convertedIntoLead?: boolean;
-  customerId: number;
 };
 
 export type CustomerFormControl = {
