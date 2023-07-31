@@ -64,8 +64,8 @@ export const testCustomerData: Customer = {
   address: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
   city: "Delhi",
   email: "xx@mail.com",
-  requiredWorkCategory: "Construction",
-  requiredWorkSubCategory: "Flooring",
+  requiredWorkCategory: 0,
+  requiredWorkSubCategory: 0,
   referenceSource: "Google",
   convertedIntoLead: false,
 };
