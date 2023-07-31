@@ -8,7 +8,7 @@ export const customerformcontrols = pgTable('customerformcontrols', {
   appId: integer('appid'),
 });
 
-export const customer = pgTable('customer', {
+export const customer = pgTable('customers', {
   id: serial('id').primaryKey(),
   name: varchar('name', {length: 250}).notNull(),
   mobile: varchar('mobile', {length: 250}).notNull(),
