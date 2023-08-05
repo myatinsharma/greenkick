@@ -16,13 +16,16 @@ export default async function handler(
 ) {
   const c = request.body as Customer;
   const customerData = request.body as DemographicData;
+  let customerDemographicData = new DemographicData();
+  customerDemographicData = mapProperties<Customer, DemographicData>(
+    c,
+    customerDemographicData
+  );
   //const customerQuery = request.body as CustomerWork;
-  console.log("customerData", customerData);
-  const xo = mapProperties<Customer, DemographicData>(c);
-  console.log("xo", xo);
-  // await db
-  //   .insert(customer)
-  //   .values({ name: customerData.name, mobile: customerData.mobile });
+  console.log("customerDemographicData", customerDemographicData);
+  //const xo = mapProperties<Customer, DemographicData>(c);
+  //console.log("xo", xo);
+  await db.insert(customer).values(customerDemographicData);
   //await db.insert(customerrequirements).values(customerQuery).returning({ customerrequirementsId: customerrequirements.id });
   return response.status(200).json("done");
 }
