@@ -2,7 +2,7 @@ export type Customer = DemographicData & CustomerWork;
 
 export type DemographicData = {
   id: number;
-  name: string;
+  fullname: string;
   mobile: string;
   email?: string;
   age?: number;

@@ -1,4 +1,4 @@
-import { CustomerFormData } from "@/constants/app";
+import { CustomerFormData, customerFormData } from "@/constants/app";
 import InputField from "./InputField";
 import { Customer, FormKeyControls } from "@/models/app";
 import { Control, UseFormRegister } from "react-hook-form";
@@ -18,7 +18,7 @@ const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
       .get("http://localhost:3000/api/get-app-settings")
       .then(function (response) {
         console.log(response.data[0].json);
-        setFc(JSON.parse(response.data[0].json) as unknown as FormKeyControls);
+        setFc(customerFormData);
       })
       .catch(function (error) {
         console.log(error);
@@ -29,7 +29,8 @@ const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
   return (
     fc && (
       <div className="grid grid-cols-2 gap-4">
-        {Object.entries(defaultValues).map(([key, value], ind) => {
+        {Object.entries(fc).map(([key, value], ind) => {
+          console.log("key", key);
           if (fc[key as keyof Customer].showInUI === false) return null;
           return (
             <div className="col-span-1" key={ind}>

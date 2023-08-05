@@ -5,9 +5,9 @@ import {
 } from "@/models/app";
 import { string } from "zod";
 
-export const CustomerFormData: Record<keyof Customer, CustomerFormControl> = {
+export const customerFormData: Record<keyof Customer, CustomerFormControl> = {
   id: { label: "ID", showInUI: false },
-  name: { label: "Name", showInUI: true },
+  fullname: { label: "Name", showInUI: true },
   age: { label: "Age", showInUI: true },
   gender: { label: "Gender", showInUI: true },
   notes: { label: "Notes", showInUI: true, type: "textarea" },

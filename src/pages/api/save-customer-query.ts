@@ -1,31 +1,33 @@
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { sql } from "@vercel/postgres";
 import {
-  customer,
+  customers,
   customerformcontrols,
   customerrequirements,
 } from "../../db/schema";
 import { NextApiResponse, NextApiRequest } from "next";
 import { Customer, CustomerWork, DemographicData } from "@/models/app";
-import { mapProperties } from "@/utils";
+import {
+  mapCustomerToDemoGraphicData,
+  mapCustomerToCustomerWork,
+} from "@/utils";
+import { InferModel } from "drizzle-orm";
 
 export const db = drizzle(sql);
+
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
   const c = request.body as Customer;
-  const customerData = request.body as DemographicData;
-  let customerDemographicData = new DemographicData();
-  customerDemographicData = mapProperties<Customer, DemographicData>(
-    c,
-    customerDemographicData
-  );
-  //const customerQuery = request.body as CustomerWork;
-  console.log("customerDemographicData", customerDemographicData);
-  //const xo = mapProperties<Customer, DemographicData>(c);
-  //console.log("xo", xo);
-  await db.insert(customer).values(customerDemographicData);
-  //await db.insert(customerrequirements).values(customerQuery).returning({ customerrequirementsId: customerrequirements.id });
+  const customerDemographicData = mapCustomerToDemoGraphicData(c);
+  await db
+    .insert(customers)
+    .values(customerDemographicData)
+    .returning({ customerId: customers.id });
+
+  const customerQuery = mapCustomerToCustomerWork(c);
+  await db.insert(customers).values(customerDemographicData);
+  await db.insert(customerrequirements).values(customerQuery);
   return response.status(200).json("done");
 }

@@ -8,18 +8,18 @@ export const customerformcontrols = pgTable('customerformcontrols', {
   appId: integer('appid'),
 });
 
-export const customer = pgTable('customers', {
+export const customers = pgTable('customers', {
   id: serial('id').primaryKey(),
-  name: varchar('name', {length: 250}).notNull(),
+  fullname: varchar('fullname', {length: 250}).notNull(),
   mobile: varchar('mobile', {length: 250}).notNull(),
   email: varchar('email', {length: 250}),
   age: integer('age'),
-  gender: varchar('name', {length: 250}),
+  gender: varchar('gender', {length: 250}),
   address: varchar('address', {length: 250}),
   city: varchar('city', {length: 250}),
 });
 
-export const customerRelations = relations(customer, ({ many }) => ({
+export const customerRelations = relations(customers, ({ many }) => ({
 	customerrequirements: many(customerrequirements),
 }));
 
@@ -35,8 +35,8 @@ export const customerrequirements = pgTable('customerrequirements', {
 });
 
 export const customerrequirementsRelations = relations(customerrequirements, ({ one }) => ({
-	author: one(customer, {
+	author: one(customers, {
 		fields: [customerrequirements.customerId],
-		references: [customer.id],
+		references: [customers.id],
 	}),
 }));
