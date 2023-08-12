@@ -24,10 +24,21 @@ export default async function handler(
   await db
     .insert(customers)
     .values(customerDemographicData)
-    .returning({ customerId: customers.id });
+    .returning({ id: customers.id })
+    .then((res) => {
+      console.log(res);
+    });
 
   const customerQuery = mapCustomerToCustomerWork(c);
-  await db.insert(customers).values(customerDemographicData);
-  await db.insert(customerrequirements).values(customerQuery);
+  // const {
+  //   requiredWorkCategory,
+  //   requiredWorkSubCategory,
+  //   convertedIntoLead,
+  //   referenceSource,
+  //   visitDate,
+  // } = c;
+  await db
+    .insert(customerrequirements)
+    .values({ ...customerQuery, customerId: 6 });
   return response.status(200).json("done");
 }

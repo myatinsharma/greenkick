@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import {
-  Customer,
-  CustomerReviewSheetDesign,
-  UnionCustomerDataKeys,
-} from "../models/app";
-import { useFieldArray, useForm } from "react-hook-form";
-import {
-  dummyCustomer,
-  numberOfMedicineInputRows,
-  testCustomerData,
-} from "@/constants/app";
+import { Customer } from "../models/app";
+import { useForm } from "react-hook-form";
+import { dummyCustomer, numberOfMedicineInputRows } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
 import { postCustomer } from "@/services/customer.service";
 

@@ -10,13 +10,14 @@ export function mapCustomerToDemoGraphicData(
     convertedIntoLead,
     referenceSource,
     visitDate,
+    id,
     ...rest
   } = customer;
   return rest;
 }
 
 export function mapCustomerToCustomerWork(customer: Customer): CustomerWork {
-  const { fullname, mobile, address, age, city, email, gender, ...rest } =
+  const { id, fullname, mobile, address, age, city, email, gender, ...rest } =
     customer;
   return rest;
 }

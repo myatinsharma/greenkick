@@ -30,21 +30,6 @@ export type CustomerFormControl = {
 
 export type FormKeyControls = Record<keyof Customer, CustomerFormControl>;
 
-export type Rx = {
-  medicineName: string;
-  type?: string;
-  occurancy: MedicineTime;
-  duration: number;
-};
-
-export type MedicineTime = {
-  morning?: string;
-  afternoon?: string;
-  evening?: string;
-};
-
-export type UnionCustomerDataKeys = Customer & Rx & MedicineTime;
-
 export type CustomerDataKeys = Extract<keyof Customer, string>;
 
 export type CustomerReviewSheetDesign = {

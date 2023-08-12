@@ -1,4 +1,4 @@
-import { CustomerFormData, customerFormData } from "@/constants/app";
+import { customerFormData } from "@/constants/app";
 import InputField from "./InputField";
 import { Customer, FormKeyControls } from "@/models/app";
 import { Control, UseFormRegister } from "react-hook-form";

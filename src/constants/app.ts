@@ -34,7 +34,7 @@ export const numberOfMedicineInputRows = 2;
 
 export const dummyCustomer: Customer = {
   id: 0,
-  name: "",
+  fullname: "",
   gender: "",
   requiredWorkCategory: 0,
   requiredWorkSubCategory: 0,
@@ -50,7 +50,7 @@ export const dummyCustomer: Customer = {
 
 export const testCustomerData: Customer = {
   id: 0,
-  name: "Raj Kumar",
+  fullname: "Raj Kumar",
   age: 20,
   gender: "M",
   notes:
