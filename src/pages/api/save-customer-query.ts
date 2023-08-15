@@ -15,6 +15,12 @@ import { InferModel } from "drizzle-orm";
 
 export const db = drizzle(sql);
 
+type CustReq = InferModel<typeof customerrequirements, "insert">;
+
+const insertCustomerRequirements = async (cr: CustReq) => {
+  return db.insert(customerrequirements).values(cr);
+};
+
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
@@ -24,21 +30,14 @@ export default async function handler(
   await db
     .insert(customers)
     .values(customerDemographicData)
-    .returning({ id: customers.id })
+    .returning({ customerId: customers.id })
     .then((res) => {
-      console.log(res);
+      console.log(res[0].customerId);
+      const customerQuery = mapCustomerToCustomerWork(c);
+      db.insert(customerrequirements).values({
+        ...customerQuery,
+        customerid: res[0].customerId,
+      });
     });
-
-  const customerQuery = mapCustomerToCustomerWork(c);
-  // const {
-  //   requiredWorkCategory,
-  //   requiredWorkSubCategory,
-  //   convertedIntoLead,
-  //   referenceSource,
-  //   visitDate,
-  // } = c;
-  await db
-    .insert(customerrequirements)
-    .values({ ...customerQuery, customerId: 6 });
   return response.status(200).json("done");
 }

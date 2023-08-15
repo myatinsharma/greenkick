@@ -17,7 +17,7 @@ const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
     axios
       .get("http://localhost:3000/api/get-app-settings")
       .then(function (response) {
-        console.log(response.data[0].json);
+        console.log('get-app-settings svc response', response.data[0].json);
         setFc(customerFormData);
       })
       .catch(function (error) {
@@ -30,7 +30,6 @@ const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
     fc && (
       <div className="grid grid-cols-2 gap-4">
         {Object.entries(fc).map(([key, value], ind) => {
-          console.log("key", key);
           if (fc[key as keyof Customer].showInUI === false) return null;
           return (
             <div className="col-span-1" key={ind}>

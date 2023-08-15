@@ -23,13 +23,13 @@ CREATE TABLE Customers (
 
 CREATE TABLE CustomerRequirements (
     id SERIAL PRIMARY KEY,
-    requiredWorkCategory INTEGER NOT NULL,
-    requiredWorkSubCategory INTEGER NOT NULL,
-    referenceSource VARCHAR(100) NULL,
+    requiredworkcategory INTEGER NOT NULL,
+    requiredworkSubcategory INTEGER NOT NULL,
+    referencesource VARCHAR(100) NULL,
     notes VARCHAR(100) NULL,
-    visitDate VARCHAR(100) NOT NULL,
-    convertedIntoLead BOOLEAN NOT NULL,
-    customerId INTEGER NOT NULL
+    visitdate VARCHAR(100) NOT NULL,
+    convertedintolead BOOLEAN NOT NULL,
+    customerid INTEGER NOT NULL
 );
 
 INSERT INTO customerformcontrols (json, isDefault, appId) VALUES ('{"id": { "label": "ID", "showInUI": false }, "fullname": { "label": "Name", "showInUI": true }, "age": { "label": "Age", "showInUI": true }, "gender": { "label": "Gender", "showInUI": true }, "notes": { "label": "Notes", "showInUI": true, "type": "textarea" }, "visitDate": { "label": "Visit Date", "showInUI": true }, "mobile": { "label": "Mobile", "showInUI": true }, "address": { "label": "Address", "showInUI": true, "type": "textarea" }, "city": { "label": "City", "showInUI": true }, "email": { "label": "Email", "showInUI": true }, "requiredWorkCategory": {
