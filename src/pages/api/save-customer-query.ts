@@ -29,23 +29,22 @@ export default async function handler(
   const c = request.body as Customer;
   const customerDemographicData = mapCustomerToDemoGraphicData(c);
 
-  await db.transaction(async (tx) => {
-    // const result = await db
-    //   .insert(customers)
-    //   .values(customerDemographicData)
-    //   .returning({ customerId: customers.id });
+  await db
+    .transaction(async (tx) => {
+      const result = await db
+        .insert(customers)
+        .values(customerDemographicData)
+        .returning({ customerId: customers.id });
 
-    const customerQuery = mapCustomerToCustomerWork(c);
-    console.log("cust", customerQuery);
-    await db.insert(customerrequirements).values({
-      convertedintolead: false,
-      customerid: 21,
-      notes: "notess",
-      referencesource: "rs",
-      requiredworkcategory: 2,
-      requiredworksubcategory: 3,
-      visitdate: "01/12/2023",
+      const customerQuery = mapCustomerToCustomerWork(c);
+
+      await db
+        .insert(customerrequirements)
+        .values({ ...customerQuery, customerid: result[0].customerId })
+        .returning({ customerrequirementsId: customerrequirements.id });
+    })
+    .then((res) => {
+      console.log("res", res);
     });
-  });
   return response.status(200).json("done");
 }

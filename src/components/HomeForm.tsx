@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Customer } from "../models/app";
 import { useForm } from "react-hook-form";
-import { dummyCustomer, numberOfMedicineInputRows } from "@/constants/app";
+import {
+  dummyCustomer,
+  numberOfMedicineInputRows,
+  testCustomerData,
+} from "@/constants/app";
 import FormSewing from "./common/FormSewing";
 import { postCustomer } from "@/services/customer.service";
 import { schema } from "@/constants/zod";
@@ -12,7 +16,7 @@ type HomeFormProps = {
 };
 
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
-  const [customer, setCustomer] = useState<Customer>(dummyCustomer);
+  const [customer, setCustomer] = useState<Customer>(testCustomerData);
   const [rxNumberOfMedicines, setRxNumberOfMedicines] = useState<number>(
     numberOfMedicineInputRows
   );
@@ -23,7 +27,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Customer>({
-    defaultValues: dummyCustomer,
+    defaultValues: testCustomerData,
     resolver: zodResolver(schema),
   });
 

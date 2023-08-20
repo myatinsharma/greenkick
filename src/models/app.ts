@@ -1,7 +1,6 @@
 export type Customer = DemographicData & CustomerWork;
 
 export type DemographicData = {
-  id: number;
   fullname: string;
   mobile: string;
   email?: string;
@@ -9,15 +8,15 @@ export type DemographicData = {
   gender?: string;
   address?: string;
   city?: string;
-};
+} & { id: number };
 
 export type CustomerWork = {
-  requiredWorkCategory: number;
-  requiredWorkSubCategory: number;
-  referenceSource?: string;
-  notes?: string; 
-  visitDate?: string;
-  convertedIntoLead?: boolean;
+  requiredworkcategory: number;
+  requiredworksubcategory: number;
+  referencesource?: string;
+  notes?: string;
+  visitdate?: string;
+  convertedintolead?: boolean;
 };
 
 export type CustomerFormControl = {

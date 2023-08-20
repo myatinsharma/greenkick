@@ -11,23 +11,23 @@ export const customerFormData: Record<keyof Customer, CustomerFormControl> = {
   age: { label: "Age", showInUI: true },
   gender: { label: "Gender", showInUI: true },
   notes: { label: "Notes", showInUI: true, type: "textarea" },
-  visitDate: { label: "Visit Date", showInUI: true },
+  visitdate: { label: "Visit Date", showInUI: true },
   mobile: { label: "Mobile", showInUI: true },
   address: { label: "Address", showInUI: true, type: "textarea" },
   city: { label: "City", showInUI: true },
   email: { label: "Email", showInUI: true },
-  requiredWorkCategory: {
+  requiredworkcategory: {
     label: "Required Work Category",
     showInUI: true,
     type: "dropdown",
     dropdownOptions: { 1: "Construction", 2: "Vastu" },
   },
-  requiredWorkSubCategory: {
+  requiredworksubcategory: {
     label: "Required Work Sub Category",
     showInUI: true,
   },
-  referenceSource: { label: "Reference Source", showInUI: true },
-  convertedIntoLead: { label: "Converted Into Lead", showInUI: false },
+  referencesource: { label: "Reference Source", showInUI: true },
+  convertedintolead: { label: "Converted Into Lead", showInUI: false },
 };
 
 export const numberOfMedicineInputRows = 2;
@@ -36,12 +36,13 @@ export const dummyCustomer: Customer = {
   id: 0,
   fullname: "",
   gender: "",
-  requiredWorkCategory: 0,
-  requiredWorkSubCategory: 0,
+  age: 0,
+  requiredworkcategory: 0,
+  requiredworksubcategory: 0,
   city: "",
-  referenceSource: "",
-  visitDate: "",
-  convertedIntoLead: false,
+  referencesource: "",
+  visitdate: "",
+  convertedintolead: false,
   mobile: "",
   email: "",
   address: "",
@@ -55,7 +56,7 @@ export const testCustomerData: Customer = {
   gender: "M",
   notes:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  visitDate: new Date().toLocaleDateString("en-GB", {
+  visitdate: new Date().toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "2-digit",
     year: "2-digit",
@@ -64,8 +65,8 @@ export const testCustomerData: Customer = {
   address: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
   city: "Delhi",
   email: "xx@mail.com",
-  requiredWorkCategory: 0,
-  requiredWorkSubCategory: 0,
-  referenceSource: "Google",
-  convertedIntoLead: false,
+  requiredworkcategory: 1,
+  requiredworksubcategory: 2,
+  referencesource: "Google",
+  convertedintolead: false,
 };

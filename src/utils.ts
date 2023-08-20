@@ -4,19 +4,19 @@ export function mapCustomerToDemoGraphicData(
   customer: Customer
 ): DemographicData {
   const {
-    requiredWorkCategory,
-    requiredWorkSubCategory,
+    requiredworkcategory,
+    requiredworksubcategory,
     notes,
-    convertedIntoLead,
-    referenceSource,
-    visitDate,
+    convertedintolead,
+    referencesource,
+    visitdate,
     ...rest
   } = customer;
   return rest;
 }
 
 export function mapCustomerToCustomerWork(customer: Customer): CustomerWork {
-  const { id, fullname, mobile, address, age, city, email, gender, ...rest } =
+  const { fullname, mobile, address, age, city, email, gender, ...rest } =
     customer;
   return rest;
 }

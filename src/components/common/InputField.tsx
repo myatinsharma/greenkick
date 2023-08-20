@@ -35,34 +35,28 @@ const InputField = ({
         ></textarea>
       )) ||
         (type === "dropdown" && (
-          <>
-            <select
-              {...register(name as CustomerDataKeys, {
-                valueAsNumber: valueType === "number" ? true : false,
-              })}
-              placeholder={placeholder}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
-            >
-              {Object.entries(dropdownOptions!).map(([value, text]) => (
-                <option key={value} value={value}>
-                  {text}
-                </option>
-              ))}
-            </select>
-            <p>{valueType}</p>
-          </>
+          <select
+            {...register(name as CustomerDataKeys, {
+              valueAsNumber: valueType === "number" ? true : false,
+            })}
+            placeholder={placeholder}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
+          >
+            {Object.entries(dropdownOptions!).map(([value, text]) => (
+              <option key={value} value={value}>
+                {text}
+              </option>
+            ))}
+          </select>
         )) || (
-          <>
-            <input
-              {...register(name as CustomerDataKeys, {
-                valueAsNumber: valueType === "number" ? true : false,
-              })}
-              type="text"
-              placeholder={placeholder}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
-            ></input>
-            <p>{valueType}</p>
-          </>
+          <input
+            {...register(name as CustomerDataKeys, {
+              valueAsNumber: valueType === "number" ? true : false,
+            })}
+            type="text"
+            placeholder={placeholder}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
+          ></input>
         )}
     </>
   );
