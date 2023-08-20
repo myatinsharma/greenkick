@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { dummyCustomer, numberOfMedicineInputRows } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
 import { postCustomer } from "@/services/customer.service";
+import { schema } from "@/constants/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type HomeFormProps = {
   handleCustomerDataSubmission: (data: Customer) => void;
@@ -20,9 +22,13 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<Customer>({ defaultValues: dummyCustomer });
+  } = useForm<Customer>({
+    defaultValues: dummyCustomer,
+    resolver: zodResolver(schema),
+  });
 
   function handleSave(data: Customer) {
+    console.log("errors", errors);
     console.log("control", control);
 
     if (isValid) {
@@ -32,6 +38,9 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
       postCustomer(data).then((res) => {
         console.log(res);
       });
+    }
+    {
+      console.log("errors", errors);
     }
   }
 
@@ -48,6 +57,9 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             control={control}
             register={register}
           ></FormSewing>
+          {errors.requiredWorkCategory?.message && (
+            <p>{errors.requiredWorkCategory?.message}</p>
+          )}
           <button
             type="submit"
             className="mt-4 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"

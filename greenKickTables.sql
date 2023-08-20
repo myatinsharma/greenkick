@@ -6,8 +6,8 @@ CREATE TABLE Apps (
 CREATE TABLE CustomerFormControls (
     id SERIAL PRIMARY KEY,
     json TEXT NOT NULL,
-    isDefault BOOLEAN NOT NULL,
-    appId INTEGER NOT NULL
+    is_default BOOLEAN NOT NULL,
+    app_id INTEGER NOT NULL
 );
 
 CREATE TABLE Customers (

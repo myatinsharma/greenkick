@@ -10,7 +10,6 @@ export function mapCustomerToDemoGraphicData(
     convertedIntoLead,
     referenceSource,
     visitDate,
-    id,
     ...rest
   } = customer;
   return rest;

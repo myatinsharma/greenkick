@@ -15,7 +15,7 @@ export type CustomerWork = {
   requiredWorkCategory: number;
   requiredWorkSubCategory: number;
   referenceSource?: string;
-  notes?: string;
+  notes?: string; 
   visitDate?: string;
   convertedIntoLead?: boolean;
 };

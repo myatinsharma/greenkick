@@ -11,8 +11,8 @@ import { relations } from "drizzle-orm";
 export const customerformcontrols = pgTable("customerformcontrols", {
   id: serial("id").primaryKey(),
   json: text("json"),
-  isDefault: boolean("isdefault"),
-  appId: integer("appid"),
+  is_default: boolean("isdefault"),
+  app_id: integer("appid"),
 });
 
 export const customers = pgTable("customers", {
@@ -37,16 +37,16 @@ export const customerrequirements = pgTable("customerrequirements", {
   customerid: integer("customerid"),
 });
 
-// export const customerRelations = relations(customers, ({ many }) => ({
-//   customerrequirements: many(customerrequirements),
-// }));
+export const customerRelations = relations(customers, ({ many }) => ({
+  customerrequirements: many(customerrequirements),
+}));
 
-// export const customerrequirementsRelations = relations(
-//   customerrequirements,
-//   ({ one }) => ({
-//     customer: one(customers, {
-//       fields: [customerrequirements.customerId],
-//       references: [customers.id],
-//     }),
-//   })
-// );
+export const customerrequirementsRelations = relations(
+  customerrequirements,
+  ({ one }) => ({
+    customer: one(customers, {
+      fields: [customerrequirements.customerid],
+      references: [customers.id],
+    }),
+  })
+);
