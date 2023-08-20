@@ -15,17 +15,10 @@ import { InferModel } from "drizzle-orm";
 
 export const db = drizzle(sql);
 
-type CustReq = InferModel<typeof customerrequirements, "insert">;
-
-const insertCustomerRequirements = async (cr: CustReq) => {
-  return db.insert(customerrequirements).values(cr);
-};
-
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  console.log("req", request.body);
   const c = request.body as Customer;
   const customerDemographicData = mapCustomerToDemoGraphicData(c);
 

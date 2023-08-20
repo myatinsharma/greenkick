@@ -32,19 +32,10 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   });
 
   function handleSave(data: Customer) {
-    console.log("errors", errors);
-    console.log("control", control);
-
     if (isValid) {
-      console.log("data", data);
       setCustomer(data);
       handleCustomerDataSubmission(data);
-      postCustomer(data).then((res) => {
-        console.log(res);
-      });
-    }
-    {
-      console.log("errors", errors);
+      postCustomer(data);
     }
   }
 
@@ -61,9 +52,6 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             control={control}
             register={register}
           ></FormSewing>
-          {errors.requiredWorkCategory?.message && (
-            <p>{errors.requiredWorkCategory?.message}</p>
-          )}
           <button
             type="submit"
             className="mt-4 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
