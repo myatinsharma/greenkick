@@ -36,7 +36,6 @@ export const dummyCustomer: Customer = {
   id: 0,
   fullname: "",
   gender: "",
-  age: 0,
   requiredworkcategory: 0,
   requiredworksubcategory: 0,
   city: "",

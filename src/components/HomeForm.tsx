@@ -17,9 +17,6 @@ type HomeFormProps = {
 
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [customer, setCustomer] = useState<Customer>(testCustomerData);
-  const [rxNumberOfMedicines, setRxNumberOfMedicines] = useState<number>(
-    numberOfMedicineInputRows
-  );
 
   const {
     control,
@@ -27,7 +24,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Customer>({
-    defaultValues: testCustomerData,
+    defaultValues: dummyCustomer,
     resolver: zodResolver(schema),
   });
 
