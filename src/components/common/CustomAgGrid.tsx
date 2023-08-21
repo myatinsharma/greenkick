@@ -15,7 +15,7 @@ const CustomAgGrid = () => {
   //   { make: "Porsche", model: "Boxter", price: 72000 },
   // ]);
 
-  const [columnDefs, setColumnDefs] = useState<ColumnConfig[]>([]);
+  const [columnDefs, setColumnDefs] = useState<ColumnConfig[] | any>([]);
 
   useEffect(() => {
     getCustomers().then((data) => {
