@@ -2,9 +2,16 @@ import { Customer } from "@/models/app";
 import axios from "axios";
 const BASE_URL = "http://localhost:3000"; // Replace with your API base URL
 
+let axiosPostConfig = {
+  headers: {
+    "Content-Type": "application/json;charset=UTF-8",
+    "Access-Control-Allow-Origin": "*",
+  },
+};
+
 export const postCustomer = async (customer: Customer) => {
   await axios
-    .post(`${BASE_URL}/api/save-customer-query`, customer)
+    .post(`${BASE_URL}/api/save-customer-query`, customer, axiosPostConfig)
     .then((res) => res.data)
     .catch((err) => err);
 };
