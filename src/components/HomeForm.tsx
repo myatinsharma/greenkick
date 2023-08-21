@@ -20,7 +20,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Customer>({
-    defaultValues: dummyCustomer,
+    defaultValues: testCustomerData,
     resolver: zodResolver(schema),
   });
 
@@ -28,7 +28,9 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     if (isValid) {
       setCustomer(data);
       handleCustomerDataSubmission(data);
-      postCustomer(data);
+      postCustomer(data).then((res) => {
+        console.log(res);
+      });
     }
   }
 

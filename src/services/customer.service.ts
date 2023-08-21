@@ -11,7 +11,7 @@ let axiosPostConfig = {
 
 export const postCustomer = async (customer: Customer) => {
   await axios
-    .post(`${BASE_URL}/api/save-customer-query`, customer)
+    .post(`${BASE_URL}/api/save-customer-query`, customer, axiosPostConfig)
     .then((res) => res.data)
     .catch((err) => err);
 };
