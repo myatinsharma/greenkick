@@ -22,7 +22,7 @@ export default async function handler(
   const c = request.body as Customer;
   const customerDemographicData = mapCustomerToDemoGraphicData(c);
 
-  await db
+  return await db
     .transaction(async (tx) => {
       const result = await db
         .insert(customers)
@@ -36,8 +36,5 @@ export default async function handler(
         .values({ ...customerQuery, customerid: result[0].customerId })
         .returning({ customerrequirementsId: customerrequirements.id });
     })
-    .then((res) => {
-      console.log("res", res);
-    });
-  return response.status(200).json("done");
+    .then(() => response.status(201).json({}));
 }

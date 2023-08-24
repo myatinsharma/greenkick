@@ -19,12 +19,12 @@ const CustomAgGrid = () => {
 
   useEffect(() => {
     getCustomers().then((data) => {
-      console.log(data);
-      setColumnDefs(
-        Object.keys(data[0]).map((key) => {
-          return { headerName: key, field: key };
-        })
-      );
+      if (data.length > 0)
+        setColumnDefs(
+          Object.keys(data[0]).map((key) => {
+            return { headerName: key, field: key };
+          })
+        );
 
       setRowData(data);
     });

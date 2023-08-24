@@ -29,7 +29,9 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
       setCustomer(data);
       handleCustomerDataSubmission(data);
       postCustomer(data).then((res) => {
-        console.log(res);
+        if (res.status === 201) {
+          alert("Customer data saved successfully!");
+        }
       });
     }
   }
