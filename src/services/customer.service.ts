@@ -1,6 +1,10 @@
+import { config } from "@/constants/app";
 import { Customer } from "@/models/app";
 import axios from "axios";
-const BASE_URL = "http://localhost:3000"; // Replace with your API base URL
+const apiUrl =
+  process.env.NODE_ENV === "production"
+    ? config.production.baseUrl
+    : config.development.baseUrl; // Replace with your API base URL
 
 let axiosPostConfig = {
   headers: {
@@ -15,14 +19,14 @@ let axiosPostConfig = {
 
 export const postCustomer = async (customer: Customer) => {
   await axios
-    .post(`${BASE_URL}/api/save-customer-query`, customer, axiosPostConfig)
+    .post(`${apiUrl}/api/save-customer-query`, customer, axiosPostConfig)
     .then((res) => res.data)
     .catch((err) => err);
 };
 
 export const getCustomers = async (): Promise<Customer[]> => {
   return await axios
-    .get<Customer[]>(`${BASE_URL}/api/get-all-customers`)
+    .get<Customer[]>(`${apiUrl}/api/get-all-customers`)
     .then((res) => res.data)
     .catch((err) => err);
 };

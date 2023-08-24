@@ -69,3 +69,12 @@ export const testCustomerData: Customer = {
   referencesource: "Google",
   convertedintolead: false,
 };
+
+export const config = {
+  development: {
+    baseUrl: "http://localhost:3000", // Your local development server URL
+  },
+  production: {
+    baseUrl: "https://greenkick.vercel.app/", // Your deployed server URL
+  },
+};
