@@ -43,6 +43,11 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
           GreenKick
         </h3>
         <div className="grid-cols-6 hidden">Tailwind Jugaad</div>
+        <div className="w-screen h-screen bg-slate-200 absolute opacity-30 top-0 left-0 flex items-center justify-center">
+          <div className="absolute text-center opacity-100 text-black">
+            Wait..
+          </div>
+        </div>
         <form onSubmit={handleSubmit(handleSave)} className="w-full">
           <FormSewing
             defaultValues={customer}
