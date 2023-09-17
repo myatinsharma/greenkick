@@ -32,5 +32,19 @@ CREATE TABLE CustomerRequirements (
     customerid INTEGER NOT NULL
 );
 
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,
+    fullname VARCHAR(100) NULL,
+    mobile VARCHAR(20) NULL,
+    email VARCHAR(100) NULL,
+    codeword VARCHAR(10) NULL,
+    isadmin BOOLEAN NOT NULL,
+    appid INTEGER NOT NULL,
+    isactive BOOLEAN NOT NULL,
+    lastupdatedate TIMESTAMP NOT NULL
+);
+
 INSERT INTO customerformcontrols (json, isDefault, appId) VALUES ('{"id": { "label": "ID", "showInUI": false }, "fullname": { "label": "Name", "showInUI": true }, "age": { "label": "Age", "showInUI": true }, "gender": { "label": "Gender", "showInUI": true }, "notes": { "label": "Notes", "showInUI": true, "type": "textarea" }, "visitdate": { "label": "Visit Date", "showInUI": true }, "mobile": { "label": "Mobile", "showInUI": true }, "address": { "label": "Address", "showInUI": true, "type": "textarea" }, "city": { "label": "City", "showInUI": true }, "email": { "label": "Email", "showInUI": true }, "requiredworkcategory": {
     "label": "Required Work Category", "showInUI": true, "type": "dropdown", "dropdownOptions": { "1": "Construction", "2": "Vastu" }}, "requiredworksubcategory": { "label": "Required Work Sub Category", "showInUI": true }, "referencesource": { "label": "Reference Source", "showInUI": true }, "convertedintolead": { "label": "Converted Into Lead", "showInUI": false }}', false, 2);
+
+insert into users (fullname, mobile, email, codeword, isadmin, appid, isactive, lastupdatedate) values ('Admin', '9999999999', 'xx@mail.com', '1290', true, 2, true, now());

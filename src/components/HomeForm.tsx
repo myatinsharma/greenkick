@@ -3,7 +3,7 @@ import { Customer } from "../models/app";
 import { useForm } from "react-hook-form";
 import { dummyCustomer, testCustomerData } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
-import { postCustomer } from "@/services/customer.service";
+import { postCustomer, verifyTaskAccess } from "@/services/customer.service";
 import { schema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -14,6 +14,7 @@ type HomeFormProps = {
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [customer, setCustomer] = useState<Customer>(testCustomerData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [codeword, setCodeword] = useState<string>("");
 
   const {
     control,
@@ -30,10 +31,19 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
       setIsSubmitting(true);
       setCustomer(data);
       handleCustomerDataSubmission(data);
-      postCustomer(data).then((res) => {
-        if (res.status === 201) {
-          alert("Customer data saved successfully!");
-          setIsSubmitting(false);
+      verifyTaskAccess(codeword).then((res) => {
+        if (res.status === 200) {
+          if (res.data.access === true) {
+            postCustomer(data).then((res) => {
+              if (res.status === 201) {
+                setIsSubmitting(false);
+                alert("Customer data saved successfully!");
+              }
+            });
+          } else {
+            setIsSubmitting(false);
+            alert("Enter valid code");
+          }
         }
       });
     }
@@ -41,7 +51,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
 
   return (
     <div className="App">
-      <header className="bg-teal-700 h-screen px-32 py-6">
+      <header className="bg-teal-700 px-32 pt-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
           GreenKick
         </h3>
@@ -52,10 +62,17 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             control={control}
             register={register}
           ></FormSewing>
+          <input
+            type="text"
+            placeholder="code"
+            value={codeword}
+            onChange={(e) => setCodeword(e.target.value)}
+            className="input input-bordered w-full max-w-xs"
+          ></input>
           <button
             type="submit"
             disabled={!isValid || isSubmitting}
-            className="mt-4 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            className="btn btn-primary mt-4 ml-4"
           >
             {isSubmitting ? "Saving..." : "Save"}
           </button>

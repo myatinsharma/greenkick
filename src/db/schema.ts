@@ -5,6 +5,7 @@ import {
   serial,
   text,
   varchar,
+  timestamp,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -17,13 +18,25 @@ export const customerformcontrols = pgTable("customerformcontrols", {
 
 export const customers = pgTable("customers", {
   id: serial("id").primaryKey(),
-  fullname: varchar("fullname", { length: 250 }).notNull(),
-  mobile: varchar("mobile", { length: 250 }).notNull(),
-  email: varchar("email", { length: 250 }),
+  fullname: varchar("fullname", { length: 100 }).notNull(),
+  mobile: varchar("mobile", { length: 100 }).notNull(),
+  email: varchar("email", { length: 100 }),
   age: integer("age"),
   gender: varchar("gender", { length: 250 }),
   address: varchar("address", { length: 250 }),
   city: varchar("city", { length: 250 }),
+});
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  fullname: varchar("fullname", { length: 100 }),
+  mobile: varchar("mobile", { length: 20 }),
+  email: varchar("email", { length: 100 }),
+  codeword: varchar("codeword", { length: 100 }),
+  appid: integer("appid"),
+  isadmin: integer("isadmin"),
+  isactive: integer("isactive"),
+  lastupdatedate: timestamp('lastupdatedate').defaultNow(),
 });
 
 export const customerrequirements = pgTable("customerrequirements", {

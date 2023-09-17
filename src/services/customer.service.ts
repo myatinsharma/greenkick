@@ -29,3 +29,9 @@ export const getCustomers = async (): Promise<Customer[]> => {
     .then((res) => res.data)
     .catch((err) => err);
 };
+
+export const verifyTaskAccess = async (
+  code: string
+): Promise<AxiosResponse> => {
+  return await axios.get<{access: boolean}>(`${apiBaseUrl}/api/verify-task-access/${code}`);
+};

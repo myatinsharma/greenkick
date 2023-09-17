@@ -30,7 +30,7 @@ const InputField = ({
       {(type === "textarea" && (
         <textarea
           {...register(name as CustomerDataKeys)}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
+          className="textarea w-full"
           placeholder={placeholder}
         ></textarea>
       )) ||
@@ -40,7 +40,7 @@ const InputField = ({
               valueAsNumber: valueType === "number" ? true : false,
             })}
             placeholder={placeholder}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
+            className="select w-full max-w-xs"
           >
             {Object.entries(dropdownOptions!).map(([value, text]) => (
               <option key={value} value={value}>
@@ -55,7 +55,7 @@ const InputField = ({
             })}
             type="text"
             placeholder={placeholder}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded block w-full px-2 py-1"
+            className="input input-bordered w-full max-w-xs"
           ></input>
         )}
     </>
