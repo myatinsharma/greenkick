@@ -13,6 +13,7 @@ type HomeFormProps = {
 
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [customer, setCustomer] = useState<Customer>(testCustomerData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     control,
@@ -26,11 +27,13 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
 
   function handleSave(data: Customer) {
     if (isValid) {
+      setIsSubmitting(true);
       setCustomer(data);
       handleCustomerDataSubmission(data);
       postCustomer(data).then((res) => {
         if (res.status === 201) {
           alert("Customer data saved successfully!");
+          setIsSubmitting(false);
         }
       });
     }
@@ -43,11 +46,6 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
           GreenKick
         </h3>
         <div className="grid-cols-6 hidden">Tailwind Jugaad</div>
-        <div className="w-screen h-screen bg-slate-200 absolute opacity-30 top-0 left-0 flex items-center justify-center">
-          <div className="absolute text-center opacity-100 text-black">
-            Wait..
-          </div>
-        </div>
         <form onSubmit={handleSubmit(handleSave)} className="w-full">
           <FormSewing
             defaultValues={customer}
@@ -56,9 +54,10 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
           ></FormSewing>
           <button
             type="submit"
+            disabled={!isValid || isSubmitting}
             className="mt-4 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
-            Submit
+            {isSubmitting ? "Saving..." : "Save"}
           </button>
         </form>
       </header>
