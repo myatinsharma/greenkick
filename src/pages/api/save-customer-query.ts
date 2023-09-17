@@ -2,7 +2,6 @@ import { drizzle } from "drizzle-orm/vercel-postgres";
 import { sql } from "@vercel/postgres";
 import {
   customers,
-  customerformcontrols,
   customerrequirements,
 } from "../../db/schema";
 import { NextApiResponse, NextApiRequest } from "next";
@@ -11,7 +10,6 @@ import {
   mapCustomerToDemoGraphicData,
   mapCustomerToCustomerWork,
 } from "@/utils";
-import { InferModel } from "drizzle-orm";
 
 export const db = drizzle(sql);
 
