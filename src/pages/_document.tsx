@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en" data-theme="synthwave">
       <Head>
-        <title>GreenKick</title>
       </Head>
       <body>
         <Main />

@@ -51,7 +51,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
 
   return (
     <div className="App">
-      <header className="bg-teal-700 px-32 pt-6">
+      <header className="bg-teal-700 px-32 py-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
           GreenKick
         </h3>

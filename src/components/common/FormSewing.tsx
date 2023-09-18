@@ -17,6 +17,9 @@ const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
     axios
       .get("http://localhost:3000/api/get-app-settings")
       .then(function (response) {
+        const customerFormData = JSON.parse(
+          response.data[0].json
+        ) as FormKeyControls;
         setFc(customerFormData);
       })
       .catch(function (error) {
