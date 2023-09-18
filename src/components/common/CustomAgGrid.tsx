@@ -32,8 +32,7 @@ const CustomAgGrid = () => {
         rowData={rowData}
         columnDefs={columnDefs}
         onRowClicked={(e) => {
-          console.log(e.data);
-          router.push(`/customer/10`, undefined, { shallow: true });
+          router.push(`/customer/${e.data.id}`);
         }}
       ></AgGridReact>
     </div>

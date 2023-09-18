@@ -4,18 +4,7 @@ import axios, { AxiosResponse } from "axios";
 const apiBaseUrl =
   process.env.NODE_ENV === "production"
     ? config.production.baseUrl
-    : config.development.baseUrl; // Replace with your API base URL
-
-// let axiosPostConfig = {
-//   headers: {
-//     "Content-Type": "application/json;charset=UTF-8",
-//     "Access-Control-Allow-Credentials": "true",
-//     "Access-Control-Allow-Origin": "*",
-//     "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
-//     "Access-Control-Allow-Headers":
-//       "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
-//   },
-// };
+    : config.development.baseUrl;
 
 export const postCustomer = async (
   customer: Customer
@@ -33,5 +22,11 @@ export const getCustomers = async (): Promise<Customer[]> => {
 export const verifyTaskAccess = async (
   code: string
 ): Promise<AxiosResponse> => {
-  return await axios.get<{access: boolean}>(`${apiBaseUrl}/api/verify-task-access/${code}`);
+  return await axios.get<{ access: boolean }>(`${apiBaseUrl}/api/verify-task-access/${code}`);
+};
+
+export const getCustomerQueryDetails = async (
+  customerId: number
+): Promise<AxiosResponse> => {
+  return await axios.get(`${apiBaseUrl}/api/customer-control/get-query-details/${customerId}`);
 };
