@@ -39,6 +39,21 @@ export const users = pgTable("users", {
   lastupdatedate: timestamp('lastupdatedate').defaultNow(),
 });
 
+export const tasks = pgTable("tasks", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 100 }),
+  description: varchar("description", { length: 100 }),
+  customer_query_id: integer("customer_query_id").notNull(),
+  customer_id: integer("customer_id").notNull(),
+  assigned_to_user_id: integer("assigned_to_user_id"),
+  assigned_by_user_id: integer("assigned_by_user_id").notNull(),
+  status: integer("status").notNull(),
+  statuses_json: text("statuses_json"),
+  appid: integer("appid").notNull(),
+  created_date: timestamp('created_date').notNull().defaultNow(),
+  updated_date: timestamp('updated_date').notNull().defaultNow(),
+});
+
 export const customerrequirements = pgTable("customerrequirements", {
   id: serial("id").primaryKey(),
   requiredworkcategory: integer("requiredworkcategory"),

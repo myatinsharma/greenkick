@@ -36,3 +36,17 @@ export type CustomerReviewSheetDesign = {
   children?: CustomerReviewSheetDesign[];
   bList?: boolean;
 };
+
+export type Task = {
+  title: string;
+  description: string;
+  customer_query_id: number;
+  customer_id: number;
+  assigned_to_user_id: number;
+  assigned_by_user_id: number;
+  status: number;
+  statuses_json: string;
+  appid: number;
+  created_date: string;
+  updated_date: string;
+} & { id: number };

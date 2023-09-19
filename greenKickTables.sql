@@ -48,15 +48,15 @@ CREATE TABLE Tasks (
     id SERIAL PRIMARY KEY,
     title VARCHAR(100) NULL,
     description VARCHAR(100) NULL,
-    customerQueryId INTEGER NOT NULL,
-    customerId INTEGER NOT NULL,
-    assignedToUserId INTEGER NULL,
-    assignedByUserId INTEGER NOT NULL,
+    customer_query_id INTEGER NOT NULL,
+    customer_id INTEGER NOT NULL,
+    assigned_to_user_id INTEGER NULL,
+    assigned_by_user_id INTEGER NOT NULL,
     status INTEGER NOT NULL,
-    statusesJson JSON NULL,
+    statuses_json JSON NULL,
     appid INTEGER NOT NULL,
-    createdDate TIMESTAMP NOT NULL,
-    lastupdatedate TIMESTAMP NOT NULL
+    created_date TIMESTAMP NOT NULL,
+    updated_date TIMESTAMP NOT NULL
 );
 
 INSERT INTO customerformcontrols (json, isDefault, appId) VALUES ('{"id": { "label": "ID", "showInUI": false }, "fullname": { "label": "Name", "showInUI": true }, "age": { "label": "Age", "showInUI": true }, "gender": { "label": "Gender", "showInUI": true }, "notes": { "label": "Notes", "showInUI": true, "type": "textarea" }, "visitdate": { "label": "Visit Date", "showInUI": true }, "mobile": { "label": "Mobile", "showInUI": true }, "address": { "label": "Address", "showInUI": true, "type": "textarea" }, "city": { "label": "City", "showInUI": true }, "email": { "label": "Email", "showInUI": true }, "requiredworkcategory": {

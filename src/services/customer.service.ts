@@ -1,5 +1,5 @@
 import { config } from "@/constants/app";
-import { Customer } from "@/models/app";
+import { Customer, Task } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
 const apiBaseUrl =
   process.env.NODE_ENV === "production"
@@ -29,4 +29,10 @@ export const getCustomerQueryDetails = async (
   customerId: number
 ): Promise<AxiosResponse> => {
   return await axios.get(`${apiBaseUrl}/api/customer-control/get-query-details/${customerId}`);
+};
+
+export const postTask = async (
+  task: Task
+): Promise<AxiosResponse> => {
+  return await axios.post(`${apiBaseUrl}/api/customer-control/create-task`, task);
 };
