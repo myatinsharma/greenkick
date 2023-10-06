@@ -19,15 +19,15 @@ export type CustomerWork = {
   convertedintolead?: boolean;
 };
 
-export type CustomerFormControl = {
-  label: string;
+export type FormControl = {
+  label?: string;
   placeholder?: string;
   showInUI: boolean;
   type?: "dropdown" | "textarea" | "text" | "date";
   dropdownOptions?: Record<string, string>;
 };
 
-export type FormKeyControls = Record<keyof Customer, CustomerFormControl>;
+export type FormKeyControls = Record<keyof Customer, FormControl>;
 
 export type CustomerDataKeys = Extract<keyof Customer, string>;
 
@@ -36,3 +36,15 @@ export type CustomerReviewSheetDesign = {
   children?: CustomerReviewSheetDesign[];
   bList?: boolean;
 };
+
+export type Task = {
+  title: string;
+  description: string;
+  customer_query_id: number;
+  customer_id: number;
+  assigned_to_user_id: number;
+  assigned_by_user_id: number;
+  status: number;
+  statuses_json: string;
+  appid: number;
+} & { id: number };

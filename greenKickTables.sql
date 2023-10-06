@@ -44,6 +44,21 @@ CREATE TABLE Users (
     lastupdatedate TIMESTAMP NOT NULL
 );
 
+CREATE TABLE Tasks (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NULL,
+    description VARCHAR(100) NULL,
+    customer_query_id INTEGER NOT NULL,
+    customer_id INTEGER NOT NULL,
+    assigned_to_user_id INTEGER NULL,
+    assigned_by_user_id INTEGER NOT NULL,
+    status INTEGER NOT NULL,
+    statuses_json JSON NULL,
+    appid INTEGER NOT NULL,
+    created_date TIMESTAMP NOT NULL,
+    updated_date TIMESTAMP NOT NULL
+);
+
 INSERT INTO customerformcontrols (json, isDefault, appId) VALUES ('{"id": { "label": "ID", "showInUI": false }, "fullname": { "label": "Name", "showInUI": true }, "age": { "label": "Age", "showInUI": true }, "gender": { "label": "Gender", "showInUI": true }, "notes": { "label": "Notes", "showInUI": true, "type": "textarea" }, "visitdate": { "label": "Visit Date", "showInUI": true }, "mobile": { "label": "Mobile", "showInUI": true }, "address": { "label": "Address", "showInUI": true, "type": "textarea" }, "city": { "label": "City", "showInUI": true }, "email": { "label": "Email", "showInUI": true }, "requiredworkcategory": {
     "label": "Required Work Category", "showInUI": true, "type": "dropdown", "dropdownOptions": { "1": "Construction", "2": "Vastu" }}, "requiredworksubcategory": { "label": "Required Work Sub Category", "showInUI": true }, "referencesource": { "label": "Reference Source", "showInUI": true }, "convertedintolead": { "label": "Converted Into Lead", "showInUI": false }}', false, 2);
 

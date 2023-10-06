@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { dummyCustomer, testCustomerData } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
 import { postCustomer, verifyTaskAccess } from "@/services/customer.service";
-import { schema } from "@/constants/zod";
+import { customerSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type HomeFormProps = {
@@ -23,7 +23,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     formState: { errors, isValid },
   } = useForm<Customer>({
     defaultValues: testCustomerData,
-    resolver: zodResolver(schema),
+    resolver: zodResolver(customerSchema),
   });
 
   function handleSave(data: Customer) {
@@ -51,7 +51,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
 
   return (
     <div className="App">
-      <header className="bg-teal-700 px-32 pt-6">
+      <header className="bg-teal-700 px-32 py-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
           GreenKick
         </h3>

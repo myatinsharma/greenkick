@@ -2,13 +2,14 @@ import { UseFormRegister } from "react-hook-form";
 import {
   Customer,
   CustomerDataKeys,
-  CustomerFormControl,
+  FormControl,
+  Task,
 } from "../../models/app";
 
 type InputFieldProps = {
-  register: UseFormRegister<Customer>;
+  register: UseFormRegister<Customer> | UseFormRegister<Task>;
   name: string;
-  control: CustomerFormControl;
+  control: FormControl;
   valueType?: string;
 };
 
