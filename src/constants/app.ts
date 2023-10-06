@@ -1,11 +1,12 @@
 import {
   Customer,
-  CustomerFormControl,
+  FormControl,
   CustomerReviewSheetDesign,
+  Task,
 } from "@/models/app";
 import { string } from "zod";
 
-export const customerFormData: Record<keyof Customer, CustomerFormControl> = {
+export const customerFormData: Record<keyof Customer, FormControl> = {
   id: { label: "ID", showInUI: false },
   fullname: { label: "Name", showInUI: true },
   age: { label: "Age", showInUI: true },
@@ -28,6 +29,19 @@ export const customerFormData: Record<keyof Customer, CustomerFormControl> = {
   },
   referencesource: { label: "Reference Source", showInUI: true },
   convertedintolead: { label: "Converted Into Lead", showInUI: false },
+};
+
+export const taskFormControls: Record<keyof Task, FormControl> = {
+  id: { showInUI: false },
+  title: { label: "Title", showInUI: true },
+  description: { label: "Description", showInUI: true },
+  customer_query_id: { showInUI: false },
+  customer_id: { showInUI: false },
+  assigned_to_user_id: { label: "Assigned To User", showInUI: true },
+  assigned_by_user_id: { label: "Assigned By User ID", showInUI: true },
+  status: { label: "Status", showInUI: true },
+  statuses_json: { showInUI: false },
+  appid: { showInUI: false },
 };
 
 export const numberOfMedicineInputRows = 2;
@@ -68,6 +82,19 @@ export const testCustomerData: Customer = {
   requiredworksubcategory: 2,
   referencesource: "Google",
   convertedintolead: false,
+};
+
+export const testTaskData: Task = {
+  id: 0,
+  title: "Task Title",
+  description: "Task Description",
+  customer_query_id: 1,
+  customer_id: 1,
+  assigned_to_user_id: 1,
+  assigned_by_user_id: 1,
+  status: 1,
+  statuses_json: "{}",
+  appid: 1,
 };
 
 export const config = {

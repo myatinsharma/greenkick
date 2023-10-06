@@ -10,14 +10,15 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { id,  } = request.body as Task;
-
+  const task = request.body as Task;
   return await db
     .transaction(async (tx) => {
       await db
         .insert(tasks)
-        .values(newTask)
-        .returning({ task_id: tasks.id });
+        .values({ ...task, created_date: new Date(), updated_date: new Date() })
+        .returning({ task_id: tasks.id }).then((res) => {
+          console.log(res);
+        });
     })
     .then(() => response.status(201).json({}));
 }

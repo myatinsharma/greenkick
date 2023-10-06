@@ -19,15 +19,15 @@ export type CustomerWork = {
   convertedintolead?: boolean;
 };
 
-export type CustomerFormControl = {
-  label: string;
+export type FormControl = {
+  label?: string;
   placeholder?: string;
   showInUI: boolean;
   type?: "dropdown" | "textarea" | "text" | "date";
   dropdownOptions?: Record<string, string>;
 };
 
-export type FormKeyControls = Record<keyof Customer, CustomerFormControl>;
+export type FormKeyControls = Record<keyof Customer, FormControl>;
 
 export type CustomerDataKeys = Extract<keyof Customer, string>;
 
@@ -47,6 +47,4 @@ export type Task = {
   status: number;
   statuses_json: string;
   appid: number;
-  created_date: string;
-  updated_date: string;
 } & { id: number };

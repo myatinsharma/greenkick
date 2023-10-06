@@ -1,5 +1,5 @@
 import { config } from "@/constants/app";
-import { Customer, Task } from "@/models/app";
+import { Customer, TaskPayload } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
 const apiBaseUrl =
   process.env.NODE_ENV === "production"
@@ -32,7 +32,7 @@ export const getCustomerQueryDetails = async (
 };
 
 export const postTask = async (
-  task: Task
+  task: TaskPayload
 ): Promise<AxiosResponse> => {
   return await axios.post(`${apiBaseUrl}/api/customer-control/create-task`, task);
 };

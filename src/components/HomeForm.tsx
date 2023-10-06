@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { dummyCustomer, testCustomerData } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
 import { postCustomer, verifyTaskAccess } from "@/services/customer.service";
-import { schema } from "@/constants/zod";
+import { customerSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type HomeFormProps = {
@@ -23,7 +23,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     formState: { errors, isValid },
   } = useForm<Customer>({
     defaultValues: testCustomerData,
-    resolver: zodResolver(schema),
+    resolver: zodResolver(customerSchema),
   });
 
   function handleSave(data: Customer) {
