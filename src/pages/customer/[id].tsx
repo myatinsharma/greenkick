@@ -11,6 +11,7 @@ import { taskSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/components/common/InputField";
 import { taskFormControls, testTaskData } from "@/constants/app";
+import { getUsers } from "@/services/user.service";
 
 const CustomAgGrid = () => {
   const router = useRouter();
@@ -32,6 +33,12 @@ const CustomAgGrid = () => {
       setCustomer(mapCustomerFromCustomerQueryAPI(res.data[0]));
     });
   }, [router.query]);
+
+  useEffect(() => {
+    getUsers().then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   function addNewTask() {
     const task: Task = {
