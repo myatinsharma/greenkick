@@ -51,9 +51,9 @@ export const taskFormControls: Record<keyof Task, FormControl> = {
   description: { label: "Description", showInUI: true },
   customer_query_id: { showInUI: false },
   customer_id: { showInUI: false },
-  assigned_to_user_id: { label: "Assigned To User", showInUI: true },
+  assigned_to_user_id: { label: "Assigned To User", showInUI: true, type: "dropdown", dropdownOptions: { 1: "Raj Kumar", 2: "Rajesh Kumar" } },
   assigned_by_user_id: { label: "Assigned By User ID", showInUI: false },
-  status: { label: "Status", showInUI: true, type: "dropdown", dropdownOptions: Object.fromEntries(Object.entries(TaskStatus).map(([key, value]) => [value, key])) },
+  status: { label: "Status", showInUI: true, type: "dropdown", dropdownOptions: Object.fromEntries(Object.entries(TaskStatus).filter((x) => typeof x[1] === 'number').map(([key, value]) => [value, key])) },
   statuses_json: { showInUI: false },
   appid: { showInUI: false },
 };

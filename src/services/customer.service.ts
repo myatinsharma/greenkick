@@ -1,5 +1,5 @@
 import { apiBaseUrl } from "@/constants/app";
-import { Customer } from "@/models/app";
+import { Customer, Task } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
 
 export const postCustomer = async (
@@ -28,7 +28,7 @@ export const getCustomerQueryDetails = async (
 };
 
 export const postTask = async (
-  task: TaskPayload
+  task: Task
 ): Promise<AxiosResponse> => {
   return await axios.post(`${apiBaseUrl}/api/customer-control/create-task`, task);
 };

@@ -53,6 +53,8 @@ CREATE TABLE Tasks (
     assigned_to_user_id INTEGER NULL,
     assigned_by_user_id INTEGER NOT NULL,
     status INTEGER NOT NULL,
+    start_date TIMESTAMP NOT NULL,
+    end_date TIMESTAMP NOT NULL,
     statuses_json JSON NULL,
     appid INTEGER NOT NULL,
     created_date TIMESTAMP NOT NULL,
@@ -63,3 +65,7 @@ INSERT INTO customerformcontrols (json, isDefault, appId) VALUES ('{"id": { "lab
     "label": "Required Work Category", "showInUI": true, "type": "dropdown", "dropdownOptions": { "1": "Construction", "2": "Vastu" }}, "requiredworksubcategory": { "label": "Required Work Sub Category", "showInUI": true }, "referencesource": { "label": "Reference Source", "showInUI": true }, "convertedintolead": { "label": "Converted Into Lead", "showInUI": false }}', false, 2);
 
 insert into users (fullname, mobile, email, codeword, isadmin, appid, isactive, lastupdatedate) values ('Admin', '9999999999', 'xx@mail.com', '1290', true, 2, true, now());
+
+insert into users (fullname, mobile, email, codeword, isadmin, appid, isactive, lastupdatedate) values ('Dinesh', '9999888811', 'dinesharma@gmail.com', '3147', false, 2, true, now());
+
+insert into users (fullname, mobile, email, codeword, isadmin, appid, isactive, lastupdatedate) values ('Ramandeep', '9999888822', 'ramandeep@gmail.com', '1177', false, 2, true, now());
