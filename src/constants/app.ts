@@ -1,10 +1,24 @@
+import { TaskStatus } from "@/enums";
 import {
   Customer,
   FormControl,
   CustomerReviewSheetDesign,
   Task,
 } from "@/models/app";
-import { string } from "zod";
+
+const config = {
+  development: {
+    baseUrl: "http://localhost:3000", // Your local development server URL
+  },
+  production: {
+    baseUrl: "https://greenkick.vercel.app/", // Your deployed server URL
+  },
+};
+
+export const apiBaseUrl =
+  process.env.NODE_ENV === "production"
+    ? config.production.baseUrl
+    : config.development.baseUrl;
 
 export const customerFormData: Record<keyof Customer, FormControl> = {
   id: { label: "ID", showInUI: false },
@@ -37,9 +51,9 @@ export const taskFormControls: Record<keyof Task, FormControl> = {
   description: { label: "Description", showInUI: true },
   customer_query_id: { showInUI: false },
   customer_id: { showInUI: false },
-  assigned_to_user_id: { label: "Assigned To User", showInUI: true },
-  assigned_by_user_id: { label: "Assigned By User ID", showInUI: true },
-  status: { label: "Status", showInUI: true },
+  assigned_to_user_id: { label: "Assigned To User", showInUI: true, type: "dropdown", dropdownOptions: { 1: "Raj Kumar", 2: "Rajesh Kumar" } },
+  assigned_by_user_id: { label: "Assigned By User ID", showInUI: false },
+  status: { label: "Status", showInUI: true, type: "dropdown", dropdownOptions: Object.fromEntries(Object.entries(TaskStatus).filter((x) => typeof x[1] === 'number').map(([key, value]) => [value, key])) },
   statuses_json: { showInUI: false },
   appid: { showInUI: false },
 };
@@ -92,16 +106,7 @@ export const testTaskData: Task = {
   customer_id: 1,
   assigned_to_user_id: 1,
   assigned_by_user_id: 1,
-  status: 1,
+  status: 3,
   statuses_json: "{}",
   appid: 1,
-};
-
-export const config = {
-  development: {
-    baseUrl: "http://localhost:3000", // Your local development server URL
-  },
-  production: {
-    baseUrl: "https://greenkick.vercel.app/", // Your deployed server URL
-  },
 };

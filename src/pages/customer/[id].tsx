@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getCustomerQueryDetails, postTask } from "@/services/customer.service";
-import { Customer, Task } from "@/models/app";
+import { Customer, Task, User } from "@/models/app";
 import { useRouter } from "next/router";
 import { mapCustomerFromCustomerQueryAPI } from "@/utils";
 import { TaskStatus } from "@/enums";
@@ -11,11 +11,13 @@ import { taskSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/components/common/InputField";
 import { taskFormControls, testTaskData } from "@/constants/app";
+import { getUsers } from "@/services/user.service";
 
 const CustomAgGrid = () => {
   const router = useRouter();
   const [customer, setCustomer] = useState<Customer>({} as Customer);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
 
   const {
     control,
@@ -28,10 +30,22 @@ const CustomAgGrid = () => {
   });
 
   useEffect(() => {
+    console.log(router.query);
     getCustomerQueryDetails(parseInt(router.query.id as string)).then((res) => {
       setCustomer(mapCustomerFromCustomerQueryAPI(res.data[0]));
     });
   }, [router.query]);
+
+  useEffect(() => {
+    getUsers().then((res) => {
+      console.log(res);
+      setAllUsers(res);
+      taskFormControls.assigned_to_user_id.dropdownOptions = res.map((user) => {
+        let option: Record<string, string> = {};
+        option[user.id] = user.fullname;
+        return option;
+      });
+  }, []);
 
   function addNewTask() {
     const task: Task = {

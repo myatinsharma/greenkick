@@ -48,3 +48,14 @@ export type Task = {
   statuses_json: string;
   appid: number;
 } & { id: number };
+
+export type User = {
+  fullname: string;
+  mobile: string;
+  email: string;
+  codeword: string;
+  appid: number;
+  isadmin: number;
+  isactive: number;
+  lastupdatedate: string;
+} & { id: number };
