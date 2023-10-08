@@ -36,7 +36,7 @@ export const users = pgTable("users", {
   appid: integer("appid"),
   isadmin: integer("isadmin"),
   isactive: integer("isactive"),
-  lastupdatedate: timestamp('lastupdatedate').defaultNow(),
+  lastupdatedate: timestamp("lastupdatedate").defaultNow(),
 });
 
 export const tasks = pgTable("tasks", {
@@ -48,10 +48,12 @@ export const tasks = pgTable("tasks", {
   assigned_to_user_id: integer("assigned_to_user_id"),
   assigned_by_user_id: integer("assigned_by_user_id").notNull(),
   status: integer("status").notNull(),
+  start_date: timestamp("start_date").notNull(),
+  end_date: timestamp("end_date").notNull(),
   statuses_json: text("statuses_json"),
   appid: integer("appid").notNull(),
-  created_date: timestamp('created_date').notNull().defaultNow(),
-  updated_date: timestamp('updated_date').notNull().defaultNow(),
+  created_date: timestamp("created_date").notNull().defaultNow(),
+  updated_date: timestamp("updated_date").notNull().defaultNow(),
 });
 
 export const customerrequirements = pgTable("customerrequirements", {

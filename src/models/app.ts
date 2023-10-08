@@ -17,7 +17,7 @@ export type CustomerWork = {
   notes?: string;
   visitdate?: string;
   convertedintolead?: boolean;
-};
+} & { queryid?: number };
 
 export type FormControl = {
   label?: string;
@@ -39,12 +39,14 @@ export type CustomerReviewSheetDesign = {
 
 export type Task = {
   title: string;
-  description: string;
+  description?: string;
   customer_query_id: number;
   customer_id: number;
   assigned_to_user_id: number;
   assigned_by_user_id: number;
   status: number;
+  start_date: Date;
+  end_date: Date;
   statuses_json: string;
   appid: number;
 } & { id: number };

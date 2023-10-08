@@ -23,4 +23,5 @@ export enum TaskStatus {
   "Cancelled" = 3,
   "Blocked" = 4,
   "On Hold" = 5,
+  "Ready To Start" = 6,
 }

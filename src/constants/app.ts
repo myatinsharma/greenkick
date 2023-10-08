@@ -54,6 +54,8 @@ export const taskFormControls: Record<keyof Task, FormControl> = {
   assigned_to_user_id: { label: "Assigned To User", showInUI: true, type: "dropdown", dropdownOptions: { 1: "Raj Kumar", 2: "Rajesh Kumar" } },
   assigned_by_user_id: { label: "Assigned By User ID", showInUI: false },
   status: { label: "Status", showInUI: true, type: "dropdown", dropdownOptions: Object.fromEntries(Object.entries(TaskStatus).filter((x) => typeof x[1] === 'number').map(([key, value]) => [value, key])) },
+  start_date: { label: "Start Date", showInUI: true, type: "date" },
+  end_date: { label: "End Date", showInUI: true, type: "date" },
   statuses_json: { showInUI: false },
   appid: { showInUI: false },
 };
@@ -98,6 +100,21 @@ export const testCustomerData: Customer = {
   convertedintolead: false,
 };
 
+export const dummyTask: Task = {
+  id: 0,
+  title: "",
+  description: "",
+  customer_query_id: -1,
+  customer_id: -1,
+  assigned_to_user_id: -1,
+  assigned_by_user_id: 1,
+  status: 0,
+  start_date: new Date(),
+  end_date: new Date(),
+  statuses_json: "{}",
+  appid: 2,
+};
+
 export const testTaskData: Task = {
   id: 0,
   title: "Task Title",
@@ -106,7 +123,9 @@ export const testTaskData: Task = {
   customer_id: 1,
   assigned_to_user_id: 1,
   assigned_by_user_id: 1,
-  status: 3,
+  status: 2,
+  start_date: new Date(),
+  end_date: new Date(),
   statuses_json: "{}",
   appid: 1,
 };

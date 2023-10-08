@@ -15,8 +15,15 @@ export default async function handler(
     .transaction(async (tx) => {
       await db
         .insert(tasks)
-        .values({ ...task, created_date: new Date(), updated_date: new Date() })
-        .returning({ task_id: tasks.id }).then((res) => {
+        .values({
+          ...task,
+          created_date: new Date(),
+          updated_date: new Date(),
+          start_date: new Date(task.start_date),
+          end_date: new Date(task.end_date),
+        })
+        .returning({ task_id: tasks.id })
+        .then((res) => {
           console.log(res);
         });
     })

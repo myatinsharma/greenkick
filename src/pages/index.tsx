@@ -2,7 +2,6 @@ import HomeForm from "@/components/HomeForm";
 import { Customer } from "@/models/app";
 import { useState } from "react";
 import { dummyCustomer } from "@/constants/app";
-import Navbar from "@/components/Navbar";
 import Layout from "@/components/common/Layout";
 
 export default function Home() {

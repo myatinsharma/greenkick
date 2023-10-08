@@ -49,6 +49,14 @@ const InputField = ({
               </option>
             ))}
           </select>
+        )) ||
+        (type === "date" && (
+          <input
+            {...register(name as CustomerDataKeys)}
+            type="date"
+            placeholder={placeholder}
+            className="input input-bordered w-full max-w-xs"
+          ></input>
         )) || (
           <input
             {...register(name as CustomerDataKeys, {

@@ -18,12 +18,18 @@ export const customerSchema = z.object({
 
 export const taskSchema = z.object({
   title: z.string().min(1, { message: "Required" }),
-  description: z.string().min(1, { message: "Required" }),
+  description: z.string().optional(),
   customer_query_id: z.number().min(1, { message: "Required" }),
   customer_id: z.number().min(1, { message: "Required" }),
   assigned_to_user_id: z.number().optional(),
   assigned_by_user_id: z.number().min(1, { message: "Required" }),
   status: z.number().min(1, { message: "Required" }),
+  start_date: z.preprocess((arg) => {
+    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+  }, z.date()),
+  end_date: z.preprocess((arg) => {
+    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+  }, z.date()),
   statuses_json: z.string().optional(),
   appid: z.number().min(1, { message: "Required" }),
 });

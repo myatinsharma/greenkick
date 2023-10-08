@@ -24,17 +24,11 @@ export function mapCustomerToCustomerWork(customer: Customer): CustomerWork {
 export function mapCustomerFromCustomerQueryAPI(
   apiCustomerData: any
 ): Customer {
-  const {
-    fullname,
-    mobile,
-    email,
-    age,
-    gender,
-    address,
-    city,
-  } = apiCustomerData.customers;
+  const { fullname, mobile, email, age, gender, address, city } =
+    apiCustomerData.customers;
 
   const {
+    id: queryid,
     requiredworkcategory,
     requiredworksubcategory,
     notes,
@@ -45,6 +39,7 @@ export function mapCustomerFromCustomerQueryAPI(
 
   let customer: Customer = {
     id: apiCustomerData.customers.id,
+    queryid,
     fullname,
     mobile,
     email,
@@ -58,7 +53,7 @@ export function mapCustomerFromCustomerQueryAPI(
     convertedintolead,
     referencesource,
     visitdate,
-  }
+  };
 
   return customer;
 }
