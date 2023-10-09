@@ -13,12 +13,15 @@ import InputField from "@/components/common/InputField";
 import { dummyTask, taskFormControls, testTaskData } from "@/constants/app";
 import { getUsers } from "@/services/user.service";
 import Layout from "@/components/common/Layout";
+import ValidateCode from "@/components/common/ValidateCode";
 
 const CustomAgGrid = () => {
   const router = useRouter();
   const [customer, setCustomer] = useState<Customer>({} as Customer);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fetchingUsers, setFetchingUsers] = useState(false);
+  const [isActionAllowed, setIsActionAllowed] = useState<boolean>(false);
+  const newTaskForm = React.createRef<HTMLFormElement>();
 
   const {
     control,
@@ -46,7 +49,16 @@ const CustomAgGrid = () => {
     setFetchingUsers(true);
   }, []);
 
+  useEffect(() => {
+    if (isActionAllowed) {
+      console.log("submitting");
+      newTaskForm.current?.dispatchEvent(new Event("submit"));
+    }
+  });
+
   function handleSave(data: Task) {
+    console.log(data);
+    console.log(isValid);
     if (isValid) {
       setIsSubmitting(true);
       data = {
@@ -71,7 +83,11 @@ const CustomAgGrid = () => {
             </p>
           ))}
           {fetchingUsers && (
-            <form onSubmit={handleSubmit(handleSave)} className="w-full">
+            <form
+              ref={newTaskForm}
+              onSubmit={handleSubmit(handleSave)}
+              className="w-full"
+            >
               <div className="grid grid-cols-2 gap-4">
                 {Object.entries(taskFormControls).map(([key, value], ind) => {
                   if (taskFormControls[key as keyof Task].showInUI === false)
@@ -88,13 +104,8 @@ const CustomAgGrid = () => {
                   );
                 })}
               </div>
-              <button
-                type="submit"
-                disabled={!isValid || isSubmitting}
-                className="btn btn-primary mt-4 ml-4"
-              >
-                {isSubmitting ? "Adding..." : "Add Task"}
-              </button>
+              <ValidateCode onSubmit={setIsActionAllowed}></ValidateCode>
+              <button type="submit" className="hidden"></button>
             </form>
           )}
         </div>

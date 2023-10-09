@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Customer } from "../models/app";
 import { useForm } from "react-hook-form";
-import { dummyCustomer, testCustomerData } from "@/constants/app";
+import { testCustomerData } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
-import { postCustomer, verifyTaskAccess } from "@/services/customer.service";
+import { postCustomer } from "@/services/customer.service";
 import { customerSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import ValidateCode from "./common/ValidateCode";
 
 type HomeFormProps = {
   handleCustomerDataSubmission: (data: Customer) => void;
@@ -14,7 +15,8 @@ type HomeFormProps = {
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [customer, setCustomer] = useState<Customer>(testCustomerData);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [codeword, setCodeword] = useState<string>("");
+  const [isActionAllowed, setIsActionAllowed] = useState<boolean>(false);
+  const customerQueryForm = React.createRef<HTMLFormElement>();
 
   const {
     control,
@@ -26,24 +28,21 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     resolver: zodResolver(customerSchema),
   });
 
+  useEffect(() => {
+    if (isActionAllowed) {
+      customerQueryForm.current?.dispatchEvent(new Event("submit"));
+    }
+  });
+
   function handleSave(data: Customer) {
     if (isValid) {
       setIsSubmitting(true);
       setCustomer(data);
       handleCustomerDataSubmission(data);
-      verifyTaskAccess(codeword).then((res) => {
-        if (res.status === 200) {
-          if (res.data.access === true) {
-            postCustomer(data).then((res) => {
-              if (res.status === 201) {
-                setIsSubmitting(false);
-                alert("Customer data saved successfully!");
-              }
-            });
-          } else {
-            setIsSubmitting(false);
-            alert("Enter valid code");
-          }
+      postCustomer(data).then((res) => {
+        if (res.status === 201) {
+          setIsSubmitting(false);
+          alert("Customer data saved successfully!");
         }
       });
     }
@@ -56,26 +55,18 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
           GreenKick
         </h3>
         <div className="grid-cols-6 hidden">Tailwind Jugaad</div>
-        <form onSubmit={handleSubmit(handleSave)} className="w-full">
+        <form
+          ref={customerQueryForm}
+          onSubmit={handleSubmit(handleSave)}
+          className="w-full"
+        >
           <FormSewing
             defaultValues={customer}
             control={control}
             register={register}
           ></FormSewing>
-          <input
-            type="text"
-            placeholder="code"
-            value={codeword}
-            onChange={(e) => setCodeword(e.target.value)}
-            className="input input-bordered w-full max-w-xs"
-          ></input>
-          <button
-            type="submit"
-            disabled={!isValid || isSubmitting}
-            className="btn btn-primary mt-4 ml-4"
-          >
-            {isSubmitting ? "Saving..." : "Save"}
-          </button>
+          <ValidateCode onSubmit={setIsActionAllowed}></ValidateCode>
+          <button type="submit" className="hidden"></button>
         </form>
       </header>
     </div>
