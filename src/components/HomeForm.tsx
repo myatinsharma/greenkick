@@ -7,6 +7,7 @@ import { postCustomer } from "@/services/customer.service";
 import { customerSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ValidateCode from "./common/ValidateCode";
+import { boolean } from "zod";
 
 type HomeFormProps = {
   handleCustomerDataSubmission: (data: Customer) => void;
@@ -15,7 +16,6 @@ type HomeFormProps = {
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [customer, setCustomer] = useState<Customer>(testCustomerData);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isActionAllowed, setIsActionAllowed] = useState<boolean>(false);
   const customerQueryForm = React.createRef<HTMLFormElement>();
 
   const {
@@ -26,12 +26,6 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   } = useForm<Customer>({
     defaultValues: testCustomerData,
     resolver: zodResolver(customerSchema),
-  });
-
-  useEffect(() => {
-    if (isActionAllowed) {
-      customerQueryForm.current?.dispatchEvent(new Event("submit"));
-    }
   });
 
   function handleSave(data: Customer) {
@@ -47,6 +41,13 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
       });
     }
   }
+
+  const afterValidationAction = (isValid: boolean) => {
+    isValid &&
+      customerQueryForm.current?.dispatchEvent(
+        new Event("submit", { cancelable: false, bubbles: true })
+      );
+  };
 
   return (
     <div className="App">
@@ -65,9 +66,9 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             control={control}
             register={register}
           ></FormSewing>
-          <ValidateCode onSubmit={setIsActionAllowed}></ValidateCode>
           <button type="submit" className="hidden"></button>
         </form>
+        <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
       </header>
     </div>
   );

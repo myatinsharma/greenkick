@@ -52,7 +52,9 @@ const CustomAgGrid = () => {
   useEffect(() => {
     if (isActionAllowed) {
       console.log("submitting");
-      newTaskForm.current?.dispatchEvent(new Event("submit"));
+      newTaskForm.current?.dispatchEvent(
+        new Event("submit", { cancelable: true, bubbles: true })
+      );
     }
   });
 
