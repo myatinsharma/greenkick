@@ -1,10 +1,11 @@
+import { UserAccess } from "@/models/app";
 import { verifyTaskAccess } from "@/services/customer.service";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 interface Props {
   submitButtonText?: string;
   isSubmittingText?: string;
-  onSubmit: (isValid: boolean) => void;
+  onSubmit: (userAccess: UserAccess) => void;
 }
 
 const ValidateCode: React.FC<Props> = ({
@@ -18,12 +19,10 @@ const ValidateCode: React.FC<Props> = ({
   function handleSubmit() {
     if (!code) return;
     verifyTaskAccess(code).then((res) => {
-      if (res.status === 200) {
-        if (res.data.access === true) {
-          onSubmit(true);
-        } else {
-          onSubmit(false);
-        }
+      if (res.access) {
+        onSubmit(res);
+      } else {
+        onSubmit(res);
       }
     });
   }

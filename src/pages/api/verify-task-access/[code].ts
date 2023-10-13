@@ -17,7 +17,7 @@ export default async function handler(
   }
   const selectResult = await db.select().from(users).where(eq(users.codeword, code as string));
   if (selectResult.length > 0) {
-    return response.status(200).json({ access: true });
+    return response.status(200).json({ access: true, userId: selectResult[0].id });
   }
   return response.status(200).json({ access: false });
 }

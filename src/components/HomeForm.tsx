@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Customer } from "../models/app";
+import { Customer, UserAccess } from "../models/app";
 import { useForm } from "react-hook-form";
 import { testCustomerData } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
@@ -16,6 +16,7 @@ type HomeFormProps = {
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
   const [customer, setCustomer] = useState<Customer>(testCustomerData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFormLoaded, setIsFormLoaded] = useState(false);
   const customerQueryForm = React.createRef<HTMLFormElement>();
 
   const {
@@ -42,8 +43,8 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     }
   }
 
-  const afterValidationAction = (isValid: boolean) => {
-    isValid &&
+  const afterValidationAction = (userAccess: UserAccess) => {
+    userAccess.access &&
       customerQueryForm.current?.dispatchEvent(
         new Event("submit", { cancelable: false, bubbles: true })
       );
@@ -62,13 +63,16 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
           className="w-full"
         >
           <FormSewing
+            setIsFormControlsLoaded={setIsFormLoaded}
             defaultValues={customer}
             control={control}
             register={register}
           ></FormSewing>
           <button type="submit" className="hidden"></button>
         </form>
-        <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
+        {isFormLoaded && (
+          <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
+        )}
       </header>
     </div>
   );

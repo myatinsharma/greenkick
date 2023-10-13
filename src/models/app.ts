@@ -61,3 +61,8 @@ export type User = {
   isactive: number;
   lastupdatedate: string;
 } & { id: number };
+
+export type UserAccess = {
+  userId: number;
+  access: boolean;
+};

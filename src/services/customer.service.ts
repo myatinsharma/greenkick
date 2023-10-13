@@ -1,5 +1,5 @@
 import { apiBaseUrl } from "@/constants/app";
-import { Customer, Task } from "@/models/app";
+import { Customer, Task, UserAccess } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
 
 export const postCustomer = async (
@@ -15,20 +15,24 @@ export const getCustomers = async (): Promise<Customer[]> => {
     .catch((err) => err);
 };
 
-export const verifyTaskAccess = async (
-  code: string
-): Promise<AxiosResponse> => {
-  return await axios.get<{ access: boolean }>(`${apiBaseUrl}/api/verify-task-access/${code}`);
+export const verifyTaskAccess = async (code: string): Promise<UserAccess> => {
+  return await axios
+    .get<UserAccess>(`${apiBaseUrl}/api/verify-task-access/${code}`)
+    .then((res) => res.data)
+    .catch((err) => err);
 };
 
 export const getCustomerQueryDetails = async (
   customerId: number
 ): Promise<AxiosResponse> => {
-  return await axios.get(`${apiBaseUrl}/api/customer-control/get-query-details/${customerId}`);
+  return await axios.get(
+    `${apiBaseUrl}/api/customer-control/get-query-details/${customerId}`
+  );
 };
 
-export const postTask = async (
-  task: Task
-): Promise<AxiosResponse> => {
-  return await axios.post(`${apiBaseUrl}/api/customer-control/create-task`, task);
+export const postTask = async (task: Task): Promise<AxiosResponse> => {
+  return await axios.post(
+    `${apiBaseUrl}/api/customer-control/create-task`,
+    task
+  );
 };

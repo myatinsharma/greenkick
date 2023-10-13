@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getCustomerQueryDetails, postTask } from "@/services/customer.service";
-import { Customer, Task, User } from "@/models/app";
+import { Customer, Task, User, UserAccess } from "@/models/app";
 import { useRouter } from "next/router";
 import { mapCustomerFromCustomerQueryAPI } from "@/utils";
 import { TaskStatus } from "@/enums";
@@ -20,7 +20,7 @@ const CustomAgGrid = () => {
   const [customer, setCustomer] = useState<Customer>({} as Customer);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fetchingUsers, setFetchingUsers] = useState(false);
-  const [isActionAllowed, setIsActionAllowed] = useState<boolean>(false);
+  const [assignedByUserId, setAssignedByUserId] = useState<number>(0);
   const newTaskForm = React.createRef<HTMLFormElement>();
 
   const {
@@ -34,7 +34,6 @@ const CustomAgGrid = () => {
   });
 
   useEffect(() => {
-    console.log(router.query);
     getCustomerQueryDetails(parseInt(router.query.id as string)).then((res) => {
       setCustomer(mapCustomerFromCustomerQueryAPI(res.data[0]));
     });
@@ -49,27 +48,29 @@ const CustomAgGrid = () => {
     setFetchingUsers(true);
   }, []);
 
-  useEffect(() => {
-    if (isActionAllowed) {
-      console.log("submitting");
+  const afterValidationAction = (userAccess: UserAccess) => {
+    if (userAccess.access) {
+      setAssignedByUserId(userAccess.userId);
       newTaskForm.current?.dispatchEvent(
-        new Event("submit", { cancelable: true, bubbles: true })
+        new Event("submit", { cancelable: false, bubbles: true })
       );
     }
-  });
+  };
 
   function handleSave(data: Task) {
-    console.log(data);
-    console.log(isValid);
     if (isValid) {
       setIsSubmitting(true);
       data = {
         ...data,
         customer_id: customer.id,
         customer_query_id: customer.queryid!,
+        assigned_by_user_id: assignedByUserId,
       };
       postTask(data).then((res) => {
         setIsSubmitting(false);
+        if (res.status === 201) {
+          alert("Task saved successfully!");
+        }
       });
     }
   }
@@ -85,30 +86,32 @@ const CustomAgGrid = () => {
             </p>
           ))}
           {fetchingUsers && (
-            <form
-              ref={newTaskForm}
-              onSubmit={handleSubmit(handleSave)}
-              className="w-full"
-            >
-              <div className="grid grid-cols-2 gap-4">
-                {Object.entries(taskFormControls).map(([key, value], ind) => {
-                  if (taskFormControls[key as keyof Task].showInUI === false)
-                    return null;
-                  return (
-                    <div className="col-span-1" key={ind}>
-                      <InputField
-                        register={register}
-                        name={key}
-                        control={taskFormControls[key as keyof Task]}
-                        valueType={typeof testTaskData[key as keyof Task]}
-                      ></InputField>
-                    </div>
-                  );
-                })}
-              </div>
-              <ValidateCode onSubmit={setIsActionAllowed}></ValidateCode>
-              <button type="submit" className="hidden"></button>
-            </form>
+            <>
+              <form
+                ref={newTaskForm}
+                onSubmit={handleSubmit(handleSave)}
+                className="w-full"
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  {Object.entries(taskFormControls).map(([key, value], ind) => {
+                    if (taskFormControls[key as keyof Task].showInUI === false)
+                      return null;
+                    return (
+                      <div className="col-span-1" key={ind}>
+                        <InputField
+                          register={register}
+                          name={key}
+                          control={taskFormControls[key as keyof Task]}
+                          valueType={typeof testTaskData[key as keyof Task]}
+                        ></InputField>
+                      </div>
+                    );
+                  })}
+                </div>
+                <button type="submit" className="hidden"></button>
+              </form>
+              <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
+            </>
           )}
         </div>
       </div>

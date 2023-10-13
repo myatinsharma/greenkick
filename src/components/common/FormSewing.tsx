@@ -1,17 +1,23 @@
 import { customerFormData } from "@/constants/app";
 import InputField from "./InputField";
 import { Customer, FormKeyControls } from "@/models/app";
-import { Control, UseFormRegister } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { Control, UseFormRegister, set } from "react-hook-form";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 
 type FormSewingProps = {
   defaultValues: Customer;
   control: Control<Customer, any>;
   register: UseFormRegister<Customer>;
+  setIsFormControlsLoaded: Dispatch<SetStateAction<boolean>>;
 };
 
-const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
+const FormSewing = ({
+  defaultValues,
+  control,
+  register,
+  setIsFormControlsLoaded,
+}: FormSewingProps) => {
   const [fc, setFc] = useState<FormKeyControls>();
   useEffect(() => {
     axios
@@ -21,6 +27,7 @@ const FormSewing = ({ defaultValues, control, register }: FormSewingProps) => {
           response.data[0].json
         ) as FormKeyControls;
         setFc(customerFormData);
+        setIsFormControlsLoaded(true);
       })
       .catch(function (error) {
         console.log(error);
