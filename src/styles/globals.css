@@ -22,3 +22,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.task-date-crossed {
+  background-color: orangered !important;
+}
+
+.task-date-near {
+  background-color: beige !important;
+}

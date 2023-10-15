@@ -17,7 +17,8 @@ export type CustomerWork = {
   notes?: string;
   visitdate?: string;
   convertedintolead?: boolean;
-} & { queryid?: number };
+  queryid?: number;
+};
 
 export type FormControl = {
   label?: string;

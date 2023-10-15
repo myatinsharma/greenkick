@@ -20,6 +20,8 @@ export const apiBaseUrl =
     ? config.production.baseUrl
     : config.development.baseUrl;
 
+export const taskProximity = 7; // days
+
 export const customerFormData: Record<keyof Customer, FormControl> = {
   id: { label: "ID", showInUI: false },
   fullname: { label: "Name", showInUI: true },
