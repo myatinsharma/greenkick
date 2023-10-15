@@ -14,6 +14,7 @@ import { dummyTask, taskFormControls, testTaskData } from "@/constants/app";
 import { getUsers } from "@/services/user.service";
 import Layout from "@/components/common/Layout";
 import ValidateCode from "@/components/common/ValidateCode";
+import TasksGrid from "@/components/tasks/tasksGrid";
 
 const CustomAgGrid = () => {
   const router = useRouter();
@@ -44,8 +45,8 @@ const CustomAgGrid = () => {
       taskFormControls.assigned_to_user_id.dropdownOptions = Object.fromEntries(
         res.map((user) => [user.id.toString(), user.fullname])
       );
+      setFetchingUsers(true);
     });
-    setFetchingUsers(true);
   }, []);
 
   const afterValidationAction = (userAccess: UserAccess) => {
@@ -82,7 +83,7 @@ const CustomAgGrid = () => {
           {Object.keys(customer || {}).map((key) => (
             <p key={key} className="text-black">
               {key}: {customer[key as keyof Customer]}
-              {TaskStatus[customer[key as keyof Customer] as TaskStatus]}
+              {customer[key as keyof Customer]}
             </p>
           ))}
           {fetchingUsers && (
@@ -111,6 +112,7 @@ const CustomAgGrid = () => {
                 <button type="submit" className="hidden"></button>
               </form>
               <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
+              <TasksGrid></TasksGrid>
             </>
           )}
         </div>

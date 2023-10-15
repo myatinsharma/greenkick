@@ -36,3 +36,10 @@ export const postTask = async (task: Task): Promise<AxiosResponse> => {
     task
   );
 };
+
+export const getAllQueryTasks = async (): Promise<Task[]> => {
+  return await axios
+    .get<Task[]>(`${apiBaseUrl}/api/customer-control/get-all-query-tasks`)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
