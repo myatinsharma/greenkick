@@ -1,11 +1,8 @@
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { sql } from "@vercel/postgres";
-import {
-  customers,
-  customerrequirements,
-} from "../../db/schema";
+import { customers, customerrequirements } from "../../db/schema";
 import { NextApiResponse, NextApiRequest } from "next";
-import { Customer, CustomerWork, DemographicData } from "@/models/app";
+import { Customer } from "@/models/app";
 import {
   mapCustomerToDemoGraphicData,
   mapCustomerToCustomerWork,

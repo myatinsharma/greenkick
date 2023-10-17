@@ -5,34 +5,23 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getAllQueryTasks, getCustomers } from "@/services/customer.service";
 import { Task } from "@/models/app";
 import { useRouter } from "next/router";
-import { taskProximity } from "@/constants/app";
+import { taskGridcolumnDefs, taskProximity } from "@/constants/app";
 
-const TasksGrid = () => {
+type TasksGridProps = {
+  queryId: number;
+};
+
+const TasksGrid = ({ queryId }: TasksGridProps) => {
   const gridRef = useRef<AgGridReact>(null);
   const [rowData, setRowData] = useState<Task[]>([]);
-  const [columnDefs, setColumnDefs] = useState<ColumnConfig[] | any>([]);
 
   useEffect(() => {
-    let keys: ColumnConfig[] = [];
-    getAllQueryTasks().then((data) => {
-      if (data.length > 0)
-        Object.keys(data[0]).map((key) => {
-          keys.push({ headerName: key, field: key });
-        });
-      setColumnDefs(keys);
-      setRowData(data);
-    });
-  }, []);
-
-  // const [columnDefs, setColumnDefs] = useState([
-  //   { headerName: "Status", field: "status" },
-  //   { headerName: "Title", field: "title" },
-  // ]);
-
-  // const rowClassRules = {
-  //   "rag-green": "data.status < 5",
-  //   "rag-red": "data.status >= 5",
-  // };
+    if (queryId) {
+      getAllQueryTasks(queryId).then((data) => {
+        setRowData(data);
+      });
+    }
+  }, [queryId]);
 
   const rowClassRules = useMemo(() => {
     return {
@@ -61,7 +50,7 @@ const TasksGrid = () => {
       <AgGridReact
         ref={gridRef}
         rowData={rowData}
-        columnDefs={columnDefs}
+        columnDefs={taskGridcolumnDefs}
         rowClassRules={rowClassRules}
       ></AgGridReact>
     </div>

@@ -37,9 +37,9 @@ export const postTask = async (task: Task): Promise<AxiosResponse> => {
   );
 };
 
-export const getAllQueryTasks = async (): Promise<Task[]> => {
+export const getAllQueryTasks = async (queryId: number): Promise<Task[]> => {
   return await axios
-    .get<Task[]>(`${apiBaseUrl}/api/customer-control/get-all-query-tasks`)
+    .get<Task[]>(`${apiBaseUrl}/api/customer-control/get-all-query-tasks/${queryId}`)
     .then((res) => res.data)
     .catch((err) => err);
 };

@@ -53,9 +53,23 @@ export const taskFormControls: Record<keyof Task, FormControl> = {
   description: { label: "Description", showInUI: true },
   customer_query_id: { showInUI: false },
   customer_id: { showInUI: false },
-  assigned_to_user_id: { label: "Assigned To User", showInUI: true, type: "dropdown", dropdownOptions: { 1: "Raj Kumar", 2: "Rajesh Kumar" } },
+  assigned_to_user_id: {
+    label: "Assigned To User",
+    showInUI: true,
+    type: "dropdown",
+    dropdownOptions: { 1: "Raj Kumar", 2: "Rajesh Kumar" },
+  },
   assigned_by_user_id: { label: "Assigned By User ID", showInUI: false },
-  status: { label: "Status", showInUI: true, type: "dropdown", dropdownOptions: Object.fromEntries(Object.entries(TaskStatus).filter((x) => typeof x[1] === 'number').map(([key, value]) => [value, key])) },
+  status: {
+    label: "Status",
+    showInUI: true,
+    type: "dropdown",
+    dropdownOptions: Object.fromEntries(
+      Object.entries(TaskStatus)
+        .filter((x) => typeof x[1] === "number")
+        .map(([key, value]) => [value, key])
+    ),
+  },
   start_date: { label: "Start Date", showInUI: true, type: "date" },
   end_date: { label: "End Date", showInUI: true, type: "date" },
   statuses_json: { showInUI: false },
@@ -131,3 +145,13 @@ export const testTaskData: Task = {
   statuses_json: "{}",
   appid: 1,
 };
+
+export const taskGridcolumnDefs: ColumnConfig[] = [
+  { headerName: "Title", field: "title" },
+  { headerName: "Description", field: "description" },
+  { headerName: "Status", field: "status" },
+  { headerName: "Assigned To", field: "assigned_to_user_id" },
+  { headerName: "Start Date", field: "start_date" },
+  { headerName: "End Date", field: "end_date" },
+  { headerName: "Created Date", field: "created_date" },
+];

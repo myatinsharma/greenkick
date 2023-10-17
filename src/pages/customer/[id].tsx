@@ -14,7 +14,7 @@ import { dummyTask, taskFormControls, testTaskData } from "@/constants/app";
 import { getUsers } from "@/services/user.service";
 import Layout from "@/components/common/Layout";
 import ValidateCode from "@/components/common/ValidateCode";
-import TasksGrid from "@/components/tasks/tasksGrid";
+import TasksGrid from "@/components/tasks/TasksGrid";
 
 const CustomAgGrid = () => {
   const router = useRouter();
@@ -112,7 +112,7 @@ const CustomAgGrid = () => {
                 <button type="submit" className="hidden"></button>
               </form>
               <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
-              <TasksGrid></TasksGrid>
+              <TasksGrid queryId={customer.queryid!}></TasksGrid>
             </>
           )}
         </div>
