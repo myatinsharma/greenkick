@@ -17,6 +17,9 @@ const Navbar = () => {
         <Link href="/customerlist" className="text-black ml-2">
           Customers
         </Link>
+        <Link href="/my-tasks-list" className="text-black ml-2">
+          Tasks
+        </Link>
       </nav>
     </>
   );
