@@ -76,4 +76,4 @@ const MyTasks = () => {
   );
 };
 
-export default TasksGrid;
+export default MyTasks;

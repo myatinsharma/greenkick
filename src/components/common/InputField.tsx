@@ -1,24 +1,25 @@
 import { UseFormRegister } from "react-hook-form";
 import {
   Customer,
-  CustomerDataKeys,
   FormControl,
+  InputFieldForm,
+  InputFieldFormKeys,
   Task,
 } from "../../models/app";
 
-type InputFieldProps = {
-  register: UseFormRegister<Customer> | UseFormRegister<Task>;
+type InputFieldProps<T extends InputFieldForm> = {
+  register: UseFormRegister<T>;
   name: string;
   control: FormControl;
   valueType?: string;
 };
 
-const InputField = ({
+function InputField<T extends Customer | Task>({
   name,
   register,
   control,
   valueType,
-}: InputFieldProps) => {
+}: InputFieldProps<T>) {
   const { label, type, placeholder, dropdownOptions } = control;
   return (
     <>
@@ -30,14 +31,14 @@ const InputField = ({
       </label>
       {(type === "textarea" && (
         <textarea
-          {...register(name as CustomerDataKeys)}
+          {...register(name as InputFieldFormKeys)}
           className="textarea w-full"
           placeholder={placeholder}
         ></textarea>
       )) ||
         (type === "dropdown" && (
           <select
-            {...register(name as CustomerDataKeys, {
+            {...register(name as InputFieldFormKeys, {
               valueAsNumber: valueType === "number" ? true : false,
             })}
             placeholder={placeholder}
@@ -52,14 +53,14 @@ const InputField = ({
         )) ||
         (type === "date" && (
           <input
-            {...register(name as CustomerDataKeys)}
+            {...register(name as InputFieldFormKeys)}
             type="date"
             placeholder={placeholder}
             className="input input-bordered w-full max-w-xs"
           ></input>
         )) || (
           <input
-            {...register(name as CustomerDataKeys, {
+            {...register(name as InputFieldFormKeys, {
               valueAsNumber: valueType === "number" ? true : false,
             })}
             type="text"
@@ -69,6 +70,6 @@ const InputField = ({
         )}
     </>
   );
-};
+}
 
 export default InputField;
