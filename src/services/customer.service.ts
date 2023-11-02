@@ -1,6 +1,7 @@
 import { apiBaseUrl } from "@/constants/app";
 import { Customer, Task, UserAccess } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
+import { string } from "zod";
 
 export const postCustomer = async (
   customer: Customer
@@ -39,7 +40,19 @@ export const postTask = async (task: Task): Promise<AxiosResponse> => {
 
 export const getAllQueryTasks = async (queryId: number): Promise<Task[]> => {
   return await axios
-    .get<Task[]>(`${apiBaseUrl}/api/customer-control/get-all-query-tasks/${queryId}`)
+    .get<Task[]>(
+      `${apiBaseUrl}/api/customer-control/get-all-query-tasks/${queryId}`
+    )
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+
+export const getAllUserTasks = async (
+  code: string,
+  email: string
+): Promise<Task[]> => {
+  return await axios
+    .get<Task[]>(`${apiBaseUrl}/api/user-tasks/get-all/${code}`)
     .then((res) => res.data)
     .catch((err) => err);
 };
