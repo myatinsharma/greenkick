@@ -45,6 +45,7 @@ export const customerFormData: Record<keyof Customer, FormControl> = {
   },
   referencesource: { label: "Reference Source", showInUI: true },
   convertedintolead: { label: "Converted Into Lead", showInUI: false },
+  queryid: { label: "Query Id", showInUI: false },
 };
 
 export const taskFormControls: Record<keyof Task, FormControl> = {

@@ -17,7 +17,7 @@ export type CustomerWork = {
   notes?: string;
   visitdate?: string;
   convertedintolead?: boolean;
-  queryid: number;
+  queryid?: number;
 };
 
 export type FormControl = {
@@ -28,12 +28,17 @@ export type FormControl = {
   dropdownOptions?: Record<string, string>;
 };
 
+export type InputFieldForm = Customer | Task;
+
 export type FormKeyControls = Record<keyof Customer, FormControl>;
 
-export type CustomerDataKeys = Extract<keyof Customer, string>;
+export type InputFieldFormKeys = Extract<
+  keyof Omit<InputFieldForm, "id">,
+  string
+>;
 
 export type CustomerReviewSheetDesign = {
-  props: CustomerDataKeys[];
+  props: InputFieldFormKeys[];
   children?: CustomerReviewSheetDesign[];
   bList?: boolean;
 };
