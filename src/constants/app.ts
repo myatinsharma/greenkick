@@ -9,10 +9,10 @@ import {
 
 const config = {
   development: {
-    baseUrl: "http://localhost:3000", // Your local development server URL
+    baseUrl: "/", // Your local development server URL
   },
   production: {
-    baseUrl: "https://greenkick.vercel.app/", // Your deployed server URL
+    baseUrl: "/", // Your deployed server URL
   },
 };
 
