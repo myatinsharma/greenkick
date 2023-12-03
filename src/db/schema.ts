@@ -27,6 +27,17 @@ export const customers = pgTable("customers", {
   city: varchar("city", { length: 250 }),
 });
 
+export const meals = pgTable("meals", {
+  id: serial("id").primaryKey(),
+  companyid: integer("companyid").notNull(),
+  companyname: varchar("companyname", { length: 100 }).notNull(),
+  breakfast: varchar("breakfast", { length: 100 }),
+  lunch: varchar("lunch", { length: 100 }),
+  dinner: varchar("dinner", { length: 100 }),
+  milk: varchar("milk", { length: 100 }),
+  other: varchar("other", { length: 100 }),
+});
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   fullname: varchar("fullname", { length: 100 }),

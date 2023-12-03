@@ -1,9 +1,9 @@
 import { UseFormRegister } from "react-hook-form";
 import {
-  Customer,
   FormControl,
   InputFieldForm,
   InputFieldFormKeys,
+  Meal,
   Task,
 } from "../../models/app";
 
@@ -14,7 +14,7 @@ type InputFieldProps<T extends InputFieldForm> = {
   valueType?: string;
 };
 
-function InputField<T extends Customer | Task>({
+function InputField<T extends Meal>({
   name,
   register,
   control,

@@ -16,6 +16,16 @@ export const customerSchema = z.object({
   convertedintolead: z.boolean().optional(),
 });
 
+export const mealsSchema = z.object({
+  companyid: z.number().optional(),
+  companyname: z.string().optional(),
+  breakfast: z.string().optional(),
+  lunch: z.string().optional(),
+  dinner: z.string().optional(),
+  milk: z.string().optional(),
+  other: z.string().optional(),
+});
+
 export const taskSchema = z.object({
   title: z.string().min(1, { message: "Required" }),
   description: z.string().optional(),

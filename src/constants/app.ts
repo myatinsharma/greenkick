@@ -4,6 +4,7 @@ import {
   FormControl,
   CustomerReviewSheetDesign,
   Task,
+  Meal,
 } from "@/models/app";
 
 const config = {
@@ -115,6 +116,16 @@ export const testCustomerData: Customer = {
   requiredworksubcategory: 2,
   referencesource: "Google",
   convertedintolead: false,
+};
+
+export const testMeal: Meal = {
+  companyid: 1,
+  comapanyname: "Hyundai",
+  breakfast: "1",
+  lunch: "2",
+  dinner: "4",
+  milk: "1",
+  other: "",
 };
 
 export const dummyTask: Task = {

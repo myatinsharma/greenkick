@@ -1,5 +1,16 @@
 export type Customer = DemographicData & CustomerWork;
 
+export type Meal = {
+  id: number;
+  companyid: number;
+  companyname: string;
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+  milk: string;
+  other: string;
+};
+
 export type DemographicData = {
   fullname: string;
   mobile: string;

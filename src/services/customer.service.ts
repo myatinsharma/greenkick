@@ -1,5 +1,5 @@
 import { apiBaseUrl } from "@/constants/app";
-import { Customer, Task, UserAccess } from "@/models/app";
+import { Customer, Meal, Task, UserAccess } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
 import { string } from "zod";
 
@@ -7,6 +7,10 @@ export const postCustomer = async (
   customer: Customer
 ): Promise<AxiosResponse> => {
   return await axios.post(`${apiBaseUrl}/api/save-customer-query`, customer);
+};
+
+export const saveData = async (meal: Meal): Promise<AxiosResponse> => {
+  return await axios.post(`${apiBaseUrl}/api/save-data`, meal);
 };
 
 export const getCustomers = async (): Promise<Customer[]> => {

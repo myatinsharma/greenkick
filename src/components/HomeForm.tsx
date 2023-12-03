@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Customer, UserAccess } from "../models/app";
+import { Customer, Meal, UserAccess } from "../models/app";
 import { useForm } from "react-hook-form";
-import { testCustomerData } from "@/constants/app";
+import { testCustomerData, testMeal } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
-import { postCustomer } from "@/services/customer.service";
-import { customerSchema } from "@/constants/zod";
+import { postCustomer, saveData } from "@/services/customer.service";
+import { customerSchema, mealsSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ValidateCode from "./common/ValidateCode";
 import { boolean } from "zod";
 
 type HomeFormProps = {
-  handleCustomerDataSubmission: (data: Customer) => void;
+  handleCustomerDataSubmission: (data: Meal) => void;
 };
 
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
-  const [customer, setCustomer] = useState<Customer>(testCustomerData);
+  const [meal, setMeal] = useState<Meal>(testMeal);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFormLoaded, setIsFormLoaded] = useState(false);
   const customerQueryForm = React.createRef<HTMLFormElement>();
@@ -24,17 +24,19 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<Customer>({
-    defaultValues: testCustomerData,
-    resolver: zodResolver(customerSchema),
+  } = useForm<Meal>({
+    defaultValues: testMeal,
+    resolver: zodResolver(mealsSchema),
   });
 
-  function handleSave(data: Customer) {
+  function handleSave(data: Meal) {
+    console.log(data);
     if (isValid) {
       setIsSubmitting(true);
-      setCustomer(data);
+      setMeal(data);
       handleCustomerDataSubmission(data);
-      postCustomer(data).then((res) => {
+      saveData(data).then((res) => {
+        console.log(data);
         if (res.status === 201) {
           setIsSubmitting(false);
           alert("Customer data saved successfully!");
@@ -43,36 +45,31 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     }
   }
 
-  const afterValidationAction = (userAccess: UserAccess) => {
-    userAccess.access &&
-      customerQueryForm.current?.dispatchEvent(
-        new Event("submit", { cancelable: false, bubbles: true })
-      );
-  };
-
   return (
     <div className="App">
       <header className="bg-teal-700 px-32 py-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
-          GreenKick
+          TAC Tool
         </h3>
-        <div className="grid-cols-6 hidden">Tailwind Jugaad</div>
-        <form
-          ref={customerQueryForm}
-          onSubmit={handleSubmit(handleSave)}
-          className="w-full"
-        >
+        <div className="grid-cols-6 hidden">Tailwind Jugaad (not visible)</div>
+        <form onSubmit={handleSubmit(handleSave)} className="w-full">
           <FormSewing
             setIsFormControlsLoaded={setIsFormLoaded}
-            defaultValues={customer}
+            defaultValues={meal}
             control={control}
             register={register}
           ></FormSewing>
-          <button type="submit" className="hidden"></button>
+          {errors.breakfast && <p>q</p>}
+          {errors.companyid && <p>c</p>}
+          {errors.companyname && <p>n</p>}
+          {errors.dinner && <p>d</p>}
+          {errors.lunch && <p>l</p>}
+          {errors.milk && <p>m</p>}
+          {errors.other && <p>o</p>}
+          <button type="submit" className="btn btn-neutral">
+            Submit
+          </button>
         </form>
-        {isFormLoaded && (
-          <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
-        )}
       </header>
     </div>
   );
