@@ -7,19 +7,14 @@ import {
   Task,
 } from "../../models/app";
 
-type InputFieldProps<T extends InputFieldForm> = {
-  register: UseFormRegister<T>;
+type InputFieldProps = {
+  register: UseFormRegister<Meal>;
   name: string;
   control: FormControl;
   valueType?: string;
 };
 
-function InputField<T extends Meal>({
-  name,
-  register,
-  control,
-  valueType,
-}: InputFieldProps<T>) {
+function InputField({ name, register, control, valueType }: InputFieldProps) {
   const { label, type, placeholder, dropdownOptions } = control;
   return (
     <>
