@@ -17,7 +17,6 @@ export const customerSchema = z.object({
 });
 
 export const mealsSchema = z.object({
-  companyid: z.number().optional(),
   companyname: z.string().min(1, { message: "Required" }),
   breakfast: z.string().optional(),
   lunch: z.string().optional(),
