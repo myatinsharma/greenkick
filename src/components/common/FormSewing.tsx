@@ -21,7 +21,7 @@ const FormSewing = ({
   const [fc, setFc] = useState<FormKeyControls>();
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/get-app-settings")
+      .get("https://greenkick-git-tac-test-myatinsharma.vercel.app/api/get-app-settings")
       .then(function (response) {
         const customerFormData = JSON.parse(
           response.data[0].json
