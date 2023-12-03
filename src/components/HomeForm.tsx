@@ -59,13 +59,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             control={control}
             register={register}
           ></FormSewing>
-          {errors.breakfast && <p>q</p>}
-          {errors.companyid && <p>c</p>}
-          {errors.companyname && <p>n</p>}
-          {errors.dinner && <p>d</p>}
-          {errors.lunch && <p>l</p>}
-          {errors.milk && <p>m</p>}
-          {errors.other && <p>o</p>}
+          {errors.root?.message && <p>{errors.root?.message}</p>}
           <button type="submit" className="btn btn-neutral">
             Submit
           </button>

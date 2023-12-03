@@ -120,7 +120,7 @@ export const testCustomerData: Customer = {
 
 export const testMeal: Meal = {
   companyid: 1,
-  comapanyname: "Hyundai",
+  companyname: "Hyundai",
   breakfast: "1",
   lunch: "2",
   dinner: "4",
