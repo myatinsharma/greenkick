@@ -23,7 +23,6 @@ CREATE TABLE Customers (
 
 CREATE TABLE Meals (
     id SERIAL PRIMARY KEY,
-    companyid INTEGER NOT NULL,
     companyname VARCHAR(100) NOT NULL,
     breakfast VARCHAR(100) NULL,
     lunch VARCHAR(100) NULL,

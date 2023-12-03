@@ -29,7 +29,6 @@ export const customers = pgTable("customers", {
 
 export const meals = pgTable("meals", {
   id: serial("id").primaryKey(),
-  companyid: integer("companyid").notNull(),
   companyname: varchar("companyname", { length: 100 }).notNull(),
   breakfast: varchar("breakfast", { length: 100 }),
   lunch: varchar("lunch", { length: 100 }),

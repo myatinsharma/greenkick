@@ -96,6 +96,15 @@ export const dummyCustomer: Customer = {
   notes: "",
 };
 
+export const dummyMeal: Meal = {
+  breakfast: "",
+  companyname: "",
+  dinner: "",
+  lunch: "",
+  milk: "",
+  other: "",
+};
+
 export const testCustomerData: Customer = {
   id: 0,
   fullname: "Raj Kumar",
@@ -119,7 +128,6 @@ export const testCustomerData: Customer = {
 };
 
 export const testMeal: Meal = {
-  companyid: 1,
   companyname: "Hyundai",
   breakfast: "1",
   lunch: "2",
