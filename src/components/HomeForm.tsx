@@ -60,8 +60,12 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             register={register}
           ></FormSewing>
           {errors.entrydate && <p>{errors.entrydate?.message}</p>}
-          <button type="submit" className="btn btn-neutral">
-            Submit
+          <button
+            disabled={isSubmitting}
+            type="submit"
+            className="btn btn-neutral mt-4"
+          >
+            {isSubmitting ? "Wait.." : "Submit"}
           </button>
         </form>
       </header>
