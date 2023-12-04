@@ -23,6 +23,9 @@ export const mealsSchema = z.object({
   dinner: z.string().optional(),
   milk: z.string().optional(),
   other: z.string().optional(),
+  entrydate: z.preprocess((arg) => {
+    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+  }, z.date()),
 });
 
 export const taskSchema = z.object({

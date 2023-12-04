@@ -59,7 +59,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             control={control}
             register={register}
           ></FormSewing>
-          {errors.root?.message && <p>{errors.root?.message}</p>}
+          {errors.entrydate && <p>{errors.entrydate?.message}</p>}
           <button type="submit" className="btn btn-neutral">
             Submit
           </button>

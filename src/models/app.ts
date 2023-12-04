@@ -8,6 +8,7 @@ export type Meal = {
   dinner: string;
   milk: string;
   other: string;
+  entrydate: Date;
 };
 
 export type DemographicData = {

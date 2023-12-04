@@ -35,6 +35,7 @@ export const meals = pgTable("meals", {
   dinner: varchar("dinner", { length: 100 }),
   milk: varchar("milk", { length: 100 }),
   other: varchar("other", { length: 100 }),
+  entrydate: timestamp("entrydate").defaultNow(),
 });
 
 export const users = pgTable("users", {

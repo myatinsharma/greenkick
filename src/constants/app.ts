@@ -103,6 +103,7 @@ export const dummyMeal: Meal = {
   lunch: "",
   milk: "",
   other: "",
+  entrydate: new Date(),
 };
 
 export const testCustomerData: Customer = {
@@ -134,6 +135,7 @@ export const testMeal: Meal = {
   dinner: "4",
   milk: "1",
   other: "",
+  entrydate: new Date(),
 };
 
 export const dummyTask: Task = {

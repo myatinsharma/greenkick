@@ -21,7 +21,7 @@ export default async function handler(
     .transaction(async (tx) => {
       const result = await db
         .insert(meals)
-        .values(c)
+        .values({ ...c, entrydate: new Date(c.entrydate) })
         .returning({ id: meals.id });
     })
     .then(() => response.status(201).json({}));
