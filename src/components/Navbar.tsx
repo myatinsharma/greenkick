@@ -14,11 +14,8 @@ const Navbar = () => {
         <Link href="/" className="text-black">
           Home
         </Link>
-        <Link href="/customerlist" className="text-black ml-2">
-          Customers
-        </Link>
-        <Link href="/my-tasks-list" className="text-black ml-2">
-          Tasks
+        <Link href="/entries" className="text-black ml-2">
+          Entries
         </Link>
       </nav>
     </>

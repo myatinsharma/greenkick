@@ -35,7 +35,7 @@ export type FormControl = {
   label?: string;
   placeholder?: string;
   showInUI: boolean;
-  type?: "dropdown" | "textarea" | "text" | "date";
+  type?: "dropdown" | "textarea" | "text" | "date" | "number";
   dropdownOptions?: Record<string, string>;
 };
 

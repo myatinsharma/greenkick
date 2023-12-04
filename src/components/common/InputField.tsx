@@ -53,6 +53,14 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
             placeholder={placeholder}
             className="input input-bordered w-full max-w-xs"
           ></input>
+        )) ||
+        (type === "number" && (
+          <input
+            {...register(name as InputFieldFormKeys)}
+            type="number"
+            placeholder={placeholder}
+            className="input input-bordered w-full max-w-xs"
+          ></input>
         )) || (
           <input
             {...register(name as InputFieldFormKeys, {

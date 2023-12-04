@@ -39,7 +39,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
         console.log(data);
         if (res.status === 201) {
           setIsSubmitting(false);
-          alert("Customer data saved successfully!");
+          alert("Data saved successfully!");
         }
       });
     }
