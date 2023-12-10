@@ -1,41 +1,46 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { getCustomers } from "@/services/customer.service";
-import { Customer } from "@/models/app";
+import { getAllEntries } from "@/services/customer.service";
+import { Meal } from "@/models/app";
 import { useRouter } from "next/router";
+import { entriesGridColumnDefs } from "@/constants/app";
 
 const CustomAgGrid = () => {
   const router = useRouter();
   const gridRef = useRef<AgGridReact>(null);
-  const [rowData, setRowData] = useState<Customer[]>([]);
-  const [columnDefs, setColumnDefs] = useState<ColumnConfig[] | any>([]);
+  const [rowData, setRowData] = useState<Meal[]>([]);
 
   useEffect(() => {
     let keys: ColumnConfig[] = [];
-    getCustomers().then((data) => {
-      if (data.length > 0)
-        Object.keys(data[0]).map((key) => {
-          keys.push({ headerName: key, field: key });
-        });
-      setColumnDefs(keys);
+    getAllEntries().then((data) => {
       setRowData(data);
     });
   }, []);
 
+  const onBtExport = useCallback(() => {
+    const params = { fileName: "test.xlsx" };
+    gridRef.current?.api.exportDataAsExcel(params);
+  }, []);
+
   return (
-    <div className="ag-theme-alpine" style={{ height: 600, width: 1400 }}>
-      <AgGridReact
-        ref={gridRef}
-        rowData={rowData}
-        columnDefs={columnDefs}
-        onRowClicked={(e) => {
-          router.push(`/customer/${e.data.id}`);
-        }}
-      ></AgGridReact>
-    </div>
+    <>
+      {/* <button
+        onClick={onBtExport}
+        style={{ marginBottom: "5px", fontWeight: "bold" }}
+      >
+        Export to Excel
+      </button> */}
+      <div className="ag-theme-alpine" style={{ height: 600, width: 1400 }}>
+        <AgGridReact
+          ref={gridRef}
+          rowData={rowData}
+          columnDefs={entriesGridColumnDefs}
+        ></AgGridReact>
+      </div>
+    </>
   );
 };
 

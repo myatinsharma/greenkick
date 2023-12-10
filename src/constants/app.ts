@@ -168,12 +168,12 @@ export const testTaskData: Task = {
   appid: 1,
 };
 
-export const taskGridcolumnDefs: ColumnConfig[] = [
-  { headerName: "Title", field: "title" },
-  { headerName: "Description", field: "description" },
-  { headerName: "Status", field: "status" },
-  { headerName: "Assigned To", field: "assigned_to_user_id" },
-  { headerName: "Start Date", field: "start_date" },
-  { headerName: "End Date", field: "end_date" },
-  { headerName: "Created Date", field: "created_date" },
+export const entriesGridColumnDefs: ColumnConfig[] = [
+  { headerName: "Company", field: "companyname", },
+  { headerName: "Breakfast", field: "breakfast" },
+  { headerName: "Lunch", field: "lunch" },
+  { headerName: "Dinner", field: "dinner" },
+  { headerName: "Milk", field: "milk" },
+  { headerName: "Other", field: "other" },
+  { headerName: "Entry Date", field: "entrydate" },
 ];

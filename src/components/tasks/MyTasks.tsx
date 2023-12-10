@@ -5,7 +5,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getAllUserTasks } from "@/services/customer.service";
 import { Task } from "@/models/app";
 import { useRouter } from "next/router";
-import { taskGridcolumnDefs, taskProximity } from "@/constants/app";
+import { taskProximity } from "@/constants/app";
 
 const MyTasks = () => {
   const gridRef = useRef<AgGridReact>(null);
@@ -64,12 +64,12 @@ const MyTasks = () => {
       </form>
       {fetchedTasks && (
         <div className="ag-theme-alpine" style={{ height: 600, width: 1400 }}>
-          <AgGridReact
+          {/* <AgGridReact
             ref={gridRef}
             rowData={rowData}
             columnDefs={taskGridcolumnDefs}
             rowClassRules={rowClassRules}
-          ></AgGridReact>
+          ></AgGridReact> */}
         </div>
       )}
     </>

@@ -1,21 +1,14 @@
 import { apiBaseUrl } from "@/constants/app";
 import { Customer, Meal, Task, UserAccess } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
-import { string } from "zod";
-
-export const postCustomer = async (
-  customer: Customer
-): Promise<AxiosResponse> => {
-  return await axios.post(`${apiBaseUrl}/api/save-customer-query`, customer);
-};
 
 export const saveData = async (meal: Meal): Promise<AxiosResponse> => {
   return await axios.post(`${apiBaseUrl}/api/save-data`, meal);
 };
 
-export const getCustomers = async (): Promise<Customer[]> => {
+export const getAllEntries = async (): Promise<Meal[]> => {
   return await axios
-    .get<Customer[]>(`${apiBaseUrl}/api/get-all-customers`)
+    .get<Meal[]>(`${apiBaseUrl}/api/get-all-entries`)
     .then((res) => res.data)
     .catch((err) => err);
 };
