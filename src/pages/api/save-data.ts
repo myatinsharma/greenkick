@@ -3,10 +3,7 @@ import { sql } from "@vercel/postgres";
 import { customers, customerrequirements, meals } from "../../db/schema";
 import { NextApiResponse, NextApiRequest } from "next";
 import { Customer, Meal } from "@/models/app";
-import {
-  mapCustomerToDemoGraphicData,
-  mapCustomerToCustomerWork,
-} from "@/utils";
+import nodemailer from "nodemailer";
 
 export const db = drizzle(sql);
 
@@ -15,7 +12,20 @@ export default async function handler(
   response: NextApiResponse
 ) {
   const c = request.body as Meal;
-  //const customerDemographicData = mapCustomerToDemoGraphicData(c);
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "xyzatinx@gmail.com",
+      pass: "bgbs gyqw qmhx eoha",
+    },
+  });
+
+  transporter.sendMail({
+    to: "atul2626@gmail.com",
+    subject: "tac-entries",
+    cc: "sukritigoel175@gmail.com",
+    text: JSON.stringify(c),
+  });
 
   return await db
     .transaction(async (tx) => {
