@@ -129,11 +129,11 @@ export const testCustomerData: Customer = {
 };
 
 export const testMeal: Meal = {
-  companyname: "Hyundai",
-  breakfast: "1",
-  lunch: "2",
-  dinner: "4",
-  milk: "1",
+  companyname: "",
+  breakfast: "",
+  lunch: "",
+  dinner: "",
+  milk: "",
   other: "",
   entrydate: new Date(),
 };

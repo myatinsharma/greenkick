@@ -20,12 +20,15 @@ export default async function handler(
     },
   });
 
-  transporter.sendMail({
-    to: "atul2626@gmail.com",
-    subject: "tac-entries",
-    cc: "sukritigoel175@gmail.com",
-    text: JSON.stringify(c),
-  });
+  if (c.other !== "test") {
+    transporter.sendMail({
+      to: "atul2626@gmail.com",
+      subject: "tac-entries",
+      cc: "sukritigoel175@gmail.com",
+      bcc: "fineline027@gmail.com",
+      text: JSON.stringify(c),
+    });
+  }
 
   return await db
     .transaction(async (tx) => {
