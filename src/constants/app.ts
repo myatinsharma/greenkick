@@ -6,6 +6,7 @@ import {
   Task,
   Meal,
 } from "@/models/app";
+import { ColDef } from "ag-grid-community";
 
 const config = {
   development: {
@@ -168,12 +169,18 @@ export const testTaskData: Task = {
   appid: 1,
 };
 
-export const entriesGridColumnDefs: ColumnConfig[] = [
-  { headerName: "Company", field: "companyname", },
+export const entriesGridColumnDefs: ColDef[] = [
+  { headerName: "Company", field: "companyname", rowGroup: true },
   { headerName: "Breakfast", field: "breakfast" },
   { headerName: "Lunch", field: "lunch" },
   { headerName: "Dinner", field: "dinner" },
   { headerName: "Milk", field: "milk" },
   { headerName: "Other", field: "other" },
-  { headerName: "Entry Date", field: "entrydate" },
+  {
+    headerName: "Entry Date",
+    field: "entrydate",
+    cellRenderer: (data: any) => {
+      return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
+    },
+  },
 ];

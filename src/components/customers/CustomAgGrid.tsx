@@ -7,6 +7,10 @@ import { getAllEntries } from "@/services/customer.service";
 import { Meal } from "@/models/app";
 import { useRouter } from "next/router";
 import { entriesGridColumnDefs } from "@/constants/app";
+import { GridOptions } from "ag-grid-community";
+import 'ag-grid-enterprise';
+
+
 
 const CustomAgGrid = () => {
   const router = useRouter();
@@ -25,14 +29,16 @@ const CustomAgGrid = () => {
     gridRef.current?.api.exportDataAsExcel(params);
   }, []);
 
+
+
   return (
     <>
-      {/* <button
+      <button
         onClick={onBtExport}
         style={{ marginBottom: "5px", fontWeight: "bold" }}
       >
         Export to Excel
-      </button> */}
+      </button>
       <div className="ag-theme-alpine" style={{ height: 600, width: 1400 }}>
         <AgGridReact
           ref={gridRef}
