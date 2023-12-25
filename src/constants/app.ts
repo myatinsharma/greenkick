@@ -1,11 +1,6 @@
 import { TaskStatus } from "@/enums";
-import {
-  Customer,
-  FormControl,
-  CustomerReviewSheetDesign,
-  Task,
-  Meal,
-} from "@/models/app";
+import { Customer, FormControl, Task, Meal } from "@/models/app";
+import { add } from "@/utils";
 import { ColDef } from "ag-grid-community";
 
 const config = {
@@ -170,12 +165,7 @@ export const testTaskData: Task = {
 };
 
 export const entriesGridColumnDefs: ColDef[] = [
-  { headerName: "Company", field: "companyname", rowGroup: true },
-  { headerName: "Breakfast", field: "breakfast" },
-  { headerName: "Lunch", field: "lunch" },
-  { headerName: "Dinner", field: "dinner" },
-  { headerName: "Milk", field: "milk" },
-  { headerName: "Other", field: "other" },
+  { headerName: "Company", field: "companyname", rowGroup: true, hide: true },
   {
     headerName: "Entry Date",
     field: "entrydate",
@@ -183,4 +173,25 @@ export const entriesGridColumnDefs: ColDef[] = [
       return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
     },
   },
+  {
+    headerName: "Breakfast",
+    field: "breakfast",
+    aggFunc: add,
+  },
+  {
+    headerName: "Lunch",
+    field: "lunch",
+    aggFunc: add,
+  },
+  {
+    headerName: "Dinner",
+    field: "dinner",
+    aggFunc: add,
+  },
+  {
+    headerName: "Milk",
+    field: "milk",
+    aggFunc: add,
+  },
+  { headerName: "Other", field: "other" },
 ];

@@ -8,9 +8,7 @@ import { Meal } from "@/models/app";
 import { useRouter } from "next/router";
 import { entriesGridColumnDefs } from "@/constants/app";
 import { GridOptions } from "ag-grid-community";
-import 'ag-grid-enterprise';
-
-
+import "ag-grid-enterprise";
 
 const CustomAgGrid = () => {
   const router = useRouter();
@@ -29,8 +27,6 @@ const CustomAgGrid = () => {
     gridRef.current?.api.exportDataAsExcel(params);
   }, []);
 
-
-
   return (
     <>
       <button
@@ -44,6 +40,8 @@ const CustomAgGrid = () => {
           ref={gridRef}
           rowData={rowData}
           columnDefs={entriesGridColumnDefs}
+          groupIncludeFooter={true}
+          groupIncludeTotalFooter={true}
         ></AgGridReact>
       </div>
     </>

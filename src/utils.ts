@@ -1,3 +1,4 @@
+import { IAggFuncParams } from "ag-grid-community";
 import { Customer, CustomerWork, DemographicData } from "./models/app";
 
 export function mapCustomerToDemoGraphicData(
@@ -57,3 +58,9 @@ export function mapCustomerFromCustomerQueryAPI(
 
   return customer;
 }
+
+export const add = (params: IAggFuncParams) => {
+  let total = 0;
+  params.values.forEach((value) => (total += +value));
+  return total;
+};
