@@ -33,7 +33,7 @@ const FormSewing = ({
         console.log(error);
       })
       .finally(function () {});
-  }, []);
+  });
 
   return (
     fc && (

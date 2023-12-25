@@ -1,3 +1,4 @@
+import AgGridcCustomHeader from "@/components/common/AgGridcCustomHeader";
 import { TaskStatus } from "@/enums";
 import { Customer, FormControl, Task, Meal } from "@/models/app";
 import { add } from "@/utils";
@@ -164,34 +165,48 @@ export const testTaskData: Task = {
   appid: 1,
 };
 
+export const headerNamesMap: Omit<Record<keyof Meal, string>, "id"> = {
+  breakfast: 'Breakfast',
+  companyname: 'Company',
+  dinner: 'Dinner',
+  lunch: 'Lunch',
+  milk: 'Milk',
+  entrydate: 'Entry Date',
+  other: 'Other'
+}
+
 export const entriesGridColumnDefs: ColDef[] = [
-  { headerName: "Company", field: "companyname", rowGroup: true, hide: true },
+  { field: "companyname", rowGroup: true, hide: true },
   {
-    headerName: "Entry Date",
+    headerName: headerNamesMap['entrydate'],
     field: "entrydate",
     cellRenderer: (data: any) => {
       return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
     },
   },
   {
-    headerName: "Breakfast",
     field: "breakfast",
     aggFunc: add,
+    headerComponent: AgGridcCustomHeader,
+    headerComponentParams: { customHeaderName: headerNamesMap['breakfast'] },
   },
   {
-    headerName: "Lunch",
     field: "lunch",
     aggFunc: add,
+    headerComponent: AgGridcCustomHeader,
+    headerComponentParams: { customHeaderName: headerNamesMap['lunch'] },
   },
   {
-    headerName: "Dinner",
     field: "dinner",
     aggFunc: add,
+    headerComponent: AgGridcCustomHeader,
+    headerComponentParams: { customHeaderName: headerNamesMap['dinner'] },
   },
   {
-    headerName: "Milk",
     field: "milk",
     aggFunc: add,
+    headerComponent: AgGridcCustomHeader,
+    headerComponentParams: { customHeaderName: headerNamesMap['milk'] },
   },
-  { headerName: "Other", field: "other" },
+  { headerName: headerNamesMap['other'], field: "other" },
 ];
