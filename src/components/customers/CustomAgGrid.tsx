@@ -31,7 +31,7 @@ const CustomAgGrid = () => {
     <>
       <button
         onClick={onBtExport}
-        style={{ marginBottom: "5px", fontWeight: "bold" }}
+        style={{ marginBottom: "5px", fontWeight: "bold", color: 'red' }}
       >
         Export to Excel
       </button>
