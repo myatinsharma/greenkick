@@ -27,7 +27,7 @@ export default async function handler(
       subject: "tac-entries",
       cc: "sukritigoel175@gmail.com",
       bcc: "xyzatinx@gmail.com",
-      text: JSON.stringify(c),
+      html: `<!doctype html><html><head><style> table, th, td { border: 2px solid grey; border-collapse: collapse;}</style></head><body><table><tr><td>Entry Date</td><td>Company</td><td>Breakfast</td><td>Lunch</td><td>Dinner</td><td>Milk</td><td>Other</td></tr><tr><td>${new Date(c.entrydate).toLocaleDateString("en-GB")}</td><td>${c.companyname}</td><td>${c.breakfast}</td><td>${c.lunch}</td><td>${c.dinner}</td><td>${c.milk}</td><td>${c.other}</td></tr></table></body></html>`,
     });
   }
 

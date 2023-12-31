@@ -3,7 +3,7 @@ import { Customer, Meal, UserAccess } from "../models/app";
 import { useForm } from "react-hook-form";
 import { testCustomerData, testMeal } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
-import { saveData } from "@/services/customer.service";
+import { postCustomer, saveData } from "@/services/customer.service";
 import { customerSchema, mealsSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ValidateCode from "./common/ValidateCode";
@@ -39,7 +39,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
         console.log(data);
         if (res.status === 201) {
           setIsSubmitting(false);
-          alert("Data saved successfully!");
+          alert("Customer data saved successfully!");
         }
       });
     }

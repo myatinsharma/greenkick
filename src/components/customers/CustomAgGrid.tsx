@@ -23,7 +23,7 @@ const CustomAgGrid = () => {
   }, []);
 
   const onBtExport = useCallback(() => {
-    const params = { fileName: "test.xlsx" };
+    const params = { fileName: "tac-sheet.xlsx" };
     gridRef.current?.api.exportDataAsExcel(params);
   }, []);
 
