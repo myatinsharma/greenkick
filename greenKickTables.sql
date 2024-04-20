@@ -82,3 +82,76 @@ insert into users (fullname, mobile, email, codeword, isadmin, appid, isactive, 
 insert into users (fullname, mobile, email, codeword, isadmin, appid, isactive, lastupdatedate) values ('Dinesh', '9999888811', 'dinesharma@gmail.com', '3147', false, 2, true, now());
 
 insert into users (fullname, mobile, email, codeword, isadmin, appid, isactive, lastupdatedate) values ('Ramandeep', '9999888822', 'ramandeep@gmail.com', '1177', false, 2, true, now());
+
+-- Orders
+
+-- order date  # date - internal/exposed
+-- shipping date # date - i
+-- payment date # date - i
+-- Customer name	# string  * autocomplete
+-- Item	# string
+-- Item Category	# string * autocomplete
+-- Quantity	# number
+-- Vendor	# string * autocomplete
+-- Vendor code - internal # string
+-- Purchase price	# decimal
+-- Price # decimal
+-- Shipping address # string * optional
+-- Vendor Payment # enum ^ Unpaid
+-- Customer Payment # enum ^ Unpaid
+-- Customer Payemnt type	# enum ^ NONE
+-- Comment # string * optional
+
+-- Customers
+
+-- Id
+-- Name
+
+
+-- ItemCategories
+
+-- Id
+-- Title
+
+
+-- Vendors
+
+-- Id
+-- Name
+-- Code
+
+create table orders (
+    id serial primary key,
+    order_date timestamp not null,
+    shipping_date timestamp not null,
+    payment_date timestamp not null,
+    customer_name varchar(100) not null,
+    item varchar(100) not null,
+    item_category varchar(100) not null,
+    quantity integer not null,
+    vendor varchar(100) not null,
+    vendor_code_internal varchar(100) not null,
+    purchase_price decimal not null,
+    price decimal not null,
+    shipping_address varchar(100) null,
+    vendor_payment INTEGER NOT NULL,
+    customer_payment INTEGER NOT NULL,
+    customer_payment_type INTEGER NOT NULL,
+    comment varchar(100) null
+);
+
+create table customers (
+    id serial primary key,
+    name varchar(100) not null
+);
+
+create table itemcategories (
+    id serial primary key,
+    title varchar(100) not null
+);
+
+create table vendors (
+    id serial primary key,
+    name varchar(100) not null,
+    code varchar(100) not null
+);
