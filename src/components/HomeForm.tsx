@@ -47,7 +47,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
 
   return (
     <div className="App">
-      <header className="bg-teal-700 px-32 py-6">
+      <div className="bg-teal-700 px-32 py-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
           Elegance IPR
         </h3>
@@ -84,7 +84,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             {isSubmitting ? "Wait.." : "Submit"}
           </button>
         </form>
-      </header>
+      </div>
     </div>
   );
 };
