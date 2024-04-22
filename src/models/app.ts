@@ -122,7 +122,7 @@ export type UserAccess = {
 // );
 
 export type Order = {
-  id: number;
+  id?: number;
   order_date: Date;
   shipping_date: Date;
   payment_date: Date;

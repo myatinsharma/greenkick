@@ -23,13 +23,16 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
   const [options, setOptions] = useState<{ value: string }[]>([]);
   const [anotherOptions, setAnotherOptions] = useState<{ value: string }[]>([]);
 
-  const getPanelValue = (searchText: string) => (!searchText ? [] : []);
+  const getPanelValue = (searchText: string) =>
+    !searchText ? [] : [{ value: "test" }, { value: "Block" }];
 
   const onSelect = (data: string) => {
     console.log("onSelect", data);
+    setValue(data);
   };
 
   const onChange = (data: string) => {
+    console.log("onChange", data);
     setValue(data);
   };
 
@@ -80,16 +83,26 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
           ></input>
         )) ||
         (type === "autocomplete" && (
-          <AutoComplete
-            {...register(name as InputFieldFormKeys)}
-            value={value}
-            options={anotherOptions}
-            onSelect={onSelect}
-            onSearch={(text) => setAnotherOptions(getPanelValue(text))}
-            onChange={onChange}
-            placeholder={placeholder}
-            className="w-full max-w-xs"
-          />
+          <>
+            <AutoComplete
+              value={value}
+              options={anotherOptions}
+              onSelect={onSelect}
+              onSearch={(text) => setAnotherOptions(getPanelValue(text))}
+              onChange={onChange}
+              placeholder={placeholder}
+              className="w-full max-w-xs"
+              filterOption={(inputValue, option) =>
+                option!.value
+                  .toUpperCase()
+                  .indexOf(inputValue.toUpperCase()) !== -1
+              }
+            />
+            <input
+              {...register(name as InputFieldFormKeys)}
+              value={value}
+            ></input>
+          </>
         )) || (
           <input
             {...register(name as InputFieldFormKeys, {

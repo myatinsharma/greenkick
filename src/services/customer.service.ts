@@ -2,8 +2,8 @@ import { apiBaseUrl } from "@/constants/app";
 import { Customer, Meal, Order, Task, UserAccess } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
 
-export const saveData = async (meal: Order): Promise<AxiosResponse> => {
-  return await axios.post(`${apiBaseUrl}/api/save-data`, meal);
+export const saveData = async (order: Order): Promise<AxiosResponse> => {
+  return await axios.post(`${apiBaseUrl}/api/save-order`, order);
 };
 
 export const getAllEntries = async (): Promise<Meal[]> => {

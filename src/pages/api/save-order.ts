@@ -21,7 +21,15 @@ export default async function handler(
 
   return await db
     .transaction(async (tx) => {
-      await db.insert(orders).values(order).returning({ orderId: orders.id });
+      await db
+        .insert(orders)
+        .values({
+          ...order,
+          order_date: new Date(order.order_date),
+          payment_date: new Date(order.payment_date),
+          shipping_date: new Date(order.shipping_date),
+        })
+        .returning({ orderId: orders.id });
     })
     .then(() => response.status(201).json({}));
 }

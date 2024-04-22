@@ -46,14 +46,13 @@ export const orderFormData: Record<keyof Order, FormControl> = {
 };
 
 export const dummyOrder: Order = {
-  id: 0,
   order_date: new Date(),
   shipping_date: new Date(),
   payment_date: new Date(),
   customer_name: "",
   item: "",
   item_category: "",
-  quantity: 0,
+  quantity: 10,
   vendor: "",
   vendor_code_internal: "",
   purchase_price: 0,
@@ -62,6 +61,25 @@ export const dummyOrder: Order = {
   vendor_payment: 0,
   customer_payment: 0,
   customer_payment_type: 0,
+  comment: "",
+};
+
+export const testOrder: Order = {
+  order_date: new Date(),
+  shipping_date: new Date(),
+  payment_date: new Date(),
+  customer_name: "",
+  item: "",
+  item_category: "",
+  quantity: 1,
+  vendor: "",
+  vendor_code_internal: "",
+  purchase_price: 0,
+  price: 0,
+  shipping_address: "",
+  vendor_payment: 1,
+  customer_payment: 1,
+  customer_payment_type: 1,
   comment: "",
 };
 
@@ -178,26 +196,6 @@ export const testMeal: Meal = {
   milk: "",
   other: "",
   entrydate: new Date(),
-};
-
-export const testOrder: Order = {
-  id: 0,
-  order_date: new Date(),
-  shipping_date: new Date(),
-  payment_date: new Date(),
-  customer_name: "test",
-  item: "itemaa",
-  item_category: "sub",
-  quantity: 0,
-  vendor: "cool",
-  vendor_code_internal: "190",
-  purchase_price: 0,
-  price: 0,
-  shipping_address: "10",
-  vendor_payment: 1,
-  customer_payment: 1,
-  customer_payment_type: 1,
-  comment: "woo",
 };
 
 export const dummyTask: Task = {

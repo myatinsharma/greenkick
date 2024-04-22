@@ -47,10 +47,15 @@ export const taskSchema = z.object({
 });
 
 export const orderSchema = z.object({
-  id: z.number().int(),
-  order_date: z.date(),
-  shipping_date: z.date(),
-  payment_date: z.date(),
+  order_date: z.preprocess((arg) => {
+    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+  }, z.date()),
+  shipping_date: z.preprocess((arg) => {
+    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+  }, z.date()),
+  payment_date: z.preprocess((arg) => {
+    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+  }, z.date()),
   customer_name: z.string().min(1, { message: "Required" }),
   item: z.string().min(1, { message: "Required" }),
   item_category: z.string().min(1, { message: "Required" }),
