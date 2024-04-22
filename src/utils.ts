@@ -65,4 +65,3 @@ import { Customer, CustomerWork, DemographicData } from "./models/app";
 //   return total;
 // };
 
-export 

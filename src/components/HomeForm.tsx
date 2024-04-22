@@ -49,7 +49,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     <div className="App">
       <header className="bg-teal-700 px-32 py-6">
         <h3 className="text-white text-3xl font-semibold mb-5 decoration-green-500 underline">
-          TAC Tool
+          Elegance IPR
         </h3>
         <div className="grid-cols-6 hidden">Tailwind Jugaad (not visible)</div>
         <form onSubmit={handleSubmit(handleSave)} className="w-full">

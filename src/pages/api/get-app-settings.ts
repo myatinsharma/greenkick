@@ -9,6 +9,6 @@ export default async function handler(
     request: NextApiRequest,
     response: NextApiResponse,
   ) {
-  const selectResult = await db.select().from(customerformcontrols).where(eq(customerformcontrols.app_id, 3));
+  const selectResult = await db.select().from(customerformcontrols).where(eq(customerformcontrols.app_id, 4));
   return response.status(200).json(selectResult);
 };
