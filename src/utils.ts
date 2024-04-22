@@ -59,9 +59,9 @@ import { Customer, CustomerWork, DemographicData } from "./models/app";
 //   return customer;
 // }
 
-// export const add = (params: IAggFuncParams) => {
-//   let total = 0;
-//   params.values.forEach((value) => (total += +value));
-//   return total;
-// };
+export const add = (params: IAggFuncParams) => {
+  let total = 0;
+  params.values.forEach((value) => (total += +value));
+  return total;
+};
 

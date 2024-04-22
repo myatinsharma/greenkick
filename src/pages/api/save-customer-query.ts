@@ -2,11 +2,7 @@ import { drizzle } from "drizzle-orm/vercel-postgres";
 import { sql } from "@vercel/postgres";
 import { customers, customerrequirements } from "../../db/schema";
 import { NextApiResponse, NextApiRequest } from "next";
-import { Customer } from "@/models/app";
-import {
-  mapCustomerToDemoGraphicData,
-  mapCustomerToCustomerWork,
-} from "@/utils";
+import { Customer, DemographicData } from "@/models/app";
 
 export const db = drizzle(sql);
 
@@ -15,21 +11,19 @@ export default async function handler(
   response: NextApiResponse
 ) {
   const c = request.body as Customer;
-  const customerDemographicData = mapCustomerToDemoGraphicData(c);
+  const customerDemographicData: DemographicData = {} as DemographicData;
 
   return await db
     .transaction(async (tx) => {
       const result = await db
         .insert(customers)
-        .values(customerDemographicData)
+        .values({ name: "x", id: 1 })
         .returning({ customerId: customers.id });
 
-      const customerQuery = mapCustomerToCustomerWork(c);
-
-      await db
-        .insert(customerrequirements)
-        .values({ ...customerQuery, customerid: result[0].customerId })
-        .returning({ customerrequirementsId: customerrequirements.id });
+      // await db
+      //   .insert(customerrequirements)
+      //   .values({ ...customerQuery, customerid: result[0].customerId })
+      //   .returning({ customerrequirementsId: customerrequirements.id });
     })
     .then(() => response.status(201).json({}));
 }

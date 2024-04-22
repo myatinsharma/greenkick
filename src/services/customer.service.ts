@@ -1,8 +1,8 @@
 import { apiBaseUrl } from "@/constants/app";
-import { Customer, Meal, Task, UserAccess } from "@/models/app";
+import { Customer, Meal, Order, Task, UserAccess } from "@/models/app";
 import axios, { AxiosResponse } from "axios";
 
-export const saveData = async (meal: Meal): Promise<AxiosResponse> => {
+export const saveData = async (meal: Order): Promise<AxiosResponse> => {
   return await axios.post(`${apiBaseUrl}/api/save-data`, meal);
 };
 

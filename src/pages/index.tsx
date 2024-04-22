@@ -1,13 +1,13 @@
 import HomeForm from "@/components/HomeForm";
-import { Meal } from "@/models/app";
+import { Meal, Order } from "@/models/app";
 import { useState } from "react";
-import { dummyMeal } from "@/constants/app";
+import { dummyOrder } from "@/constants/app";
 import Layout from "@/components/common/Layout";
 
 export default function Home() {
-  const [customer, setCustomer] = useState<Meal>(dummyMeal);
-  const handlePateinDetails = (meal: Meal) => {
-    setCustomer(meal);
+  const [customer, setCustomer] = useState<Order>(dummyOrder);
+  const handlePateinDetails = (order: Order) => {
+    setCustomer(order);
   };
 
   return (

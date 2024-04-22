@@ -46,26 +46,6 @@ export const taskSchema = z.object({
   appid: z.number().min(1, { message: "Required" }),
 });
 
-// export type Order = {
-//   id: number;
-//   order_date: Date;
-//   shipping_date: Date;
-//   payment_date: Date;
-//   customer_name: string;
-//   item: string;
-//   item_category: string;
-//   quantity: number;
-//   vendor: string;
-//   vendor_code_internal: string;
-//   purchase_price: number;
-//   price: number;
-//   shipping_address?: string;
-//   vendor_payment: number;
-//   customer_payment: number;
-//   customer_payment_type: number;
-//   comment?: string;
-// };
-
 export const orderSchema = z.object({
   id: z.number().int(),
   order_date: z.date(),

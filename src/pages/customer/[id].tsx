@@ -4,7 +4,6 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getCustomerQueryDetails, postTask } from "@/services/customer.service";
 import { Customer, Task, User, UserAccess } from "@/models/app";
 import { useRouter } from "next/router";
-import { mapCustomerFromCustomerQueryAPI } from "@/utils";
 import { TaskStatus } from "@/enums";
 import { set, useForm } from "react-hook-form";
 import { taskSchema } from "@/constants/zod";
@@ -36,7 +35,7 @@ const CustomAgGrid = () => {
 
   useEffect(() => {
     getCustomerQueryDetails(parseInt(router.query.id as string)).then((res) => {
-      setCustomer(mapCustomerFromCustomerQueryAPI(res.data[0]));
+      //setCustomer(mapCustomerFromCustomerQueryAPI(res.data[0]));
     });
   }, [router.query]);
 
@@ -61,12 +60,12 @@ const CustomAgGrid = () => {
   function handleSave(data: Task) {
     if (isValid) {
       setIsSubmitting(true);
-      data = {
-        ...data,
-        customer_id: customer.id,
-        customer_query_id: customer.queryid!,
-        assigned_by_user_id: assignedByUserId,
-      };
+      // data = {
+      //   ...data,
+      //   customer_id: customer.id,
+      //   customer_query_id: customer.queryid!,
+      //   assigned_by_user_id: assignedByUserId,
+      // };
       postTask(data).then((res) => {
         setIsSubmitting(false);
         if (res.status === 201) {
@@ -112,7 +111,7 @@ const CustomAgGrid = () => {
                 <button type="submit" className="hidden"></button>
               </form>
               <ValidateCode onSubmit={afterValidationAction}></ValidateCode>
-              <TasksGrid queryId={customer.queryid!}></TasksGrid>
+              {/* <TasksGrid queryId={customer.queryid!}></TasksGrid> */}
             </>
           )}
         </div>

@@ -1,4 +1,3 @@
-import { customerFormData } from "@/constants/app";
 import InputField from "./InputField";
 import { Customer, FormKeyControls, Meal, Order } from "@/models/app";
 import { Control, UseFormRegister, set } from "react-hook-form";

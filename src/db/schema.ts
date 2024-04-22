@@ -27,16 +27,16 @@ export const customerformcontrols = pgTable("customerformcontrols", {
 //   city: varchar("city", { length: 250 }),
 // });
 
-// export const meals = pgTable("meals", {
-//   id: serial("id").primaryKey(),
-//   companyname: varchar("companyname", { length: 100 }).notNull(),
-//   breakfast: varchar("breakfast", { length: 100 }),
-//   lunch: varchar("lunch", { length: 100 }),
-//   dinner: varchar("dinner", { length: 100 }),
-//   milk: varchar("milk", { length: 100 }),
-//   other: varchar("other", { length: 100 }),
-//   entrydate: timestamp("entrydate").defaultNow(),
-// });
+export const meals = pgTable("meals", {
+  id: serial("id").primaryKey(),
+  companyname: varchar("companyname", { length: 100 }).notNull(),
+  breakfast: varchar("breakfast", { length: 100 }),
+  lunch: varchar("lunch", { length: 100 }),
+  dinner: varchar("dinner", { length: 100 }),
+  milk: varchar("milk", { length: 100 }),
+  other: varchar("other", { length: 100 }),
+  entrydate: timestamp("entrydate").defaultNow(),
+});
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -50,33 +50,33 @@ export const users = pgTable("users", {
   lastupdatedate: timestamp("lastupdatedate").defaultNow(),
 });
 
-// export const tasks = pgTable("tasks", {
-//   id: serial("id").primaryKey(),
-//   title: varchar("title", { length: 100 }),
-//   description: varchar("description", { length: 100 }),
-//   customer_query_id: integer("customer_query_id").notNull(),
-//   customer_id: integer("customer_id").notNull(),
-//   assigned_to_user_id: integer("assigned_to_user_id"),
-//   assigned_by_user_id: integer("assigned_by_user_id").notNull(),
-//   status: integer("status").notNull(),
-//   start_date: timestamp("start_date").notNull(),
-//   end_date: timestamp("end_date").notNull(),
-//   statuses_json: text("statuses_json"),
-//   appid: integer("appid").notNull(),
-//   created_date: timestamp("created_date").notNull().defaultNow(),
-//   updated_date: timestamp("updated_date").notNull().defaultNow(),
-// });
+export const tasks = pgTable("tasks", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 100 }),
+  description: varchar("description", { length: 100 }),
+  customer_query_id: integer("customer_query_id").notNull(),
+  customer_id: integer("customer_id").notNull(),
+  assigned_to_user_id: integer("assigned_to_user_id"),
+  assigned_by_user_id: integer("assigned_by_user_id").notNull(),
+  status: integer("status").notNull(),
+  start_date: timestamp("start_date").notNull(),
+  end_date: timestamp("end_date").notNull(),
+  statuses_json: text("statuses_json"),
+  appid: integer("appid").notNull(),
+  created_date: timestamp("created_date").notNull().defaultNow(),
+  updated_date: timestamp("updated_date").notNull().defaultNow(),
+});
 
-// export const customerrequirements = pgTable("customerrequirements", {
-//   id: serial("id").primaryKey(),
-//   requiredworkcategory: integer("requiredworkcategory"),
-//   requiredworksubcategory: integer("requiredworksubcategory"),
-//   referencesource: varchar("referencesource", { length: 250 }),
-//   notes: varchar("notes", { length: 250 }),
-//   visitdate: varchar("visitdate", { length: 250 }),
-//   convertedintolead: boolean("convertedintolead"),
-//   customerid: integer("customerid"),
-// });
+export const customerrequirements = pgTable("customerrequirements", {
+  id: serial("id").primaryKey(),
+  requiredworkcategory: integer("requiredworkcategory"),
+  requiredworksubcategory: integer("requiredworksubcategory"),
+  referencesource: varchar("referencesource", { length: 250 }),
+  notes: varchar("notes", { length: 250 }),
+  visitdate: varchar("visitdate", { length: 250 }),
+  convertedintolead: boolean("convertedintolead"),
+  customerid: integer("customerid"),
+});
 
 // export const customerRelations = relations(customers, ({ many }) => ({
 //   customerrequirements: many(customerrequirements),
