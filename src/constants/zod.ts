@@ -45,3 +45,43 @@ export const taskSchema = z.object({
   statuses_json: z.string().optional(),
   appid: z.number().min(1, { message: "Required" }),
 });
+
+// export type Order = {
+//   id: number;
+//   order_date: Date;
+//   shipping_date: Date;
+//   payment_date: Date;
+//   customer_name: string;
+//   item: string;
+//   item_category: string;
+//   quantity: number;
+//   vendor: string;
+//   vendor_code_internal: string;
+//   purchase_price: number;
+//   price: number;
+//   shipping_address?: string;
+//   vendor_payment: number;
+//   customer_payment: number;
+//   customer_payment_type: number;
+//   comment?: string;
+// };
+
+export const orderSchema = z.object({
+  id: z.number().int(),
+  order_date: z.date(),
+  shipping_date: z.date(),
+  payment_date: z.date(),
+  customer_name: z.string().min(1, { message: "Required" }),
+  item: z.string().min(1, { message: "Required" }),
+  item_category: z.string().min(1, { message: "Required" }),
+  quantity: z.string().min(1, { message: "Required" }),
+  vendor: z.string().min(1, { message: "Required" }),
+  vendor_code_internal: z.string().min(1, { message: "Required" }),
+  purchase_price: z.number().min(1, { message: "Required" }),
+  price: z.number().min(1, { message: "Required" }),
+  shipping_address: z.string().optional(),
+  vendor_payment: z.number().min(1, { message: "Required" }),
+  customer_payment: z.number().min(1, { message: "Required" }),
+  customer_payment_type: z.number().min(1, { message: "Required" }),
+  comment: z.string().optional(),
+});

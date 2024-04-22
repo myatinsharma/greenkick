@@ -1,7 +1,7 @@
 import AgGridcCustomHeader from "@/components/common/AgGridcCustomHeader";
 import { TaskStatus } from "@/enums";
-import { Customer, FormControl, Task, Meal } from "@/models/app";
-import { add } from "@/utils";
+import { Customer, FormControl, Task, Meal, Order } from "@/models/app";
+// import { add } from "@/utils";
 import { ColDef } from "ag-grid-community";
 
 const config = {
@@ -19,6 +19,30 @@ export const apiBaseUrl =
     : config.development.baseUrl;
 
 export const taskProximity = 7; // days
+
+export const orderFormData: Record<keyof Order, FormControl> = {
+  id: { showInUI: false },
+  order_date: { label: "Order Date", showInUI: true, type: "date" },
+  shipping_date: { label: "Shipping Date", showInUI: true, type: "date" },
+  payment_date: { label: "Payment Date", showInUI: true, type: "date" },
+  customer_name: { label: "Customer Name", showInUI: true },
+  item: { label: "Item", showInUI: true },
+  item_category: { label: "Item Category", showInUI: true },
+  quantity: { label: "Quantity", showInUI: true },
+  vendor: { label: "Vendor", showInUI: true },
+  vendor_code_internal: { label: "Vendor Code Internal", showInUI: true },
+  purchase_price: { label: "Purchase Price", showInUI: true },
+  price: { label: "Price", showInUI: true },
+  shipping_address: {
+    label: "Shipping Address",
+    showInUI: true,
+    type: "textarea",
+  },
+  vendor_payment: { label: "Vendor Payment", showInUI: true },
+  customer_payment: { label: "Customer Payment", showInUI: true },
+  customer_payment_type: { label: "Customer Payment Type", showInUI: true },
+  comment: { label: "Comment", showInUI: true, type: "textarea" },
+};
 
 export const customerFormData: Record<keyof Customer, FormControl> = {
   id: { label: "ID", showInUI: false },
@@ -77,53 +101,53 @@ export const taskFormControls: Record<keyof Task, FormControl> = {
 
 export const numberOfMedicineInputRows = 2;
 
-export const dummyCustomer: Customer = {
-  id: 0,
-  fullname: "",
-  gender: "",
-  requiredworkcategory: 0,
-  requiredworksubcategory: 0,
-  city: "",
-  referencesource: "",
-  visitdate: "",
-  convertedintolead: false,
-  mobile: "",
-  email: "",
-  address: "",
-  notes: "",
-};
+// export const dummyCustomer: Customer = {
+//   id: 0,
+//   fullname: "",
+//   gender: "",
+//   requiredworkcategory: 0,
+//   requiredworksubcategory: 0,
+//   city: "",
+//   referencesource: "",
+//   visitdate: "",
+//   convertedintolead: false,
+//   mobile: "",
+//   email: "",
+//   address: "",
+//   notes: "",
+// };
 
-export const dummyMeal: Meal = {
-  breakfast: "",
-  companyname: "",
-  dinner: "",
-  lunch: "",
-  milk: "",
-  other: "",
-  entrydate: new Date(),
-};
+// export const dummyMeal: Meal = {
+//   breakfast: "",
+//   companyname: "",
+//   dinner: "",
+//   lunch: "",
+//   milk: "",
+//   other: "",
+//   entrydate: new Date(),
+// };
 
-export const testCustomerData: Customer = {
-  id: 0,
-  fullname: "Raj Kumar",
-  age: 20,
-  gender: "M",
-  notes:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  visitdate: new Date().toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-  }),
-  mobile: "1234567890",
-  address: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-  city: "Delhi",
-  email: "xx@mail.com",
-  requiredworkcategory: 1,
-  requiredworksubcategory: 2,
-  referencesource: "Google",
-  convertedintolead: false,
-};
+// export const testCustomerData: Customer = {
+//   id: 0,
+//   fullname: "Raj Kumar",
+//   age: 20,
+//   gender: "M",
+//   notes:
+//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+//   visitdate: new Date().toLocaleDateString("en-GB", {
+//     day: "2-digit",
+//     month: "2-digit",
+//     year: "2-digit",
+//   }),
+//   mobile: "1234567890",
+//   address: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+//   city: "Delhi",
+//   email: "xx@mail.com",
+//   requiredworkcategory: 1,
+//   requiredworksubcategory: 2,
+//   referencesource: "Google",
+//   convertedintolead: false,
+// };
 
 export const testMeal: Meal = {
   companyname: "",
@@ -133,6 +157,26 @@ export const testMeal: Meal = {
   milk: "",
   other: "",
   entrydate: new Date(),
+};
+
+export const testOrder: Order = {
+  id: 0,
+  order_date: new Date(),
+  shipping_date: new Date(),
+  payment_date: new Date(),
+  customer_name: "test",
+  item: "itemaa",
+  item_category: "sub",
+  quantity: 0,
+  vendor: "cool",
+  vendor_code_internal: "190",
+  purchase_price: 0,
+  price: 0,
+  shipping_address: "10",
+  vendor_payment: 1,
+  customer_payment: 1,
+  customer_payment_type: 1,
+  comment: "woo",
 };
 
 export const dummyTask: Task = {
@@ -166,47 +210,47 @@ export const testTaskData: Task = {
 };
 
 export const headerNamesMap: Omit<Record<keyof Meal, string>, "id"> = {
-  breakfast: 'Breakfast',
-  companyname: 'Company',
-  dinner: 'Dinner',
-  lunch: 'Lunch',
-  milk: 'Milk',
-  entrydate: 'Entry Date',
-  other: 'Other'
-}
+  breakfast: "Breakfast",
+  companyname: "Company",
+  dinner: "Dinner",
+  lunch: "Lunch",
+  milk: "Milk",
+  entrydate: "Entry Date",
+  other: "Other",
+};
 
-export const entriesGridColumnDefs: ColDef[] = [
-  { field: "companyname", rowGroup: true, hide: true },
-  {
-    headerName: headerNamesMap['entrydate'],
-    field: "entrydate",
-    cellRenderer: (data: any) => {
-      return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
-    },
-  },
-  {
-    field: "breakfast",
-    aggFunc: add,
-    headerComponent: AgGridcCustomHeader,
-    headerComponentParams: { customHeaderName: headerNamesMap['breakfast'] },
-  },
-  {
-    field: "lunch",
-    aggFunc: add,
-    headerComponent: AgGridcCustomHeader,
-    headerComponentParams: { customHeaderName: headerNamesMap['lunch'] },
-  },
-  {
-    field: "dinner",
-    aggFunc: add,
-    headerComponent: AgGridcCustomHeader,
-    headerComponentParams: { customHeaderName: headerNamesMap['dinner'] },
-  },
-  {
-    field: "milk",
-    aggFunc: add,
-    headerComponent: AgGridcCustomHeader,
-    headerComponentParams: { customHeaderName: headerNamesMap['milk'] },
-  },
-  { headerName: headerNamesMap['other'], field: "other" },
-];
+// export const entriesGridColumnDefs: ColDef[] = [
+//   { field: "companyname", rowGroup: true, hide: true },
+//   {
+//     headerName: headerNamesMap['entrydate'],
+//     field: "entrydate",
+//     cellRenderer: (data: any) => {
+//       return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
+//     },
+//   },
+//   {
+//     field: "breakfast",
+//     aggFunc: add,
+//     headerComponent: AgGridcCustomHeader,
+//     headerComponentParams: { customHeaderName: headerNamesMap['breakfast'] },
+//   },
+//   {
+//     field: "lunch",
+//     aggFunc: add,
+//     headerComponent: AgGridcCustomHeader,
+//     headerComponentParams: { customHeaderName: headerNamesMap['lunch'] },
+//   },
+//   {
+//     field: "dinner",
+//     aggFunc: add,
+//     headerComponent: AgGridcCustomHeader,
+//     headerComponentParams: { customHeaderName: headerNamesMap['dinner'] },
+//   },
+//   {
+//     field: "milk",
+//     aggFunc: add,
+//     headerComponent: AgGridcCustomHeader,
+//     headerComponentParams: { customHeaderName: headerNamesMap['milk'] },
+//   },
+//   { headerName: headerNamesMap['other'], field: "other" },
+// ];

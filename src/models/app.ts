@@ -35,11 +35,11 @@ export type FormControl = {
   label?: string;
   placeholder?: string;
   showInUI: boolean;
-  type?: "dropdown" | "textarea" | "text" | "date" | "number";
+  type?: "dropdown" | "textarea" | "text" | "date" | "number" | "autocomplete";
   dropdownOptions?: Record<string, string>;
 };
 
-export type InputFieldForm = Customer | Task;
+export type InputFieldForm = Customer | Task | Order;
 
 export type FormKeyControls = Record<keyof Customer, FormControl>;
 

@@ -1,14 +1,14 @@
 import { customerFormData } from "@/constants/app";
 import InputField from "./InputField";
-import { Customer, FormKeyControls, Meal } from "@/models/app";
+import { Customer, FormKeyControls, Meal, Order } from "@/models/app";
 import { Control, UseFormRegister, set } from "react-hook-form";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 
 type FormSewingProps = {
-  defaultValues: Meal;
-  control: Control<Meal, any>;
-  register: UseFormRegister<Meal>;
+  defaultValues: Order;
+  control: Control<Order, any>;
+  register: UseFormRegister<Order>;
   setIsFormControlsLoaded: Dispatch<SetStateAction<boolean>>;
 };
 
@@ -21,7 +21,7 @@ const FormSewing = ({
   const [fc, setFc] = useState<FormKeyControls>();
   useEffect(() => {
     axios
-      .get("https://greenkick-git-tac-test-myatinsharma.vercel.app/api/get-app-settings")
+      .get("http://localhost:3000/api/get-app-settings")
       .then(function (response) {
         const customerFormData = JSON.parse(
           response.data[0].json
@@ -46,7 +46,7 @@ const FormSewing = ({
                 register={register}
                 name={key}
                 control={fc[key as keyof Customer]}
-                valueType={typeof defaultValues[key as keyof Meal]}
+                valueType={typeof defaultValues[key as keyof Order]}
               ></InputField>
             </div>
           );

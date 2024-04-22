@@ -4,11 +4,14 @@ import {
   InputFieldForm,
   InputFieldFormKeys,
   Meal,
+  Order,
   Task,
 } from "../../models/app";
+import { AutoComplete } from "antd";
+import { useState } from "react";
 
 type InputFieldProps = {
-  register: UseFormRegister<Meal>;
+  register: UseFormRegister<Order>;
   name: string;
   control: FormControl;
   valueType?: string;
@@ -16,6 +19,20 @@ type InputFieldProps = {
 
 function InputField({ name, register, control, valueType }: InputFieldProps) {
   const { label, type, placeholder, dropdownOptions } = control;
+  const [value, setValue] = useState("");
+  const [options, setOptions] = useState<{ value: string }[]>([]);
+  const [anotherOptions, setAnotherOptions] = useState<{ value: string }[]>([]);
+
+  const getPanelValue = (searchText: string) => (!searchText ? [] : []);
+
+  const onSelect = (data: string) => {
+    console.log("onSelect", data);
+  };
+
+  const onChange = (data: string) => {
+    setValue(data);
+  };
+
   return (
     <>
       <label
@@ -61,6 +78,18 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
             placeholder={placeholder}
             className="input input-bordered w-full max-w-xs"
           ></input>
+        )) ||
+        (type === "autocomplete" && (
+          <AutoComplete
+            {...register(name as InputFieldFormKeys)}
+            value={value}
+            options={anotherOptions}
+            onSelect={onSelect}
+            onSearch={(text) => setAnotherOptions(getPanelValue(text))}
+            onChange={onChange}
+            placeholder={placeholder}
+            className="w-full max-w-xs"
+          />
         )) || (
           <input
             {...register(name as InputFieldFormKeys, {
