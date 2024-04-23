@@ -19,8 +19,7 @@ type InputFieldProps = {
 
 function InputField({ name, register, control, valueType }: InputFieldProps) {
   const { label, type, placeholder, dropdownOptions } = control;
-  const [value, setValue] = useState("");
-  const [options, setOptions] = useState<{ value: string }[]>([]);
+  const [autocompleteValue, setAutocompleteValue] = useState("");
   const [anotherOptions, setAnotherOptions] = useState<{ value: string }[]>([]);
 
   const getPanelValue = (searchText: string) =>
@@ -28,12 +27,12 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
 
   const onSelect = (data: string) => {
     console.log("onSelect", data);
-    setValue(data);
+    setAutocompleteValue(data);
   };
 
   const onChange = (data: string) => {
     console.log("onChange", data);
-    setValue(data);
+    setAutocompleteValue(data);
   };
 
   return (
@@ -85,7 +84,6 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
         (type === "autocomplete" && (
           <>
             <AutoComplete
-              value={value}
               options={anotherOptions}
               onSelect={onSelect}
               onSearch={(text) => setAnotherOptions(getPanelValue(text))}
@@ -100,7 +98,8 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
             />
             <input
               {...register(name as InputFieldFormKeys)}
-              value={value}
+              value={autocompleteValue}
+              className="invisible"
             ></input>
           </>
         )) || (

@@ -36,7 +36,7 @@ const FormSewing = ({
 
   return (
     fc && (
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {Object.entries(fc).map(([key, value], ind) => {
           if (fc[key as keyof Customer].showInUI === false) return null;
           return (
