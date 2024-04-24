@@ -18,7 +18,6 @@ type InputFieldProps = {
 };
 
 function InputField({ name, register, control, valueType }: InputFieldProps) {
-  const autoCompleteRef = useRef<HTMLInputElement>(null);
   const { label, type, placeholder, dropdownOptions } = control;
   const [autocompleteValue, setAutocompleteValue] = useState("");
   const [anotherOptions, setAnotherOptions] = useState<{ value: string }[]>([]);
@@ -27,17 +26,14 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
     !searchText ? [] : [{ value: "test" }, { value: "Block" }];
 
   const onSelect = (data: string) => {
-    console.log("onSelect", data);
     setAutocompleteValue(data);
   };
 
   const onChange = (data: string) => {
-    console.log("onChange", data);
     setAutocompleteValue(data);
   };
 
   function onChg(event: ChangeEvent<HTMLInputElement>): void {
-    console.log("onChg", event.target.value);
     setAutocompleteValue(event.target.value);
     event.preventDefault();
   }
