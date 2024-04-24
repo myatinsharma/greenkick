@@ -59,23 +59,9 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             control={control}
             register={register}
           ></FormSewing>
-          {errors.order_date && <p>order_date{errors.order_date?.message}</p>}
-          {errors.shipping_date && <p>shipping_date{errors.shipping_date?.message}</p>}
-          {errors.payment_date && <p>payment_date{errors.payment_date?.message}</p>}
-          {errors.id && <p>id{errors.id?.message}</p>}
           {errors.customer_name && <p>customer_name{errors.customer_name?.message}</p>}
-          {errors.item && <p>item{errors.item?.message}</p>}
           {errors.item_category && <p>item_category{errors.item_category?.message}</p>}
-          {errors.quantity && <p>quantity{errors.quantity?.message}</p>}
           {errors.vendor && <p>vendor{errors.vendor?.message}</p>}
-          {errors.vendor_code_internal && <p>vendor_code_internal{errors.vendor_code_internal?.message}</p>}
-          {errors.purchase_price && <p>purchase_price{errors.purchase_price?.message}</p>}
-          {errors.price && <p>price{errors.price?.message}</p>}
-          {errors.shipping_address && <p>shipping_address{errors.shipping_address?.message}</p>}
-          {errors.vendor_payment && <p>vendor_payment{errors.vendor_payment?.message}</p>}
-          {errors.customer_payment && <p>customer_payment{errors.customer_payment?.message}</p>}
-          {errors.customer_payment_type && <p>customer_payment_type{errors.customer_payment_type?.message}</p>}
-          {errors.comment && <p>comment{errors.comment?.message}</p>}
           <button
             disabled={isSubmitting}
             type="submit"

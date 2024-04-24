@@ -8,7 +8,7 @@ import {
   Task,
 } from "../../models/app";
 import { AutoComplete } from "antd";
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 type InputFieldProps = {
   register: UseFormRegister<Order>;
@@ -18,6 +18,7 @@ type InputFieldProps = {
 };
 
 function InputField({ name, register, control, valueType }: InputFieldProps) {
+  const autoCompleteRef = useRef<HTMLInputElement>(null);
   const { label, type, placeholder, dropdownOptions } = control;
   const [autocompleteValue, setAutocompleteValue] = useState("");
   const [anotherOptions, setAnotherOptions] = useState<{ value: string }[]>([]);
@@ -34,6 +35,12 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
     console.log("onChange", data);
     setAutocompleteValue(data);
   };
+
+  function onChg(event: ChangeEvent<HTMLInputElement>): void {
+    console.log("onChg", event.target.value);
+    setAutocompleteValue(event.target.value);
+    event.preventDefault();
+  }
 
   return (
     <>
@@ -89,18 +96,22 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
               onSearch={(text) => setAnotherOptions(getPanelValue(text))}
               onChange={onChange}
               placeholder={placeholder}
-              className="w-full max-w-xs"
+              className="w-full max-w-xs input"
               filterOption={(inputValue, option) =>
                 option!.value
                   .toUpperCase()
                   .indexOf(inputValue.toUpperCase()) !== -1
               }
-            />
-            <input
-              {...register(name as InputFieldFormKeys)}
-              value={autocompleteValue}
-              className="invisible"
-            ></input>
+            >
+              <input
+                {...register(name as InputFieldFormKeys)}
+                type="text"
+                placeholder={placeholder}
+                className="input px-0 w-full focus:outline-none focus:ring-0 focus:border-0"
+                onChange={onChg}
+                value={autocompleteValue}
+              ></input>
+            </AutoComplete>
           </>
         )) || (
           <input
