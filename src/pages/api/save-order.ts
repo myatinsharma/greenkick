@@ -7,7 +7,7 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
-import { orders } from "../../db/schema";
+import { customers, orders } from "../../db/schema";
 import { NextApiResponse, NextApiRequest } from "next";
 import { Order } from "@/models/app";
 
@@ -21,6 +21,7 @@ export default async function handler(
 
   return await db
     .transaction(async (tx) => {
+      await db.insert(customers).values({ name: order.customer_name });
       await db
         .insert(orders)
         .values({

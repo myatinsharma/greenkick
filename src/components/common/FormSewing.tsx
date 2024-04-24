@@ -18,6 +18,9 @@ const FormSewing = ({
   setIsFormControlsLoaded,
 }: FormSewingProps) => {
   const [fc, setFc] = useState<FormKeyControls>();
+  const [autocompleteLists, setAutocompleteLists] = useState<
+    Record<"customers" | "categories" | "vendors", Customer[]>
+  >({} as Record<"customers" | "categories" | "vendors", Customer[]>);
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/get-app-settings")
@@ -26,6 +29,10 @@ const FormSewing = ({
           response.data[0].json
         ) as FormKeyControls;
         setFc(customerFormData);
+        getAllCustomersFullname().then((data) => {
+          setAutocompleteLists({ customers: data, categories: [], vendors: [] });
+          console.log(data);
+        });
         setIsFormControlsLoaded(true);
       })
       .catch(function (error) {
@@ -33,6 +40,13 @@ const FormSewing = ({
       })
       .finally(function () {});
   }, []);
+
+  const getAllCustomersFullname = async () => {
+    const response = await axios.get<Customer[]>(
+      "http://localhost:3000/api/get-all-customers"
+    );
+    return response.data;
+  };
 
   return (
     fc && (
