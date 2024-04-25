@@ -87,7 +87,16 @@ const FormSewing = ({
                 autocompleteData={autocompleteLists[
                   autocompleteMap[key as PickedOrderPropsForAutocomplete]
                     .list as "customers" | "categories" | "vendors"
-                ].map((item) => item[autocompleteMap[key as PickedOrderPropsForAutocomplete].key] as string)}
+                ].map(
+                  (item) =>
+                    item[
+                      autocompleteMap[key as PickedOrderPropsForAutocomplete]
+                        .key as
+                        | keyof Customer
+                        | keyof ItemCategory
+                        | keyof Vendor
+                    ]
+                )}
               ></InputField>
             </div>
           );

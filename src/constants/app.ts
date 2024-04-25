@@ -1,6 +1,6 @@
 import AgGridcCustomHeader from "@/components/common/AgGridcCustomHeader";
 import { TaskStatus } from "@/enums";
-import { Customer, FormControl, Task, Meal, Order } from "@/models/app";
+import { Customer, FormControl, Task, Meal, Order, ItemCategory, Vendor } from "@/models/app";
 import { add } from "@/utils";
 // import { add } from "@/utils";
 import { ColDef } from "ag-grid-community";
@@ -90,7 +90,7 @@ export type PickedOrderPropsForAutocomplete = keyof Pick<
 
 export const autocompleteMap: Record<
   PickedOrderPropsForAutocomplete,
-  { list: string; key: string }
+  { list: string; key: keyof Customer | keyof ItemCategory | keyof Vendor}
 > = {
   customer_name: { list: "customers", key: "name" },
   item_category: { list: "categories", key: "title" },
