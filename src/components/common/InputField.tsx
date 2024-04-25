@@ -15,12 +15,13 @@ type InputFieldProps = {
   name: string;
   control: FormControl;
   valueType?: string;
+  autocompleteData?: string[];
 };
 
 function InputField({ name, register, control, valueType }: InputFieldProps) {
   const { label, type, placeholder, dropdownOptions } = control;
   const [autocompleteValue, setAutocompleteValue] = useState("");
-  const [anotherOptions, setAnotherOptions] = useState<{ value: string }[]>([]);
+  const [options, setOptions] = useState<{ value: string }[]>([]);
 
   const getPanelValue = (searchText: string) =>
     !searchText ? [] : [{ value: "test" }, { value: "Block" }];
@@ -87,9 +88,9 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
         (type === "autocomplete" && (
           <>
             <AutoComplete
-              options={anotherOptions}
+              options={options}
               onSelect={onSelect}
-              onSearch={(text) => setAnotherOptions(getPanelValue(text))}
+              onSearch={(text) => setOptions(getPanelValue(text))}
               onChange={onChange}
               placeholder={placeholder}
               className="w-full max-w-xs input"

@@ -41,7 +41,7 @@ export type FormControl = {
 
 export type InputFieldForm = Customer | Task | Order;
 
-export type FormKeyControls = Record<keyof Customer, FormControl>;
+export type FormKeyControls = Record<keyof Order, FormControl>;
 
 export type InputFieldFormKeys = Extract<
   keyof Omit<InputFieldForm, "id">,
@@ -83,7 +83,6 @@ export type UserAccess = {
   userId: number;
   access: boolean;
 };
-
 
 // create table orders (
 //   id serial primary key,
@@ -155,4 +154,10 @@ export type Vendor = {
   id: number;
   name: string;
   code: string;
+};
+
+export type PreRequiredData = {
+  customers: Customer[];
+  categories: ItemCategory[];
+  vendors: Vendor[];
 };

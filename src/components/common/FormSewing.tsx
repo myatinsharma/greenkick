@@ -1,8 +1,20 @@
 import InputField from "./InputField";
-import { Customer, FormKeyControls, Meal, Order } from "@/models/app";
+import {
+  Customer,
+  FormKeyControls,
+  ItemCategory,
+  Meal,
+  Order,
+  PreRequiredData,
+  Vendor,
+} from "@/models/app";
 import { Control, UseFormRegister, set } from "react-hook-form";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
+import {
+  PickedOrderPropsForAutocomplete,
+  autocompleteMap,
+} from "@/constants/app";
 
 type FormSewingProps = {
   defaultValues: Order;
@@ -19,8 +31,16 @@ const FormSewing = ({
 }: FormSewingProps) => {
   const [fc, setFc] = useState<FormKeyControls>();
   const [autocompleteLists, setAutocompleteLists] = useState<
-    Record<"customers" | "categories" | "vendors", Customer[]>
-  >({} as Record<"customers" | "categories" | "vendors", Customer[]>);
+    Record<
+      "customers" | "categories" | "vendors",
+      Customer[] | ItemCategory[] | Vendor[]
+    >
+  >(
+    {} as Record<
+      "customers" | "categories" | "vendors",
+      Customer[] | ItemCategory[] | Vendor[]
+    >
+  );
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/get-app-settings")
@@ -30,7 +50,11 @@ const FormSewing = ({
         ) as FormKeyControls;
         setFc(customerFormData);
         getAllCustomersFullname().then((data) => {
-          setAutocompleteLists({ customers: data, categories: [], vendors: [] });
+          setAutocompleteLists({
+            customers: data.customers,
+            categories: data.categories,
+            vendors: data.vendors,
+          });
           console.log(data);
         });
         setIsFormControlsLoaded(true);
@@ -42,8 +66,8 @@ const FormSewing = ({
   }, []);
 
   const getAllCustomersFullname = async () => {
-    const response = await axios.get<Customer[]>(
-      "http://localhost:3000/api/get-all-customers"
+    const response = await axios.get<PreRequiredData>(
+      "http://localhost:3000/api/get-pre-required-data"
     );
     return response.data;
   };
@@ -52,14 +76,18 @@ const FormSewing = ({
     fc && (
       <div className="grid grid-cols-3 gap-2">
         {Object.entries(fc).map(([key, value], ind) => {
-          if (fc[key as keyof Customer].showInUI === false) return null;
+          if (fc[key as keyof Order].showInUI === false) return null;
           return (
             <div className="col-span-1" key={ind}>
               <InputField
                 register={register}
                 name={key}
-                control={fc[key as keyof Customer]}
+                control={fc[key as keyof Order]}
                 valueType={typeof defaultValues[key as keyof Order]}
+                autocompleteData={autocompleteLists[
+                  autocompleteMap[key as PickedOrderPropsForAutocomplete]
+                    .list as "customers" | "categories" | "vendors"
+                ].map((item) => item[autocompleteMap[key as PickedOrderPropsForAutocomplete].key] as string)}
               ></InputField>
             </div>
           );

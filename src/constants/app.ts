@@ -83,6 +83,20 @@ export const testOrder: Order = {
   comment: "",
 };
 
+export type PickedOrderPropsForAutocomplete = keyof Pick<
+  Order,
+  "customer_name" | "item_category" | "vendor"
+>;
+
+export const autocompleteMap: Record<
+  PickedOrderPropsForAutocomplete,
+  { list: string; key: string }
+> = {
+  customer_name: { list: "customers", key: "name" },
+  item_category: { list: "categories", key: "title" },
+  vendor: { list: "vendors", key: "name" },
+};
+
 // export const customerFormData: Record<keyof Customer, FormControl> = {
 //   id: { label: "ID", showInUI: false },
 //   fullname: { label: "Name", showInUI: true },
