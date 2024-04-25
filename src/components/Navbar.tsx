@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { title } from "process";
+import clsx from "clsx";
+import path from "path";
 
 const Navbar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -8,6 +11,13 @@ const Navbar = () => {
   const toggleNavbar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  const menuItems = [
+    { title: "Home", path: "/" },
+    { title: "Orders", path: "/orders" },
+    { title: "Customers", path: "/customers" },
+  ];
+
   return (
     <>
       <Head>
@@ -17,7 +27,7 @@ const Navbar = () => {
       </Head>
       <div className="navbar bg-base-100">
         <div className="flex-none">
-          <button className="btn btn-square btn-ghost">
+          <button className="btn btn-square btn-ghost" onClick={toggleNavbar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -55,6 +65,24 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
+      </div>
+      <div
+        className={clsx(
+          ["fixed border border-auburn bg-platinum h-full z-10"],
+          [!isCollapsed ? "w-48" : "w-8"]
+        )}
+      >
+        {menuItems.map((item, index) => (
+          <Link
+            key={index}
+            href={`/${item.path.toLowerCase()}`}
+            className="text-chocolate-cosmos ml-2 block font-semibold text-sm my-2"
+          >
+            {isCollapsed
+              ? item.title.substring(0, 1)
+              : item.title}
+          </Link>
+        ))}
       </div>
     </>
   );
