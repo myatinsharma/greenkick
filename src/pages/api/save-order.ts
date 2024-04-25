@@ -10,6 +10,7 @@ import {
 import { customers, itemcategories, orders, vendors } from "../../db/schema";
 import { NextApiResponse, NextApiRequest } from "next";
 import { Order } from "@/models/app";
+import { eq } from "drizzle-orm";
 
 export const db = drizzle(sql);
 
@@ -21,11 +22,36 @@ export default async function handler(
 
   return await db
     .transaction(async (tx) => {
-      await db.insert(customers).values({ name: order.customer_name });
-      await db.insert(itemcategories).values({ title: order.item_category });
-      await db
-        .insert(vendors)
-        .values({ name: order.vendor, code: order.vendor_code_internal });
+      const bCustomerSavedAlready = await db
+        .select()
+        .from(customers)
+        .where(eq(customers.name, order.customer_name as string));
+
+      if (bCustomerSavedAlready.length == 0) {
+        await db.insert(customers).values({ name: order.customer_name });
+      }
+
+      const bCategorySavedAlready = await db
+        .select()
+        .from(itemcategories)
+        .where(eq(itemcategories.title, order.item_category as string));
+
+      if (bCategorySavedAlready.length == 0) {
+        await db.insert(itemcategories).values({ title: order.item_category });
+      }
+
+      const bVendorSavedAlready = await db
+        .select()
+        .from(vendors)
+        .where(eq(vendors.name, order.vendor as string))
+        .where(eq(vendors.code, order.vendor_code_internal as string));
+
+      if (bVendorSavedAlready.length == 0) {
+        await db
+          .insert(vendors)
+          .values({ name: order.vendor, code: order.vendor_code_internal });
+      }
+
       await db
         .insert(orders)
         .values({

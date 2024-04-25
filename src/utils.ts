@@ -1,5 +1,9 @@
 import { IAggFuncParams } from "ag-grid-community";
 import { Customer, CustomerWork, DemographicData } from "./models/app";
+import {
+  PickedOrderPropsForAutocomplete,
+  autocompleteMap,
+} from "./constants/app";
 
 // export function mapCustomerToDemoGraphicData(
 //   customer: Customer
@@ -65,3 +69,26 @@ export const add = (params: IAggFuncParams) => {
   return total;
 };
 
+export function getAutocompleteOptions(
+  key: string,
+  autocompleteLists: Record<"customers" | "categories" | "vendors", any>
+): string[] | undefined {
+  return autocompleteMap[key as PickedOrderPropsForAutocomplete] !== undefined
+    ? autocompleteLists[
+        autocompleteMap[key as PickedOrderPropsForAutocomplete].list as
+          | "customers"
+          | "categories"
+          | "vendors"
+      ]
+      ? (autocompleteLists[
+          autocompleteMap[key as PickedOrderPropsForAutocomplete].list as
+            | "customers"
+            | "categories"
+            | "vendors"
+        ].map(
+          (item: { [x: string]: any }) =>
+            item[autocompleteMap[key as PickedOrderPropsForAutocomplete].key]
+        ) as string[])
+      : undefined
+    : undefined;
+}

@@ -18,13 +18,25 @@ type InputFieldProps = {
   autocompleteData?: string[];
 };
 
-function InputField({ name, register, control, valueType }: InputFieldProps) {
+function InputField({
+  name,
+  register,
+  control,
+  valueType,
+  autocompleteData,
+}: InputFieldProps) {
   const { label, type, placeholder, dropdownOptions } = control;
   const [autocompleteValue, setAutocompleteValue] = useState("");
   const [options, setOptions] = useState<{ value: string }[]>([]);
 
   const getPanelValue = (searchText: string) =>
-    !searchText ? [] : [{ value: "test" }, { value: "Block" }];
+    !searchText
+      ? []
+      : autocompleteData
+      ? autocompleteData.map((val) => {
+          return { value: val };
+        })
+      : [];
 
   const onSelect = (data: string) => {
     setAutocompleteValue(data);
@@ -43,7 +55,7 @@ function InputField({ name, register, control, valueType }: InputFieldProps) {
     <>
       <label
         htmlFor={name}
-        className="block mb-2 text-sm font-medium text-zinc-300 text-left"
+        className="block mb-2 text-sm font-medium text-auburn text-left"
       >
         {label}
       </label>

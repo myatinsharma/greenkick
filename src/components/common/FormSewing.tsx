@@ -15,6 +15,7 @@ import {
   PickedOrderPropsForAutocomplete,
   autocompleteMap,
 } from "@/constants/app";
+import { getAutocompleteOptions } from "@/utils";
 
 type FormSewingProps = {
   defaultValues: Order;
@@ -31,16 +32,8 @@ const FormSewing = ({
 }: FormSewingProps) => {
   const [fc, setFc] = useState<FormKeyControls>();
   const [autocompleteLists, setAutocompleteLists] = useState<
-    Record<
-      "customers" | "categories" | "vendors",
-      Customer[] | ItemCategory[] | Vendor[]
-    >
-  >(
-    {} as Record<
-      "customers" | "categories" | "vendors",
-      Customer[] | ItemCategory[] | Vendor[]
-    >
-  );
+    Record<"customers" | "categories" | "vendors", any>
+  >({} as Record<"customers" | "categories" | "vendors", any>);
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/get-app-settings")
@@ -84,18 +77,9 @@ const FormSewing = ({
                 name={key}
                 control={fc[key as keyof Order]}
                 valueType={typeof defaultValues[key as keyof Order]}
-                autocompleteData={autocompleteLists[
-                  autocompleteMap[key as PickedOrderPropsForAutocomplete]
-                    .list as "customers" | "categories" | "vendors"
-                ].map(
-                  (item) =>
-                    item[
-                      autocompleteMap[key as PickedOrderPropsForAutocomplete]
-                        .key as
-                        | keyof Customer
-                        | keyof ItemCategory
-                        | keyof Vendor
-                    ]
+                autocompleteData={getAutocompleteOptions(
+                  key,
+                  autocompleteLists
                 )}
               ></InputField>
             </div>
