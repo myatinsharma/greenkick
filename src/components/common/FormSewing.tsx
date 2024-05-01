@@ -13,7 +13,9 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import {
   PickedOrderPropsForAutocomplete,
+  apiBaseUrl,
   autocompleteMap,
+  orderFormData,
 } from "@/constants/app";
 import { getAutocompleteOptions } from "@/utils";
 
@@ -41,16 +43,15 @@ const FormSewing = ({
         const customerFormData = JSON.parse(
           response.data[0].json
         ) as FormKeyControls;
-        setFc(customerFormData);
-        getAllCustomersFullname().then((data) => {
+        setFc(orderFormData);
+        fetchPreRequiredData().then((data) => {
           setAutocompleteLists({
             customers: data.customers,
             categories: data.categories,
             vendors: data.vendors,
           });
-          console.log(data);
         });
-        setIsFormControlsLoaded(true);
+        //setIsFormControlsLoaded(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -58,9 +59,9 @@ const FormSewing = ({
       .finally(function () {});
   }, []);
 
-  const getAllCustomersFullname = async () => {
+  const fetchPreRequiredData = async () => {
     const response = await axios.get<PreRequiredData>(
-      "http://localhost:3000/api/get-pre-required-data"
+      apiBaseUrl + "/api/get-pre-required-data"
     );
     return response.data;
   };

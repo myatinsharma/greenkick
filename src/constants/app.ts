@@ -1,6 +1,14 @@
 import AgGridcCustomHeader from "@/components/common/AgGridcCustomHeader";
 import { TaskStatus } from "@/enums";
-import { Customer, FormControl, Task, Meal, Order, ItemCategory, Vendor } from "@/models/app";
+import {
+  Customer,
+  FormControl,
+  Task,
+  Meal,
+  Order,
+  ItemCategory,
+  Vendor,
+} from "@/models/app";
 import { add } from "@/utils";
 // import { add } from "@/utils";
 import { ColDef } from "ag-grid-community";
@@ -22,27 +30,46 @@ export const apiBaseUrl =
 export const taskProximity = 7; // days
 
 export const orderFormData: Record<keyof Order, FormControl> = {
-  id: { showInUI: false },
+  id: { label: "ID", showInUI: false },
   order_date: { label: "Order Date", showInUI: true, type: "date" },
   shipping_date: { label: "Shipping Date", showInUI: true, type: "date" },
   payment_date: { label: "Payment Date", showInUI: true, type: "date" },
-  customer_name: { label: "Customer Name", showInUI: true },
-  item: { label: "Item", showInUI: true },
-  item_category: { label: "Item Category", showInUI: true },
-  quantity: { label: "Quantity", showInUI: true },
-  vendor: { label: "Vendor", showInUI: true },
-  vendor_code_internal: { label: "Vendor Code Internal", showInUI: true },
-  purchase_price: { label: "Purchase Price", showInUI: true },
-  price: { label: "Price", showInUI: true },
-  shipping_address: {
-    label: "Shipping Address",
+  customer_name: {
+    label: "Customer Name",
     showInUI: true,
-    type: "textarea",
+    type: "autocomplete",
   },
-  vendor_payment: { label: "Vendor Payment", showInUI: true },
-  customer_payment: { label: "Customer Payment", showInUI: true },
-  customer_payment_type: { label: "Customer Payment Type", showInUI: true },
-  comment: { label: "Comment", showInUI: true, type: "textarea" },
+  item: { label: "Item", showInUI: true },
+  item_category: {
+    label: "Item Category",
+    showInUI: true,
+    type: "autocomplete",
+  },
+  quantity: { label: "Quantity", showInUI: true, type: "number" },
+  vendor: { label: "Vendor", showInUI: true, type: "autocomplete" },
+  vendor_code_internal: { label: "Vendor Code", showInUI: true },
+  purchase_price: { label: "Cost", showInUI: true },
+  price: { label: "Price", showInUI: true },
+  shipping_address: { label: "Shipping Address", showInUI: true },
+  vendor_payment: {
+    label: "Vendor Payment",
+    showInUI: true,
+    type: "dropdown",
+    dropdownOptions: { "1": "Pending", "2": "Paid" },
+  },
+  customer_payment: {
+    label: "Payment",
+    showInUI: true,
+    type: "dropdown",
+    dropdownOptions: { "1": "Pending", "2": "Paid" },
+  },
+  customer_payment_type: {
+    label: "Payment Type",
+    showInUI: true,
+    type: "dropdown",
+    dropdownOptions: { "1": "Cash", "2": "UPI", "3": "Card" },
+  },
+  comment: { label: "Comment", showInUI: true },
 };
 
 export const dummyOrder: Order = {
@@ -71,11 +98,11 @@ export const testOrder: Order = {
   customer_name: "",
   item: "",
   item_category: "",
-  quantity: 1,
+  quantity: "" as any,
   vendor: "",
   vendor_code_internal: "",
   purchase_price: 0,
-  price: 0,
+  price: "" as any,
   shipping_address: "",
   vendor_payment: 1,
   customer_payment: 1,
@@ -90,7 +117,7 @@ export type PickedOrderPropsForAutocomplete = keyof Pick<
 
 export const autocompleteMap: Record<
   PickedOrderPropsForAutocomplete,
-  { list: string; key: keyof Customer | keyof ItemCategory | keyof Vendor}
+  { list: string; key: keyof Customer | keyof ItemCategory | keyof Vendor }
 > = {
   customer_name: { list: "customers", key: "name" },
   item_category: { list: "categories", key: "title" },

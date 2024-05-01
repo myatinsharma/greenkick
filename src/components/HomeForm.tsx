@@ -7,7 +7,6 @@ import { saveData } from "@/services/customer.service";
 import { orderSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ValidateCode from "./common/ValidateCode";
-import { boolean } from "zod";
 
 type HomeFormProps = {
   handleCustomerDataSubmission: (data: Order) => void;
@@ -59,6 +58,8 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
           {errors.customer_name && <p>customer_name{errors.customer_name?.message}</p>}
           {errors.item_category && <p>item_category{errors.item_category?.message}</p>}
           {errors.vendor && <p>vendor{errors.vendor?.message}</p>}
+          {errors.quantity && <p>quantity{errors.quantity?.message}</p>}
+          {errors.purchase_price && <p>purchase_price{errors.purchase_price?.message}</p>}
           <button
             disabled={isSubmitting}
             type="submit"
