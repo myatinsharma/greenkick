@@ -76,8 +76,8 @@ const FormSewing = ({
           )
         ).map(([sectionTitle, sectionEntries], sectionIndex) => (
           <Fragment key={sectionIndex}>
-            <div className="grid grid-cols-3 gap-2 mt-10 first:mt-4">
-              <h2 className="absolute font-semibold text-lg -mt-7">{sectionTitle}</h2>
+            <div className="grid grid-cols-3 gap-2 mt-10 first:mt-4 border border-auburn p-2 py-12 pt-8 pl-20 rounded-sm">
+              {/* <h2 className="absolute font-semibold text-lg -mt-7">{sectionTitle}</h2> */}
               {sectionEntries &&
                 sectionEntries.map(([key, value], ind) => {
                   if (fc[key as keyof Order].showInUI === false) return null;

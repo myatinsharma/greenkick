@@ -46,7 +46,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
 
   return (
     <div className="App">
-      <div className="bg-platinum px-32 py-6 max-h-full">
+      <div className="bg-platinum px-32 py-6 max-h-full max-sm:px-0">
         <div className="grid-cols-6 hidden">Tailwind Jugaad (not visible)</div>
         <form onSubmit={handleSubmit(handleSave)} className="w-full">
           <FormSewing

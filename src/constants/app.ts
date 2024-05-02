@@ -159,7 +159,7 @@ export const testOrder: Order = {
   vendor: "",
   vendor_code_internal: "",
   purchase_price: 0,
-  price: "" as any,
+  price: 0,
   shipping_address: "",
   vendor_payment: 1,
   customer_payment: 1,
