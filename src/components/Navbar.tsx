@@ -3,7 +3,11 @@ import Link from "next/link";
 import Head from "next/head";
 import { title } from "process";
 import clsx from "clsx";
-import path from "path";
+import {
+  HomeOutlined,
+  PlusCircleOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 const Navbar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -13,9 +17,21 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { title: "Home", path: "/" },
-    { title: "Orders", path: "/orders" },
-    { title: "Customers", path: "/customers" },
+    {
+      title: "Home",
+      path: "/",
+      icon: <HomeOutlined className="text-auburn" />,
+    },
+    {
+      title: "Orders",
+      path: "/orders",
+      icon: <PlusCircleOutlined className="text-auburn" />,
+    },
+    {
+      title: "Customers",
+      path: "/customers",
+      icon: <UserOutlined className="text-auburn" />,
+    },
   ];
 
   return (
@@ -68,7 +84,7 @@ const Navbar = () => {
       </div>
       <div
         className={clsx(
-          ["fixed border border-auburn bg-platinum h-full z-10"],
+          ["fixed border border-auburn bg-platinum h-full z-10 rounded-sm"],
           [!isCollapsed ? "w-48" : "w-8"]
         )}
       >
@@ -78,9 +94,16 @@ const Navbar = () => {
             href={`/${item.path.toLowerCase()}`}
             className="text-chocolate-cosmos ml-2 block font-semibold text-sm my-2"
           >
-            {isCollapsed
-              ? item.title.substring(0, 1)
-              : item.title}
+            {isCollapsed ? (
+              item.icon
+            ) : (
+              <>
+                <div className="flex items-center text-auburn">
+                  <span className="flex mr-1">{item.icon}</span>
+                  {item.title}
+                </div>
+              </>
+            )}
           </Link>
         ))}
       </div>

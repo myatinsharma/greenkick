@@ -4,7 +4,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getAllEntries } from "@/services/customer.service";
-import { Meal } from "@/models/app";
+import { Meal, Order } from "@/models/app";
 import { useRouter } from "next/router";
 import { entriesGridColumnDefs } from "@/constants/app";
 import { GridOptions } from "ag-grid-community";
@@ -13,7 +13,7 @@ import "ag-grid-enterprise";
 const CustomAgGrid = () => {
   const router = useRouter();
   const gridRef = useRef<AgGridReact>(null);
-  const [rowData, setRowData] = useState<Meal[]>([]);
+  const [rowData, setRowData] = useState<Order[]>([]);
 
   useEffect(() => {
     let keys: ColumnConfig[] = [];
@@ -31,7 +31,7 @@ const CustomAgGrid = () => {
     <>
       <button
         onClick={onBtExport}
-        style={{ marginBottom: "5px", fontWeight: "bold", color: 'red' }}
+        style={{ marginBottom: "5px", fontWeight: "bold", color: "red" }}
       >
         Export to Excel
       </button>

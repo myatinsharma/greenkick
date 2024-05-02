@@ -1,4 +1,4 @@
-import CustomAgGrid from "@/components/customers/CustomAgGrid";
+import CustomAgGrid from "@/components/common/CustomAgGrid";
 import Layout from "@/components/common/Layout";
 import MyTasks from "@/components/tasks/MyTasks";
 

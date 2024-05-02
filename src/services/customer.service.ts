@@ -13,6 +13,13 @@ export const getAllEntries = async (): Promise<Meal[]> => {
     .catch((err) => err);
 };
 
+export const getAllOrders = async (): Promise<Order[]> => {
+  return await axios
+    .get<Meal[]>(`${apiBaseUrl}/api/get-all-entries`)
+    .then((res) => res.data)
+    .catch((err) => err);
+};
+
 export const verifyTaskAccess = async (code: string): Promise<UserAccess> => {
   return await axios
     .get<UserAccess>(`${apiBaseUrl}/api/verify-task-access/${code}`)
