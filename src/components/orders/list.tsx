@@ -3,49 +3,33 @@ import { AgGridReact } from "ag-grid-react";
 
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { getAllEntries } from "@/services/customer.service";
+import { getAllEntries, getAllOrders } from "@/services/customer.service";
 import { Meal, Order } from "@/models/app";
 import { useRouter } from "next/router";
 import { entriesGridColumnDefs } from "@/constants/app";
 import { GridOptions } from "ag-grid-community";
 import "ag-grid-enterprise";
+import CustomAgGrid from "../common/CustomAgGrid";
 
-const CustomAgGrid = () => {
-  const router = useRouter();
-  const gridRef = useRef<AgGridReact>(null);
+const OrdersList = () => {
   const [rowData, setRowData] = useState<Order[]>([]);
 
   useEffect(() => {
-    let keys: ColumnConfig[] = [];
-    getAllEntries().then((data) => {
+    getAllOrders().then((data) => {
       setRowData(data);
     });
   }, []);
 
-  const onBtExport = useCallback(() => {
-    const params = { fileName: "tac-sheet.xlsx" };
-    gridRef.current?.api.exportDataAsExcel(params);
-  }, []);
-
   return (
     <>
-      <button
-        onClick={onBtExport}
-        style={{ marginBottom: "5px", fontWeight: "bold", color: "red" }}
-      >
-        Export to Excel
-      </button>
       <div className="ag-theme-alpine" style={{ height: 600, width: 1400 }}>
-        <AgGridReact
-          ref={gridRef}
+        <CustomAgGrid<Order>
           rowData={rowData}
           columnDefs={entriesGridColumnDefs}
-          groupIncludeFooter={true}
-          groupIncludeTotalFooter={true}
-        ></AgGridReact>
+        />
       </div>
     </>
   );
 };
 
-export default CustomAgGrid;
+export default OrdersList;

@@ -15,7 +15,7 @@ export const getAllEntries = async (): Promise<Meal[]> => {
 
 export const getAllOrders = async (): Promise<Order[]> => {
   return await axios
-    .get<Meal[]>(`${apiBaseUrl}/api/get-all-entries`)
+    .get<Meal[]>(`${apiBaseUrl}/api/get-all-orders`)
     .then((res) => res.data)
     .catch((err) => err);
 };
