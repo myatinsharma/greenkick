@@ -6,7 +6,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { getAllEntries, getAllOrders } from "@/services/customer.service";
 import { Meal, Order } from "@/models/app";
 import { useRouter } from "next/router";
-import { entriesGridColumnDefs } from "@/constants/app";
+import { ordersGridColumnDefs } from "@/constants/app";
 import { GridOptions } from "ag-grid-community";
 import "ag-grid-enterprise";
 import CustomAgGrid from "../common/CustomAgGrid";
@@ -25,7 +25,7 @@ const OrdersList = () => {
       <div className="ag-theme-alpine" style={{ height: 600, width: 1400 }}>
         <CustomAgGrid<Order>
           rowData={rowData}
-          columnDefs={entriesGridColumnDefs}
+          columnDefs={ordersGridColumnDefs}
         />
       </div>
     </>

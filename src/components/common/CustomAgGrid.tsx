@@ -35,7 +35,7 @@ function CustomAgGrid<T>({ rowData, columnDefs }: CustomAgGridProps<T>) {
         <AgGridReact
           ref={gridRef}
           rowData={rowData}
-          columnDefs={entriesGridColumnDefs}
+          columnDefs={columnDefs}
           groupIncludeFooter={true}
           groupIncludeTotalFooter={true}
         ></AgGridReact>

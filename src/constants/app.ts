@@ -336,6 +336,25 @@ export const headerNamesMap: Omit<Record<keyof Meal, string>, "id"> = {
   other: "Other",
 };
 
+export const headerNamesMapOrders: Omit<Record<keyof Order, string>, "id"> = {
+  customer_name: "Customer Name",
+  item: "Item",
+  item_category: "Item Category",
+  quantity: "Quantity",
+  vendor: "Vendor",
+  vendor_code_internal: "Vendor Code",
+  purchase_price: "Cost",
+  price: "Price",
+  shipping_address: "Shipping Address",
+  vendor_payment: "Vendor Payment",
+  customer_payment: "Payment",
+  customer_payment_type: "Payment Type",
+  comment: "Comment",
+  order_date: "Order Date",
+  shipping_date: "Shipping Date",
+  payment_date: "Payment Date",
+};
+
 export const entriesGridColumnDefs: ColDef[] = [
   { field: "companyname", rowGroup: true, hide: true },
   {
@@ -370,4 +389,60 @@ export const entriesGridColumnDefs: ColDef[] = [
     headerComponentParams: { customHeaderName: headerNamesMap["milk"] },
   },
   { headerName: headerNamesMap["other"], field: "other" },
+];
+
+export const ordersGridColumnDefs: ColDef[] = [
+  { field: "id", hide: true },
+  {
+    field: "order_date",
+    headerName: "Order Date",
+    cellRenderer: (data: any) => {
+      return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
+    },
+  },
+  {
+    field: "shipping_date",
+    headerName: "Shipping Date",
+    cellRenderer: (data: any) => {
+      return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
+    },
+  },
+  {
+    field: "payment_date",
+    headerName: "Payment Date",
+    cellRenderer: (data: any) => {
+      return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
+    },
+  },
+  { field: "customer_name", headerName: "Customer Name" },
+  { field: "item", headerName: "Item" },
+  { field: "item_category", headerName: "Item Category" },
+  { field: "quantity", headerName: "Quantity" },
+  { field: "vendor", headerName: "Vendor" },
+  { field: "vendor_code_internal", headerName: "Vendor Code" },
+  { field: "purchase_price", headerName: "Cost" },
+  { field: "price", headerName: "Price" },
+  { field: "shipping_address", headerName: "Shipping Address" },
+  {
+    field: "vendor_payment",
+    headerName: "Vendor Payment",
+    cellRenderer: (data: any) => {
+      return data.value === 1 ? "Pending" : "Paid";
+    },
+  },
+  {
+    field: "customer_payment",
+    headerName: "Payment",
+    cellRenderer: (data: any) => {
+      return data.value === 1 ? "Pending" : "Paid";
+    },
+  },
+  {
+    field: "customer_payment_type",
+    headerName: "Payment Type",
+    cellRenderer: (data: any) => {
+      return ["Cash", "UPI", "Card"][data.value - 1];
+    },
+  },
+  { field: "comment", headerName: "Comment" },
 ];
