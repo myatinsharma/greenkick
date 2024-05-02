@@ -9,7 +9,7 @@ import {
   Vendor,
 } from "@/models/app";
 import { Control, UseFormRegister, set } from "react-hook-form";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import {
   PickedOrderPropsForAutocomplete,
@@ -68,24 +68,37 @@ const FormSewing = ({
 
   return (
     fc && (
-      <div className="grid grid-cols-3 gap-2">
-        {Object.entries(fc).map(([key, value], ind) => {
-          if (fc[key as keyof Order].showInUI === false) return null;
-          return (
-            <div className="col-span-1" key={ind}>
-              <InputField
-                register={register}
-                name={key}
-                control={fc[key as keyof Order]}
-                valueType={typeof defaultValues[key as keyof Order]}
-                autocompleteData={getAutocompleteOptions(
-                  key,
-                  autocompleteLists
-                )}
-              ></InputField>
+      <div>
+        {Object.entries(
+          Object.groupBy(
+            Object.entries(fc),
+            ([key, value]) => value.section!.title
+          )
+        ).map(([sectionTitle, sectionEntries], sectionIndex) => (
+          <Fragment key={sectionIndex}>
+            <div className="grid grid-cols-3 gap-2 mt-10 first:mt-4">
+              <h2 className="absolute font-semibold text-lg -mt-7">{sectionTitle}</h2>
+              {sectionEntries &&
+                sectionEntries.map(([key, value], ind) => {
+                  if (fc[key as keyof Order].showInUI === false) return null;
+                  return (
+                    <div className="col-span-1" key={ind}>
+                      <InputField
+                        register={register}
+                        name={key}
+                        control={fc[key as keyof Order]}
+                        valueType={typeof defaultValues[key as keyof Order]}
+                        autocompleteData={getAutocompleteOptions(
+                          key,
+                          autocompleteLists
+                        )}
+                      ></InputField>
+                    </div>
+                  );
+                })}
             </div>
-          );
-        })}
+          </Fragment>
+        ))}
       </div>
     )
   );

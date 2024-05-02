@@ -30,46 +30,103 @@ export const apiBaseUrl =
 export const taskProximity = 7; // days
 
 export const orderFormData: Record<keyof Order, FormControl> = {
-  id: { label: "ID", showInUI: false },
-  order_date: { label: "Order Date", showInUI: true, type: "date" },
-  shipping_date: { label: "Shipping Date", showInUI: true, type: "date" },
-  payment_date: { label: "Payment Date", showInUI: true, type: "date" },
+  id: {
+    label: "ID",
+    showInUI: false,
+    type: "number",
+    section: { title: "Basic", id: 1 },
+  },
   customer_name: {
     label: "Customer Name",
     showInUI: true,
     type: "autocomplete",
+    section: { title: "Basic", id: 1 },
   },
-  item: { label: "Item", showInUI: true },
+  item: { label: "Item", showInUI: true, section: { title: "Basic", id: 1 } },
   item_category: {
     label: "Item Category",
     showInUI: true,
     type: "autocomplete",
+    section: { title: "Basic", id: 1 },
   },
-  quantity: { label: "Quantity", showInUI: true, type: "number" },
-  vendor: { label: "Vendor", showInUI: true, type: "autocomplete" },
-  vendor_code_internal: { label: "Vendor Code", showInUI: true },
-  purchase_price: { label: "Cost", showInUI: true },
-  price: { label: "Price", showInUI: true },
-  shipping_address: { label: "Shipping Address", showInUI: true },
+  quantity: {
+    label: "Quantity",
+    showInUI: true,
+    type: "number",
+    section: { title: "Basic", id: 1 },
+  },
+  vendor: {
+    label: "Vendor",
+    showInUI: true,
+    type: "autocomplete",
+    section: { title: "Basic", id: 1 },
+  },
+  vendor_code_internal: {
+    label: "Vendor Code",
+    showInUI: true,
+    section: { title: "Basic", id: 1 },
+  },
+  purchase_price: {
+    label: "Cost",
+    showInUI: true,
+    type: "number",
+    section: { title: "Basic", id: 1 },
+  },
+  price: {
+    label: "Price",
+    showInUI: true,
+    type: "number",
+    section: { title: "Basic", id: 1 },
+  },
+  shipping_address: {
+    label: "Shipping Address",
+    showInUI: true,
+    section: { title: "Basic", id: 1 },
+  },
   vendor_payment: {
     label: "Vendor Payment",
     showInUI: true,
     type: "dropdown",
     dropdownOptions: { "1": "Pending", "2": "Paid" },
+    section: { title: "Basic", id: 1 },
   },
   customer_payment: {
     label: "Payment",
     showInUI: true,
     type: "dropdown",
     dropdownOptions: { "1": "Pending", "2": "Paid" },
+    section: { title: "Basic", id: 1 },
   },
   customer_payment_type: {
     label: "Payment Type",
     showInUI: true,
     type: "dropdown",
     dropdownOptions: { "1": "Cash", "2": "UPI", "3": "Card" },
+    section: { title: "Basic", id: 1 },
   },
-  comment: { label: "Comment", showInUI: true },
+  comment: {
+    label: "Comment",
+    showInUI: true,
+    section: { title: "Basic", id: 1 },
+  },
+  order_date: {
+    label: "Order Date",
+    showInUI: true,
+    type: "date",
+    section: { title: "Dates", id: 2 },
+  },
+  shipping_date: {
+    label: "Shipping Date",
+    showInUI: true,
+    type: "date",
+    section: { title: "Dates", id: 2 },
+  },
+  payment_date: {
+    label: "Payment Date",
+    showInUI: true,
+    type: "date",
+    section: { title: "Dates", id: 2 },
+  },
 };
 
 export const dummyOrder: Order = {

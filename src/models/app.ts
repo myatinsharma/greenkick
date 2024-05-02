@@ -37,6 +37,7 @@ export type FormControl = {
   showInUI: boolean;
   type?: "dropdown" | "textarea" | "text" | "date" | "number" | "autocomplete";
   dropdownOptions?: Record<string, string>;
+  section?: { title: string; id: number };
 };
 
 export type InputFieldForm = Customer | Task | Order;
@@ -83,42 +84,6 @@ export type UserAccess = {
   userId: number;
   access: boolean;
 };
-
-// create table orders (
-//   id serial primary key,
-//   order_date timestamp not null,
-//   shipping_date timestamp not null,
-//   payment_date timestamp not null,
-//   customer_name varchar(100) not null,
-//   item varchar(100) not null,
-//   item_category varchar(100) not null,
-//   quantity integer not null,
-//   vendor varchar(100) not null,
-//   vendor_code_internal varchar(100) not null,
-//   purchase_price decimal not null,
-//   price decimal not null,
-//   shipping_address varchar(100) null,
-//   vendor_payment INTEGER NOT NULL,
-//   customer_payment INTEGER NOT NULL,
-//   customer_payment_type INTEGER NOT NULL,
-//   comment varchar(100) null
-// );
-
-// create table customers (
-//   id serial primary key,
-//   name varchar(100) not null
-// );
-
-// create table itemcategories (
-//   id serial primary key,
-//   title varchar(100) not null
-// );
-
-// create table vendors (
-//   id serial primary key,
-//   name varchar(100) not null,
-//   code varchar(100) not null
-// );
 
 export type Order = {
   id?: number;

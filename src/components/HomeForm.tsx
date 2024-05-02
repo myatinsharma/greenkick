@@ -60,6 +60,7 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
           {errors.vendor && <p>vendor{errors.vendor?.message}</p>}
           {errors.quantity && <p>quantity{errors.quantity?.message}</p>}
           {errors.purchase_price && <p>purchase_price{errors.purchase_price?.message}</p>}
+          {errors.price && <p>price{errors.price?.message}</p>}
           <button
             disabled={isSubmitting}
             type="submit"
