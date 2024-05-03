@@ -10,6 +10,7 @@ import { ordersGridColumnDefs } from "@/constants/app";
 import { GridOptions } from "ag-grid-community";
 import "ag-grid-enterprise";
 import CustomAgGrid from "../common/CustomAgGrid";
+import { Button, Input, Space } from "antd";
 
 const OrdersList = () => {
   const [rowData, setRowData] = useState<Order[]>([]);
@@ -22,7 +23,16 @@ const OrdersList = () => {
 
   return (
     <>
-      <div className="ag-theme-alpine" style={{ height: 600, width: 1400 }}>
+      <Space.Compact className="w-1/3 ml-10">
+        <Input defaultValue="Combine input and button" type=""/>
+        <Button type="primary" className="btn hover:!bg-auburn">
+          Search
+        </Button>
+      </Space.Compact>
+      <div
+        className="ag-theme-alpine ml-10"
+        style={{ height: 600, width: 1400 }}
+      >
         <CustomAgGrid<Order>
           rowData={rowData}
           columnDefs={ordersGridColumnDefs}

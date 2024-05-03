@@ -395,51 +395,60 @@ export const ordersGridColumnDefs: ColDef[] = [
   { field: "id", hide: true },
   {
     field: "order_date",
-    headerName: "Order Date",
+    headerName: headerNamesMapOrders["order_date"],
     cellRenderer: (data: any) => {
       return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
     },
   },
   {
     field: "shipping_date",
-    headerName: "Shipping Date",
+    headerName: headerNamesMapOrders["shipping_date"],
     cellRenderer: (data: any) => {
       return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
     },
   },
   {
     field: "payment_date",
-    headerName: "Payment Date",
+    headerName: headerNamesMapOrders["payment_date"],
     cellRenderer: (data: any) => {
       return data.value ? new Date(data.value).toLocaleDateString("en-GB") : "";
     },
   },
-  { field: "customer_name", headerName: "Customer Name" },
-  { field: "item", headerName: "Item" },
-  { field: "item_category", headerName: "Item Category" },
-  { field: "quantity", headerName: "Quantity" },
-  { field: "vendor", headerName: "Vendor" },
-  { field: "vendor_code_internal", headerName: "Vendor Code" },
-  { field: "purchase_price", headerName: "Cost" },
-  { field: "price", headerName: "Price" },
-  { field: "shipping_address", headerName: "Shipping Address" },
+  { field: "customer_name", headerName: headerNamesMapOrders["customer_name"] },
+  { field: "item", headerName: headerNamesMapOrders["item"] },
+  { field: "item_category", headerName: headerNamesMapOrders["item_category"] },
+  { field: "quantity", headerName: headerNamesMapOrders["quantity"] },
+  { field: "vendor", headerName: headerNamesMapOrders["vendor"] },
+  {
+    field: "vendor_code_internal",
+    headerName: headerNamesMapOrders["vendor_code_internal"],
+  },
+  {
+    field: "purchase_price",
+    headerName: headerNamesMapOrders["purchase_price"],
+  },
+  { field: "price", headerName: headerNamesMapOrders["price"] },
+  {
+    field: "shipping_address",
+    headerName: headerNamesMapOrders["shipping_address"],
+  },
   {
     field: "vendor_payment",
-    headerName: "Vendor Payment",
+    headerName: headerNamesMapOrders["vendor_payment"],
     cellRenderer: (data: any) => {
       return data.value === 1 ? "Pending" : "Paid";
     },
   },
   {
     field: "customer_payment",
-    headerName: "Payment",
+    headerName: headerNamesMapOrders["customer_payment"],
     cellRenderer: (data: any) => {
       return data.value === 1 ? "Pending" : "Paid";
     },
   },
   {
     field: "customer_payment_type",
-    headerName: "Payment Type",
+    headerName: headerNamesMapOrders["customer_payment_type"],
     cellRenderer: (data: any) => {
       return ["Cash", "UPI", "Card"][data.value - 1];
     },
