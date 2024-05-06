@@ -8,6 +8,8 @@ import { Meal, Order } from "@/models/app";
 import { entriesGridColumnDefs } from "@/constants/app";
 import { ColDef, GridOptions } from "ag-grid-community";
 import "ag-grid-enterprise";
+import router from "next/router";
+import { useOrderContext } from "@/contexts";
 
 type CustomAgGridProps<T> = {
   rowData: T[];
@@ -16,12 +18,14 @@ type CustomAgGridProps<T> = {
 };
 
 function CustomAgGrid<T>({ rowData, columnDefs }: CustomAgGridProps<T>) {
+  const { currentOrder } = useOrderContext();
   const gridRef = useRef<AgGridReact>(null);
 
   const onBtExport = useCallback(() => {
+    if (rowData.length === 0) return;
     const params = { fileName: "elegance-sales.xlsx" };
     gridRef.current?.api.exportDataAsExcel(params);
-  }, []);
+  }, [rowData.length]);
 
   return (
     <>
@@ -36,6 +40,7 @@ function CustomAgGrid<T>({ rowData, columnDefs }: CustomAgGridProps<T>) {
           ref={gridRef}
           rowData={rowData}
           columnDefs={columnDefs}
+          onRowClicked={(e) => {}}
         ></AgGridReact>
       </div>
     </>

@@ -10,16 +10,9 @@ export default async function handler(
   response: NextApiResponse
 ) {
   const orderDate = request.query["orderDate"];
-  // const selectResult = await db
-  //   .select()
-  //   .from(orders)
-  //   .where(ne(orders.comment, "test"));
-  // return response.status(200).json(selectResult);
-
   const selectResult = await db
     .select()
     .from(orders)
-    .where(eq(orders.order_date, new Date(orderDate as string)))
-    .where(ne(orders.comment, "test"));
+    .where(eq(orders.order_date, new Date(orderDate as string)));
   return response.status(200).json(selectResult);
 }
