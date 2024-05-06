@@ -10,21 +10,27 @@ import { ordersGridColumnDefs } from "@/constants/app";
 import { GridOptions } from "ag-grid-community";
 import "ag-grid-enterprise";
 import CustomAgGrid from "../common/CustomAgGrid";
-import { Button, Input, Space } from "antd";
+import { Button, DatePicker, DatePickerProps, Input, Space } from "antd";
 
 const OrdersList = () => {
   const [rowData, setRowData] = useState<Order[]>([]);
 
-  useEffect(() => {
-    getAllOrders().then((data) => {
-      setRowData(data);
-    });
-  }, []);
+  useEffect(() => {}, []);
+
+  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+    if (!dateString) {
+      setRowData([]);
+    } else {
+      getAllOrders(dateString).then((data) => {
+        setRowData(data);
+      });
+    }
+  };
 
   return (
     <>
       <Space.Compact className="w-1/3 ml-10">
-        <Input defaultValue="Combine input and button" type=""/>
+        <DatePicker onChange={onChange} />
         <Button type="primary" className="btn hover:!bg-auburn">
           Search
         </Button>

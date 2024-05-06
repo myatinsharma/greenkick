@@ -91,7 +91,7 @@ const Navbar = () => {
         {menuItems.map((item, index) => (
           <Link
             key={index}
-            href={`/${item.path.toLowerCase()}`}
+            href={`${item.path.toLowerCase()}`}
             className="text-chocolate-cosmos ml-2 block font-semibold text-sm my-2"
           >
             {isCollapsed ? (

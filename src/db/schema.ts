@@ -6,6 +6,7 @@ import {
   text,
   varchar,
   timestamp,
+  date,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -114,7 +115,11 @@ export const customerrequirements = pgTable("customerrequirements", {
 
 export const orders = pgTable("orders", {
   id: serial("id").primaryKey(),
-  order_date: timestamp("order_date").notNull(),
+  order_date: timestamp("order_date", {
+    mode: "date",
+    precision: 6,
+    withTimezone: false,
+  }).notNull(),
   shipping_date: timestamp("shipping_date").notNull(),
   payment_date: timestamp("payment_date").notNull(),
   customer_name: varchar("customer_name", { length: 100 }).notNull(),

@@ -19,7 +19,7 @@ function CustomAgGrid<T>({ rowData, columnDefs }: CustomAgGridProps<T>) {
   const gridRef = useRef<AgGridReact>(null);
 
   const onBtExport = useCallback(() => {
-    const params = { fileName: "tac-sheet.xlsx" };
+    const params = { fileName: "elegance-sales.xlsx" };
     gridRef.current?.api.exportDataAsExcel(params);
   }, []);
 
@@ -36,8 +36,6 @@ function CustomAgGrid<T>({ rowData, columnDefs }: CustomAgGridProps<T>) {
           ref={gridRef}
           rowData={rowData}
           columnDefs={columnDefs}
-          groupIncludeFooter={true}
-          groupIncludeTotalFooter={true}
         ></AgGridReact>
       </div>
     </>

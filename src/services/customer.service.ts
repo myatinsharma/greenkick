@@ -13,9 +13,11 @@ export const getAllEntries = async (): Promise<Meal[]> => {
     .catch((err) => err);
 };
 
-export const getAllOrders = async (): Promise<Order[]> => {
+export const getAllOrders = async (date: string): Promise<Order[]> => {
+  const timestamp = new Date(date);
+  console.log("timestamp", timestamp);
   return await axios
-    .get<Meal[]>(`${apiBaseUrl}/api/get-all-orders`)
+    .get<Order[]>(`${apiBaseUrl}/api/get-all-orders?orderDate=${timestamp}`)
     .then((res) => res.data)
     .catch((err) => err);
 };
