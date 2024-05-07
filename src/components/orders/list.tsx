@@ -15,8 +15,6 @@ import { Button, DatePicker, DatePickerProps, Input, Space } from "antd";
 const OrdersList = () => {
   const [rowData, setRowData] = useState<Order[]>([]);
 
-  useEffect(() => {}, []);
-
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     if (!dateString) {
       setRowData([]);

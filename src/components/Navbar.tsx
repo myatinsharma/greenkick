@@ -84,7 +84,7 @@ const Navbar = () => {
       </div>
       <div
         className={clsx(
-          ["fixed border border-auburn bg-platinum h-full z-10 rounded-sm"],
+          ["fixed bg-platinum h-full z-10 rounded-sm"],
           [!isCollapsed ? "w-48" : "w-8"]
         )}
       >

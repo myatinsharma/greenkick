@@ -51,7 +51,7 @@ const FormSewing = ({
             vendors: data.vendors,
           });
         });
-        //setIsFormControlsLoaded(true);
+        setIsFormControlsLoaded(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -65,6 +65,10 @@ const FormSewing = ({
     );
     return response.data;
   };
+
+  useEffect(() => {
+    console.log("defaultValues", defaultValues);
+  }, [defaultValues]);
 
   return (
     fc && (

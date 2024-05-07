@@ -18,7 +18,7 @@ type CustomAgGridProps<T> = {
 };
 
 function CustomAgGrid<T>({ rowData, columnDefs }: CustomAgGridProps<T>) {
-  const { currentOrder } = useOrderContext();
+  const { currentOrder, setCurrentOrder } = useOrderContext();
   const gridRef = useRef<AgGridReact>(null);
 
   const onBtExport = useCallback(() => {
@@ -40,7 +40,10 @@ function CustomAgGrid<T>({ rowData, columnDefs }: CustomAgGridProps<T>) {
           ref={gridRef}
           rowData={rowData}
           columnDefs={columnDefs}
-          onRowClicked={(e) => {}}
+          onRowClicked={(e) => {
+            setCurrentOrder(e.data as Order);
+            router.push(`/`);
+          }}
         ></AgGridReact>
       </div>
     </>

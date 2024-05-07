@@ -52,15 +52,35 @@ export default async function handler(
           .values({ name: order.vendor, code: order.vendor_code_internal });
       }
 
-      await db
-        .insert(orders)
-        .values({
-          ...order,
-          order_date: new Date(order.order_date),
-          payment_date: new Date(order.payment_date),
-          shipping_date: new Date(order.shipping_date),
-        })
-        .returning({ orderId: orders.id });
+      const bOrderSavedAlready = await db
+        .select()
+        .from(orders)
+        .where(eq(orders.id, order.id as number));
+
+      if (!bOrderSavedAlready) {
+        console.log("inserting order..........................");
+        await db
+          .insert(orders)
+          .values({
+            ...order,
+            order_date: new Date(order.order_date),
+            payment_date: new Date(order.payment_date),
+            shipping_date: new Date(order.shipping_date),
+          })
+          .returning({ orderId: orders.id });
+      } else {
+        console.log("updating order..........................");
+        await db
+          .update(orders)
+          .set({
+            ...order,
+            order_date: new Date(order.order_date),
+            payment_date: new Date(order.payment_date),
+            shipping_date: new Date(order.shipping_date),
+          })
+          .where(eq(orders.id, order.id as number))
+          .returning({ orderId: orders.id });
+      }
     })
     .then(() => response.status(201).json({}));
 }

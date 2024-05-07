@@ -46,6 +46,15 @@ export const taskSchema = z.object({
   appid: z.number().min(1, { message: "Required" }),
 });
 
+const validateAndParseNumber = z.preprocess((input) => {
+  const processed = z
+    .string()
+    .regex(/^\d+$/)
+    .transform(Number)
+    .safeParse(input);
+  return processed.success ? processed.data : input;
+}, z.number().min(1));
+
 export const orderSchema = z.object({
   order_date: z.preprocess((arg) => {
     if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
@@ -59,11 +68,11 @@ export const orderSchema = z.object({
   customer_name: z.string().min(1, { message: "Required" }),
   item: z.string().min(1, { message: "Required" }),
   item_category: z.string().min(1, { message: "Required" }),
-  quantity: z.string().min(1, { message: "Required" }),
+  quantity: validateAndParseNumber,
   vendor: z.string().min(1, { message: "Required" }),
   vendor_code_internal: z.string().min(1, { message: "Required" }),
-  purchase_price: z.string().min(1, { message: "Required" }),
-  price: z.string().min(1, { message: "Required" }),
+  purchase_price: validateAndParseNumber,
+  price: validateAndParseNumber,
   shipping_address: z.string().optional(),
   vendor_payment: z.number().min(1, { message: "Required" }),
   customer_payment: z.number().min(1, { message: "Required" }),

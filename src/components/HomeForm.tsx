@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Order, UserAccess } from "../models/app";
 import { useForm } from "react-hook-form";
-import { testOrder } from "@/constants/app";
+import { testOrder, testAnotherOrder } from "@/constants/app";
 import FormSewing from "./common/FormSewing";
 import { saveData } from "@/services/customer.service";
 import { orderSchema } from "@/constants/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ValidateCode from "./common/ValidateCode";
-import { useRouter } from "next/router";
+import { useOrderContext } from "@/contexts";
 
 type HomeFormProps = {
   handleCustomerDataSubmission: (data: Order) => void;
 };
 
 const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
-  const router = useRouter();
-  const [order, setOrder] = useState<Order>(testOrder);
+  const [order, setOrder] = useState<Order>(testAnotherOrder);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFormLoaded, setIsFormLoaded] = useState(false);
   const customerQueryForm = React.createRef<HTMLFormElement>();
+  const { currentOrder } = useOrderContext();
 
   const {
     control,
@@ -27,12 +27,14 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
     formState: { errors, isValid },
   } = useForm<Order>({
     defaultValues: testOrder,
+    values: order,
     resolver: zodResolver(orderSchema),
   });
 
   useEffect(() => {
-    console.log("router", router);
-  }, [router]);
+    console.log(currentOrder);
+    setOrder(currentOrder);
+  }, [currentOrder]);
 
   function handleSave(data: Order) {
     console.log(data);
@@ -65,14 +67,14 @@ const HomeForm = ({ handleCustomerDataSubmission }: HomeFormProps) => {
             <p>customer_name{errors.customer_name?.message}</p>
           )}
           {errors.item_category && (
-            <p>item_category{errors.item_category?.message}</p>
+            <p>item category {errors.item_category?.message}</p>
           )}
-          {errors.vendor && <p>vendor{errors.vendor?.message}</p>}
-          {errors.quantity && <p>quantity{errors.quantity?.message}</p>}
+          {errors.vendor && <p>vendor {errors.vendor?.message}</p>}
+          {errors.quantity && <p>quantity {errors.quantity?.message}</p>}
           {errors.purchase_price && (
-            <p>purchase_price{errors.purchase_price?.message}</p>
+            <p>cost {errors.purchase_price?.message}</p>
           )}
-          {errors.price && <p>price{errors.price?.message}</p>}
+          {errors.price && <p>price {errors.price?.message}</p>}
           <button
             disabled={isSubmitting}
             type="submit"
