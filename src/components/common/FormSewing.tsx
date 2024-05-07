@@ -38,7 +38,7 @@ const FormSewing = ({
   >({} as Record<"customers" | "categories" | "vendors", any>);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/get-app-settings")
+      .get(`${apiBaseUrl}/api/get-app-settings`)
       .then(function (response) {
         const customerFormData = JSON.parse(
           response.data[0].json
@@ -61,7 +61,7 @@ const FormSewing = ({
 
   const fetchPreRequiredData = async () => {
     const response = await axios.get<PreRequiredData>(
-      apiBaseUrl + "/api/get-pre-required-data"
+      `${apiBaseUrl}/api/get-pre-required-data`
     );
     return response.data;
   };
